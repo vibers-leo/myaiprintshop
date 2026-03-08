@@ -1,13 +1,14 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { 
-  getOrders, 
-  getOrderById, 
+import {
+  getOrders,
+  getOrderById,
   getOrdersByUser,
   updateOrderStatus,
   updateShippingInfo,
   getOrderStats
 } from '@/lib/orders';
 import { OrderStatus } from '@/lib/payment';
+import { requireAdmin } from '@/lib/auth-middleware';
 
 // GET: 주문 목록 조회
 export async function GET(request: NextRequest) {
@@ -71,9 +72,13 @@ export async function GET(request: NextRequest) {
   }
 }
 
-// PATCH: 주문 상태 업데이트
+// PATCH: 주문 상태 업데이트 (관리자 전용)
 export async function PATCH(request: NextRequest) {
   try {
+    // 관리자 인증 검사
+    const authError = await requireAdmin(request);
+    if (authError) return authError;
+
     const body = await request.json();
     const { orderId, status, trackingNumber, carrier } = body;
     

@@ -34,26 +34,49 @@ import {
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 
-// Admin email whitelist (환경변수로 관리하거나 Firestore에 저장 권장)
-const ADMIN_EMAILS = [
-  'admin@myaiprintshop.com',
-  'juno@myaiprintshop.com',
-  // 추가 관리자 이메일은 여기에 등록
-];
-
 export default function AdminPage() {
   const { user, loading, loginWithGoogle, logout } = useAuth();
   const [activeTab, setActiveTab] = useState('dashboard');
   const [isCheckingAuth, setIsCheckingAuth] = useState(true);
+  const [isAdmin, setIsAdmin] = useState(false);
 
-  // Check if user is admin
-  const isAdmin = user && ADMIN_EMAILS.includes(user.email || '');
-
+  // 서버사이드 관리자 권한 확인
   useEffect(() => {
+    const checkAdmin = async () => {
+      if (!user) {
+        setIsAdmin(false);
+        setIsCheckingAuth(false);
+        return;
+      }
+
+      try {
+        const { getAuth } = await import('firebase/auth');
+        const auth = getAuth();
+        const idToken = await auth.currentUser?.getIdToken();
+        if (!idToken) {
+          setIsAdmin(false);
+          setIsCheckingAuth(false);
+          return;
+        }
+
+        const res = await fetch('/api/auth/check-admin', {
+          method: 'POST',
+          headers: { Authorization: `Bearer ${idToken}` },
+        });
+        const data = await res.json();
+        setIsAdmin(data.isAdmin === true);
+      } catch (error) {
+        console.error('Admin check failed:', error);
+        setIsAdmin(false);
+      } finally {
+        setIsCheckingAuth(false);
+      }
+    };
+
     if (!loading) {
-      setIsCheckingAuth(false);
+      checkAdmin();
     }
-  }, [loading]);
+  }, [user, loading]);
 
   const handleGoogleLogin = async () => {
     try {
@@ -64,24 +87,42 @@ export default function AdminPage() {
     }
   };
 
+  // 인증된 API 호출 헬퍼
+  const fetchWithAuth = async (url: string, options?: RequestInit) => {
+    const { getAuth } = await import('firebase/auth');
+    const auth = getAuth();
+    const idToken = await auth.currentUser?.getIdToken();
+    return fetch(url, {
+      ...options,
+      headers: {
+        ...options?.headers,
+        Authorization: `Bearer ${idToken}`,
+      },
+    });
+  };
+
   // 대시보드 개요 컴포넌트
   const DashboardOverview = () => {
     const [stats, setStats] = useState<any>(null);
+    const [dashStats, setDashStats] = useState<any>(null);
     const [orders, setOrders] = useState<any[]>([]);
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
       const fetchDashboardData = async () => {
         try {
-          const [statsRes, ordersRes] = await Promise.all([
+          const [statsRes, ordersRes, dashRes] = await Promise.all([
             fetch('/api/orders?stats=true'),
-            fetch('/api/orders?limit=5')
+            fetch('/api/orders?limit=5'),
+            fetchWithAuth('/api/admin/stats'),
           ]);
           const statsData = await statsRes.json();
           const ordersData = await ordersRes.json();
-          
+          const dashData = await dashRes.json();
+
           if (statsData.success) setStats(statsData.stats);
           if (ordersData.success) setOrders(ordersData.orders);
+          if (dashData.success) setDashStats(dashData);
         } catch (error) {
           console.error('Error fetching dashboard data:', error);
         } finally {
@@ -110,9 +151,13 @@ export default function AdminPage() {
               <TrendingUp className="text-emerald-500" size={18} />
             </div>
             <div className={styles.value} style={{ color: '#10b981' }}>
-                {(orders.reduce((acc, curr) => acc + (curr.totalAmount || 0), 0) * 12.5).toLocaleString()}원
+                {(dashStats?.monthlyRevenue || 0).toLocaleString()}원
             </div>
-            <div className={styles.trend}><span className="text-emerald-500 font-bold">↑ 12%</span> 전월 대비</div>
+            <div className={styles.trend}>
+              <span className={`font-bold ${(dashStats?.revenueGrowth || 0) >= 0 ? 'text-emerald-500' : 'text-red-500'}`}>
+                {(dashStats?.revenueGrowth || 0) >= 0 ? '↑' : '↓'} {Math.abs(dashStats?.revenueGrowth || 0)}%
+              </span> 전월 대비
+            </div>
           </div>
           <div className={styles.statCard}>
             <div className="flex justify-between items-start">
@@ -145,19 +190,23 @@ export default function AdminPage() {
                     </select>
                 </div>
                 <div className="h-48 flex items-end gap-3 px-4">
-                    {[35, 45, 30, 65, 85, 40, 95].map((h, i) => (
-                        <div key={i} className="flex-1 flex flex-col items-center gap-2 group">
-                            <motion.div 
-                                initial={{ height: 0 }} animate={{ height: `${h}%` }}
-                                className="w-full bg-linear-to-t from-blue-600 to-blue-400 rounded-t-lg group-hover:from-blue-500 group-hover:to-blue-300 transition-all cursor-pointer relative"
-                            >
-                                <div className="absolute -top-8 left-1/2 -translate-x-1/2 bg-gray-900 text-white text-[10px] py-1 px-2 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
-                                    {(h * 12500).toLocaleString()}원
-                                </div>
-                            </motion.div>
-                            <span className="text-[10px] text-gray-400 font-bold">{['월','화','수','목','금','토','일'][i]}</span>
-                        </div>
-                    ))}
+                    {(dashStats?.dailySales || Array(7).fill({ date: '-', amount: 0 })).map((day: { date: string; amount: number }, i: number) => {
+                        const maxAmount = Math.max(...(dashStats?.dailySales || []).map((d: { amount: number }) => d.amount), 1);
+                        const heightPercent = Math.max((day.amount / maxAmount) * 100, 3);
+                        return (
+                            <div key={i} className="flex-1 flex flex-col items-center gap-2 group">
+                                <motion.div
+                                    initial={{ height: 0 }} animate={{ height: `${heightPercent}%` }}
+                                    className="w-full bg-linear-to-t from-blue-600 to-blue-400 rounded-t-lg group-hover:from-blue-500 group-hover:to-blue-300 transition-all cursor-pointer relative"
+                                >
+                                    <div className="absolute -top-8 left-1/2 -translate-x-1/2 bg-gray-900 text-white text-[10px] py-1 px-2 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
+                                        {day.amount.toLocaleString()}원
+                                    </div>
+                                </motion.div>
+                                <span className="text-[10px] text-gray-400 font-bold">{day.date}</span>
+                            </div>
+                        );
+                    })}
                 </div>
            </div>
 

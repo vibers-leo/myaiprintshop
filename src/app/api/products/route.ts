@@ -9,6 +9,7 @@ import {
 } from '@/lib/products';
 import { MOCK_PRODUCTS } from '@/lib/mock-data';
 import { getDbCategories, getSubCategoryDbValue } from '@/lib/categories';
+import { requireAdmin } from '@/lib/auth-middleware';
 
 // Mock 상품을 DB 상품 형태로 변환
 function mockToProduct(mock: typeof MOCK_PRODUCTS[0]): Product {
@@ -135,9 +136,13 @@ export async function GET(request: NextRequest) {
   }
 }
 
-// POST: 상품 생성
+// POST: 상품 생성 (관리자 전용)
 export async function POST(request: NextRequest) {
   try {
+    // 관리자 인증 검사
+    const authError = await requireAdmin(request);
+    if (authError) return authError;
+
     const body = await request.json();
     const { name, price, category, thumbnail, stock } = body;
 

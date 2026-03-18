@@ -113,3 +113,16 @@ export async function setUserClaims(uid: string, claims: Record<string, any>): P
     throw error;
   }
 }
+
+/**
+ * 사용자가 관리자 권한을 가지고 있는지 확인
+ */
+export async function isAdminUser(uid: string): Promise<boolean> {
+  try {
+    const user = await getAdminUser(uid);
+    return user.customClaims?.admin === true || user.customClaims?.role === 'admin';
+  } catch (error) {
+    console.error(`❌ Failed to check admin status for user ${uid}:`, error);
+    return false;
+  }
+}

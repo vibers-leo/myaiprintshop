@@ -18,6 +18,7 @@
     "@opentelemetry/api": "^1.9.0",
     "@portone/browser-sdk": "^0.1.2",
     "clsx": "^2.1.1",
+    "fabric": "^6.5.2",
     "firebase": "^12.7.0",
     "firebase-admin": "^13.7.0",
     "framer-motion": "^12.23.26",

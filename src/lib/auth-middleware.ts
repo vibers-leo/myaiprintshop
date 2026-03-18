@@ -111,6 +111,14 @@ export function forbiddenResponse(message?: string): NextResponse {
 }
 
 /**
+ * Admin 권한 필요한 API 요청을 검증합니다.
+ * requireRole의 편의 함수입니다.
+ */
+export async function requireAdmin(request: NextRequest): Promise<AuthResult> {
+  return requireRole(request, ['admin']);
+}
+
+/**
  * 사용자가 자신의 리소스에만 접근하는지 확인합니다.
  *
  * @param userId 인증된 사용자 ID

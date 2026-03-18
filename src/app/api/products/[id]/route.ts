@@ -54,6 +54,8 @@ function mockToProduct(mock: typeof MOCK_PRODUCTS[0]): Product {
         { minQuantity: 50, discountRate: 0.2 },
         { minQuantity: 100, discountRate: 0.3 }
     ],
+    vendorId: 'PLATFORM_DEFAULT',
+    vendorType: 'platform',
     createdAt: new Date(),
     updatedAt: new Date(),
   };

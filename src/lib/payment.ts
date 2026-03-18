@@ -33,6 +33,8 @@ export type OrderStatus =
 export interface OrderItem {
   productId: string;
   productName: string;
+  name: string; // 상품명 (vendor.ts와 호환)
+  thumbnail: string; // 썸네일 (vendor.ts와 호환)
   quantity: number;
   price: number;
   options?: {
@@ -40,6 +42,23 @@ export interface OrderItem {
     color?: string;
     customDesign?: string; // AI 생성 디자인 URL
     customOptions?: { groupLabel: string; valueLabel: string }[]; // 자동 견적 옵션 내역
+  };
+  vendorId?: string; // Phase 5: 판매자 ID
+}
+
+// 판매자별 주문 (Phase 5: Multi-vendor)
+export interface VendorOrder {
+  vendorId: string;
+  vendorName: string;
+  items: OrderItem[];
+  subtotal: number;
+  commission: number;
+  vendorAmount: number;
+  status: 'pending' | 'confirmed' | 'shipped' | 'delivered' | 'cancelled';
+  shippingInfo?: {
+    trackingNumber?: string;
+    carrier?: string;
+    shippedAt?: string;
   };
 }
 
@@ -50,7 +69,11 @@ export interface Order {
   items: OrderItem[];
   totalAmount: number;
   shippingFee: number;
-  
+  platformFee?: number; // Phase 5: 플랫폼 수수료 총액
+
+  // Phase 5: 멀티벤더 주문
+  vendorOrders?: VendorOrder[];
+
   // 배송 정보
   shippingInfo: {
     name: string;
@@ -63,12 +86,12 @@ export interface Order {
     trackingNumber?: string;
     carrier?: string;
   };
-  
+
   // 결제 정보
   paymentId?: string;
   paymentStatus: PaymentStatus;
   orderStatus: OrderStatus;
-  
+
   createdAt: string;
   updatedAt: string;
 }

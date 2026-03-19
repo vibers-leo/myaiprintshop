@@ -27,7 +27,7 @@ export function Skeleton({
       transition: {
         duration: 1.5,
         repeat: Infinity,
-        ease: 'easeInOut',
+        ease: [0.4, 0, 0.2, 1] as const, // easeInOut cubic-bezier
       },
     },
     wave: {
@@ -35,11 +35,11 @@ export function Skeleton({
       transition: {
         duration: 1.5,
         repeat: Infinity,
-        ease: 'linear',
+        ease: [0, 0, 1, 1] as const, // linear cubic-bezier
       },
     },
     none: {},
-  };
+  } as const;
 
   return (
     <motion.div

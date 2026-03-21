@@ -65,6 +65,8 @@ export interface Product {
   vendorId: string; // vendors 컬렉션 ID
   vendorName?: string; // 캐시 (판매자명)
   vendorType: 'platform' | 'marketplace'; // 'platform' = MyAIPrintShop 직판
+  // Metadata (확장 가능한 추가 정보)
+  metadata?: Record<string, any>; // WowPress 연동 정보, 외부 시스템 ID 등
   createdAt: Date | Timestamp;
   updatedAt: Date | Timestamp;
 }

@@ -1,18 +1,28 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { useAuth } from '@/context/AuthContext';
 import Navbar from '@/components/Navbar';
-import { Wand2, Store, User, ArrowRight, Check, Loader2 } from 'lucide-react';
+import { Wand2, Store, User, ArrowRight, Check, Loader2, Sparkles } from 'lucide-react';
 import { toast } from 'sonner';
+import type { AnalysisResult, GoodsRecommendation } from '@/lib/goods-recommendation';
 
 export default function CreatorRegisterPage() {
   const { user, loading } = useAuth();
   const router = useRouter();
+  const searchParams = useSearchParams();
   const [step, setStep] = useState(1);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isCreator, setIsCreator] = useState<boolean | null>(null);
+
+  // AI 추천 데이터
+  const [aiRecommendations, setAiRecommendations] = useState<{
+    source?: string;
+    url?: string;
+    analysis?: AnalysisResult;
+    recommendations?: GoodsRecommendation[];
+  }>({});
 
   const [formData, setFormData] = useState({
     handle: '',
@@ -22,6 +32,35 @@ export default function CreatorRegisterPage() {
   });
 
   const [handleError, setHandleError] = useState('');
+
+  // AI 추천 데이터 읽기
+  useEffect(() => {
+    const source = searchParams.get('source');
+    const url = searchParams.get('url');
+    const analysisStr = searchParams.get('analysis');
+    const recommendationsStr = searchParams.get('recommendations');
+
+    if (source === 'goods-recommendation' && analysisStr && recommendationsStr) {
+      try {
+        const analysis: AnalysisResult = JSON.parse(analysisStr);
+        const recommendations: GoodsRecommendation[] = JSON.parse(recommendationsStr);
+
+        setAiRecommendations({ source, url: url || undefined, analysis, recommendations });
+
+        // 샵 이름 자동 입력 (분석 결과 기반)
+        if (analysis.keywords.length > 0) {
+          const suggestedName = `${analysis.keywords[0]} 굿즈샵`;
+          setFormData((prev) => ({ ...prev, shopName: suggestedName }));
+        }
+
+        toast.success(`AI가 ${recommendations.length}개의 굿즈를 추천했습니다!`, {
+          icon: <Sparkles className="text-purple-500" size={16} />,
+        });
+      } catch (error) {
+        console.error('Failed to parse AI recommendations:', error);
+      }
+    }
+  }, [searchParams]);
 
   useEffect(() => {
     if (!loading && !user) {
@@ -63,6 +102,7 @@ export default function CreatorRegisterPage() {
 
     setIsSubmitting(true);
     try {
+      // Step 1: 크리에이터 등록
       const res = await fetch('/api/creators', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -78,12 +118,52 @@ export default function CreatorRegisterPage() {
       });
 
       const data = await res.json();
-      if (data.success) {
-        toast.success('크리에이터 등록이 완료되었습니다!');
-        router.push('/creators/dashboard');
-      } else {
+      if (!data.success) {
         toast.error(data.error || '등록에 실패했습니다.');
+        return;
       }
+
+      toast.success('크리에이터 등록이 완료되었습니다!');
+
+      // Step 2: AI 추천 상품 자동 등록
+      if (aiRecommendations.recommendations && aiRecommendations.recommendations.length > 0) {
+        toast.loading(`${aiRecommendations.recommendations.length}개의 추천 상품을 등록하는 중...`, { id: 'auto-products' });
+
+        let successCount = 0;
+        for (const rec of aiRecommendations.recommendations) {
+          try {
+            const productRes = await fetch('/api/creators', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                action: 'create_product',
+                creatorUid: user.uid,
+                creatorHandle: formData.handle,
+                productId: '', // Will be auto-generated
+                title: rec.name,
+                description: rec.reason,
+                designUrl: `https://images.unsplash.com/photo-1618354691373-d851c5c3a990?w=800&auto=format`, // 임시 플레이스홀더
+                price: rec.basePrice + Math.floor(rec.basePrice * 0.7), // 기본가 + 70% 마진
+                baseProductPrice: rec.basePrice,
+                category: rec.category,
+                tags: [rec.productType, ...(aiRecommendations.analysis?.keywords.slice(0, 3) || [])],
+              }),
+            });
+
+            const productData = await productRes.json();
+            if (productData.success) {
+              successCount++;
+            }
+          } catch (error) {
+            console.error(`Failed to create product ${rec.name}:`, error);
+          }
+        }
+
+        toast.success(`${successCount}개의 상품이 자동 등록되었습니다!`, { id: 'auto-products' });
+      }
+
+      // Step 3: 대시보드로 이동
+      router.push('/creators/dashboard');
     } catch {
       toast.error('네트워크 오류가 발생했습니다.');
     } finally {
@@ -126,6 +206,32 @@ export default function CreatorRegisterPage() {
         </div>
 
         <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-8">
+          {/* AI 추천 배너 */}
+          {aiRecommendations.recommendations && aiRecommendations.recommendations.length > 0 && (
+            <div className="mb-6 bg-gradient-to-r from-purple-50 to-blue-50 border-2 border-purple-200 rounded-xl p-4">
+              <div className="flex items-center gap-3 mb-2">
+                <Sparkles className="text-purple-600" size={20} />
+                <h3 className="font-bold text-purple-900">AI 굿즈 추천 샵 오픈</h3>
+              </div>
+              <p className="text-sm text-purple-700 leading-relaxed">
+                AI가 분석한 {aiRecommendations.recommendations.length}개의 추천 상품이<br />
+                샵 오픈 후 자동으로 등록됩니다!
+              </p>
+              <div className="flex flex-wrap gap-2 mt-3">
+                {aiRecommendations.recommendations.slice(0, 3).map((rec, i) => (
+                  <span key={i} className="px-2 py-1 bg-white text-purple-700 rounded-full text-xs font-medium border border-purple-200">
+                    {rec.name}
+                  </span>
+                ))}
+                {aiRecommendations.recommendations.length > 3 && (
+                  <span className="px-2 py-1 bg-purple-600 text-white rounded-full text-xs font-medium">
+                    +{aiRecommendations.recommendations.length - 3}개 더
+                  </span>
+                )}
+              </div>
+            </div>
+          )}
+
           {step === 1 && (
             <div className="space-y-6">
               <h2 className="text-xl font-bold text-gray-900">기본 정보</h2>
@@ -230,6 +336,27 @@ export default function CreatorRegisterPage() {
                   <span className="font-bold">크리에이터 70% / 플랫폼 30%</span>
                 </div>
               </div>
+
+              {/* AI 추천 상품 목록 */}
+              {aiRecommendations.recommendations && aiRecommendations.recommendations.length > 0 && (
+                <div className="bg-purple-50 border-2 border-purple-200 rounded-xl p-5">
+                  <div className="flex items-center gap-2 mb-3">
+                    <Sparkles className="text-purple-600" size={18} />
+                    <h3 className="font-bold text-purple-900">자동 등록될 AI 추천 상품</h3>
+                  </div>
+                  <div className="space-y-2 max-h-60 overflow-y-auto">
+                    {aiRecommendations.recommendations.map((rec, i) => (
+                      <div key={i} className="bg-white rounded-lg p-3 flex items-center justify-between">
+                        <div>
+                          <p className="font-medium text-gray-900">{rec.name}</p>
+                          <p className="text-xs text-gray-500">{rec.reason}</p>
+                        </div>
+                        <span className="text-sm font-bold text-purple-600">매칭률 {rec.score}%</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
 
               <div className="bg-amber-50 border border-amber-200 rounded-xl p-4 text-sm text-amber-800">
                 등록 후 바로 상품 등록이 가능하며, 정산은 매월 진행됩니다. 최소 출금 금액은 10,000원입니다.

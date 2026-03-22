@@ -3,6 +3,7 @@ import Hero from '@/components/Hero';
 import Footer from '@/components/Footer';
 import HomeClientContent from '@/components/HomeClientContent';
 import ReviewsSection from '@/components/ReviewsSection';
+import GoodsRecommendationSearch from '@/components/GoodsRecommendationSearch';
 import Link from 'next/link';
 import { getLatestReviews } from '@/lib/reviews';
 import { Sparkles, Zap, Shield, Truck } from 'lucide-react';
@@ -121,6 +122,9 @@ export default async function Home() {
     <main className="min-h-screen bg-white">
       <Navbar />
       <Hero />
+
+      {/* AI 굿즈 추천 검색 */}
+      <GoodsRecommendationSearch />
 
       {/* Features Section - Stripe 스타일 */}
       <section className="py-20 bg-white border-t border-gray-100">

@@ -10,17 +10,16 @@ export default function Hero() {
         <div className="max-w-3xl">
           {/* 메인 타이틀 */}
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-6 leading-[1.15] tracking-tight">
-            AI로 디자인하고{' '}
+            사장님, 브랜드 굿즈{' '}
             <br className="hidden sm:block" />
-            바로 제작하는{' '}
-            <span className="text-gradient-purple">프린트샵</span>
+            <span className="text-gradient">직접 만들어보세요</span>
           </h1>
 
           {/* 서브타이틀 */}
           <p className="text-lg md:text-xl text-gray-500 mb-10 leading-relaxed max-w-xl">
-            상상을 현실로 만드는 가장 쉬운 방법.
+            AI가 디자인하고, 굿쯔가 만들어드립니다.
             <br />
-            명함, 스티커, 티셔츠, 에코백까지 AI로 디자인하세요.
+            소량도 OK! 부담 없이 브랜드 맞춤 제작을 시작하세요.
           </p>
 
           {/* CTA 버튼 */}
@@ -29,7 +28,7 @@ export default function Hero() {
               href="/create"
               className="btn btn-primary btn-lg group"
             >
-              지금 시작하기
+              무료로 시작하기
               <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </Link>
 

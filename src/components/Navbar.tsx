@@ -86,8 +86,8 @@ export default function Navbar() {
             {/* Desktop Menu - 심플하게 */}
             <div className="hidden md:flex items-center gap-1">
               <Link href="/" className="px-3 py-2 text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors rounded-md hover:bg-gray-50">홈</Link>
-              <Link href="/shop" className="px-3 py-2 text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors rounded-md hover:bg-gray-50">상품</Link>
-              <Link href="/create" className="px-3 py-2 text-sm font-medium text-primary-600 hover:text-primary-700 transition-colors rounded-md hover:bg-primary-50">AI 디자인</Link>
+              <Link href="/shop" className="px-3 py-2 text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors rounded-md hover:bg-gray-50">모든 상품</Link>
+              <Link href="/create" className="px-3 py-2 text-sm font-medium text-primary-600 hover:text-primary-700 transition-colors rounded-md hover:bg-primary-50">사진으로 만들기</Link>
               <Link href="/mypage" className="px-3 py-2 text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors rounded-md hover:bg-gray-50">마이페이지</Link>
             </div>
 

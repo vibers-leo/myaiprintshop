@@ -92,11 +92,11 @@ export default async function ShopPage({ searchParams }: ShopPageProps) {
           ) : (
               <>
                 <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-gray-900 mb-6 tracking-tight">
-                    모든 카테고리
+                    글로벌 커스텀 굿즈
                 </h1>
                 <p className="text-gray-600 max-w-2xl mx-auto text-lg md:text-xl font-medium leading-relaxed">
-                    사장님을 위한 맞춤형 브랜드 굿즈. <br className="hidden md:block" />
-                    수량은 가볍게, 퀄리티는 완벽하게 제작해드립니다.
+                    어디서든 주문 가능한 가장 심플한 굿즈 서비스. <br className="hidden md:block" />
+                    사진 한 장만 준비하세요. 배송은 굿쯔가 책임집니다.
                 </p>
               </>
           )}

@@ -94,14 +94,14 @@ export default async function Home() {
       <section className="py-24 bg-white border-b border-gray-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl lg:text-4xl font-extrabold text-gray-900 mb-16 tracking-tight">
-            단 4단계면 주문 완료
+            사진 한 장으로 끝나는 4단계
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
             {[
               { num: 1, title: '상품 선택', icon: LayoutGrid },
-              { num: 2, title: 'AI 디자인', icon: Palette },
-              { num: 3, title: '옵션/결제', icon: CheckCircle },
-              { num: 4, title: '총알 배송', icon: Package },
+              { num: 2, title: '사진 업로드', icon: Palette },
+              { num: 3, title: '자동 AI 핏', icon: CheckCircle },
+              { num: 4, title: '글로벌 배송', icon: Package },
             ].map((step, idx) => (
               <div key={idx} className="relative">
                 {idx < 3 && (
@@ -121,14 +121,14 @@ export default async function Home() {
       <section className="py-24 bg-gray-50 border-b border-gray-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl lg:text-4xl font-extrabold mb-16 text-center text-gray-900 tracking-tight">
-            사장님들이 GOODZZ를 <span className="text-primary-600">선택하는 이유</span>
+            왜 다들 <span className="text-primary-600">GOODZZ.KR</span>을 찾을까요?
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {[
-              { icon: Palette, title: '디자인 무료', desc: '비싼 외주 없이 AI가\n브랜드 맞춤 디자인 완성' },
-              { icon: Box, title: '진짜 소량 주문', desc: '쌓아둘 필요 없이\n딱 100장부터 주문 가능' },
-              { icon: Clock, title: '초고속 제작', desc: '주문 당일 인쇄 시작,\n빠르면 내일 도착' },
-              { icon: LayoutGrid, title: '브랜드 통일', desc: '우리 가게 로고 한 번 치면\n모든 굿즈에 자동 최적화' },
+              { icon: Palette, title: '복잡한 툴 제로', desc: '포토샵 몰라도 OK.\n사진 한 장이면 끝납니다' },
+              { icon: LayoutGrid, title: '완벽한 핏 (Fit)', desc: 'AI가 업로드한 사진을\n상품 틀에 맞춰 자동 조정' },
+              { icon: Box, title: '단 1개도 제작', desc: '재고 부담 없이\n하나뿐인 굿즈도 만들어드려요' },
+              { icon: Clock, title: '전 세계 글로벌 배송', desc: '국내외 어디서 주문하든\n안전하고 빠르게 배송' },
             ].map(({ icon: Icon, title, desc }, idx) => (
               <div key={title} className="bg-white p-8 rounded-2xl border border-gray-200 shadow-sm text-center transform transition-transform hover:-translate-y-1 hover:shadow-md">
                 <div className="w-16 h-16 bg-primary-50 rounded-full flex items-center justify-center mx-auto mb-6">

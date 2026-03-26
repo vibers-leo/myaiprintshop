@@ -43,22 +43,22 @@ export default function CreateClientContent({ products }: { products: Product[] 
           >
             <div className="inline-flex items-center gap-2 px-3 py-1 bg-white text-gray-700 rounded border border-gray-200 text-sm font-bold mb-6">
               <Sparkles className="w-4 h-4 text-primary-600" />
-              AI 디자이너 활용
+              사진 1장 = 모든 굿즈
             </div>
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-gray-900 mb-6 tracking-tight">
-              우리 가게{' '}
+              내 사진을 그대로{' '}
               <span className="text-primary-600">
-                브랜드 굿즈
-              </span> 만들기
+                글로벌 굿즈
+              </span>로
             </h1>
             <p className="text-lg md:text-xl text-gray-600 max-w-2xl mx-auto mb-10 font-medium leading-relaxed">
-              원하는 카테고리를 선택하고 AI 디자이너와 함께<br className="hidden sm:block" />
-              우리 가게만의 특별한 굿즈를 전문가 퀄리티로 만들어보세요.
+              복잡한 디자인 툴은 잊으세요. 원하는 사진만 올리면<br className="hidden sm:block" />
+              어떤 상품이든 찰떡같이 입혀서 전 세계로 배송해 드립니다.
             </p>
             <div className="flex justify-center flex-col sm:flex-row gap-4 mb-4">
               <button className="btn btn-primary btn-lg flex items-center justify-center gap-2 font-bold px-8">
                 <Palette className="w-5 h-5" />
-                내 브랜드 키트 등록 (로고/컬러)
+                사진 갤러리에서 업로드 (JPG, PNG)
               </button>
             </div>
           </motion.div>
@@ -134,12 +134,10 @@ export default function CreateClientContent({ products }: { products: Product[] 
       {/* Product Selector */}
       <section className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-10">
-            <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-3">
-              커스텀할 상품을 선택하세요
-            </h2>
-            <p className="text-gray-500">상품을 선택하면 AI 디자인 에디터가 열립니다</p>
-          </div>
+          <div className="mb-10 text-center">
+          <h2 className="text-2xl font-bold text-gray-900">어떤 굿즈에 입혀볼까요?</h2>
+          <p className="text-gray-500 mt-2">업로드한 사진이 아래 선택한 상품에 자동으로 입혀집니다.</p>
+        </div>
 
           {/* Category Filter */}
           <div className="flex flex-wrap justify-center gap-2 mb-8">

@@ -10,17 +10,17 @@ export default function Hero() {
           <div className="max-w-xl">
             <div className="inline-flex items-center gap-2 px-3 py-1 bg-gray-50 text-gray-700 rounded border border-gray-200 text-sm font-bold mb-6">
               <ShoppingBag className="w-4 h-4 text-primary-600" />
-              대한민국 1등 소상공인 AI 굿즈
+              전 세계 배송 지원 · 최소 수량 없음
             </div>
             
             <h1 className="text-5xl md:text-6xl font-extrabold text-gray-900 mb-6 leading-[1.15] tracking-tight">
-              내 가게 브랜드 굿즈,<br />
-              <span className="text-primary-600">AI로 뚝딱</span> 만드세요
+              사진 한 장이면,<br />
+              <span className="text-primary-600">글로벌 굿즈</span> 완성
             </h1>
 
             <p className="text-lg md:text-xl text-gray-600 mb-10 leading-relaxed font-medium">
-              명함, 스티커, 전단지까지 — 더 이상 디자인 스트레스 받지 마세요.<br />
-              AI 디자이너가 퀄리티 있게 뽑아주고, GOODZZ가 제작해 드립니다.
+              goodzz.kr 하나면 끝. 원하는 사진만 올리세요.<br />
+              어디서든 주문 가능한 가장 심플한 굿즈 커스텀 서비스.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 mb-10">
@@ -43,12 +43,12 @@ export default function Hero() {
             {/* 신뢰 포인트 */}
             <div className="flex items-center gap-6 text-sm font-bold text-gray-500">
               <div className="flex items-center gap-2">
-                <span className="w-2 h-2 rounded-full bg-accent-600"></span>
-                <span>24시간 내 초고속 샘플</span>
+                <span className="w-2 h-2 rounded-full bg-accent-500"></span>
+                <span>글로벌 해외 배송</span>
               </div>
               <div className="flex items-center gap-2">
-                <span className="w-2 h-2 rounded-full bg-accent-600"></span>
-                <span>소량 인쇄 100장부터</span>
+                <span className="w-2 h-2 rounded-full bg-accent-500"></span>
+                <span>원클릭 AI 목업</span>
               </div>
             </div>
           </div>

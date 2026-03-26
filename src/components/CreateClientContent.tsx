@@ -28,6 +28,7 @@ const AI_STYLES = [
 export default function CreateClientContent({ products }: { products: Product[] }) {
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [uploadedImage, setUploadedImage] = useState<string | null>(null);
+  const [isGenerating, setIsGenerating] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const [isOrderModalOpen, setIsOrderModalOpen] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -35,8 +36,14 @@ export default function CreateClientContent({ products }: { products: Product[] 
   const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
+      setIsGenerating(true);
       const url = URL.createObjectURL(file);
       setUploadedImage(url);
+      
+      // Simulate high-quality drafting process
+      setTimeout(() => {
+        setIsGenerating(false);
+      }, 1500);
     }
   };
 
@@ -136,6 +143,109 @@ export default function CreateClientContent({ products }: { products: Product[] 
       </section>
 
 
+
+      {/* Draft Showcase Section (Visible after upload) */}
+      <AnimatePresence>
+        {uploadedImage && (
+          <section className="py-20 bg-gradient-to-b from-primary-50/30 to-white overflow-hidden">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+              <div className="flex flex-col md:flex-row items-end justify-between mb-12 gap-6">
+                <div className="max-w-xl">
+                  <div className="inline-flex items-center gap-2 px-3 py-1 bg-primary-100 text-primary-700 rounded-full text-xs font-bold mb-4">
+                    <Zap className="w-3 h-3" /> AUTO-MOCKUP ENGINE
+                  </div>
+                  <h2 className="text-3xl md:text-4xl font-black text-gray-900 leading-tight">
+                    {isGenerating ? '시안을 생성하고 있어요...' : '방금 올린 사진으로 만든\n오늘의 추천 굿즈 시안'}
+                  </h2>
+                </div>
+                {!isGenerating && (
+                  <button 
+                    onClick={() => fileInputRef.current?.click()}
+                    className="flex items-center gap-2 text-primary-600 font-bold hover:text-primary-700 transition-colors"
+                  >
+                    <Palette className="w-4 h-4" /> 다른 사진으로 시안 보기
+                  </button>
+                )}
+              </div>
+
+              {isGenerating ? (
+                <div className="flex flex-col items-center justify-center py-20">
+                  <div className="relative w-24 h-24 mb-6">
+                    <motion.div 
+                      animate={{ rotate: 360 }}
+                      transition={{ repeat: Infinity, duration: 2, ease: "linear" }}
+                      className="absolute inset-0 border-4 border-primary-100 border-t-primary-600 rounded-full"
+                    />
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <Sparkles className="w-8 h-8 text-primary-500 animate-pulse" />
+                    </div>
+                  </div>
+                  <p className="text-gray-400 font-medium animate-pulse">이미지 분석 및 시안 합성 중...</p>
+                </div>
+              ) : (
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                  {[
+                    { name: '오버핏 코튼 티셔츠', category: '의류', theme: 'bg-blue-50', rotate: -1 },
+                    { name: '세라믹 머그컵 (350ml)', category: '주방', theme: 'bg-green-50', rotate: 2 },
+                    { name: '프리미엄 폰케이스', category: '액세서리', theme: 'bg-purple-50', rotate: -2 },
+                  ].map((item, idx) => (
+                    <motion.div
+                      key={item.name}
+                      initial={{ opacity: 0, y: 30 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: idx * 0.1 }}
+                      className={`${item.theme} rounded-[2.5rem] p-10 flex flex-col items-center justify-center min-h-[400px] border border-white shadow-xl relative group overflow-hidden`}
+                    >
+                      {/* Realistic Mockup Visualization */}
+                      <div className="relative w-full aspect-square mb-8 flex items-center justify-center">
+                        {/* Shadow underneath */}
+                        <div className="absolute bottom-4 w-3/4 h-8 bg-black/5 blur-2xl rounded-full" />
+                        
+                        {/* Mockup Base */}
+                        <div className="absolute inset-0 flex items-center justify-center opacity-5 select-none pointer-events-none">
+                           <ShoppingBag className="w-48 h-48 text-gray-900" />
+                        </div>
+
+                        {/* The Drafted Image */}
+                        <motion.div 
+                          initial={{ scale: 0.9, opacity: 0 }}
+                          animate={{ scale: 1, opacity: 1 }}
+                          transition={{ delay: 0.3 + idx * 0.1 }}
+                          style={{ rotate: item.rotate }}
+                          className="relative w-4/5 h-4/5 bg-white p-2 shadow-[-10px_20px_40px_rgba(0,0,0,0.1)] rounded-sm border-[12px] border-white ring-1 ring-gray-100"
+                        >
+                          <img 
+                            src={uploadedImage!} 
+                            alt={item.name} 
+                            className="w-full h-full object-cover mix-blend-multiply opacity-90 shadow-inner"
+                          />
+                          {/* Gloss effect overlay */}
+                          <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/10 to-white/20 pointer-events-none" />
+                        </motion.div>
+                      </div>
+                      
+                      <div className="text-center">
+                        <span className="text-xs font-bold text-gray-400 uppercase tracking-widest">{item.category}</span>
+                        <h3 className="text-xl font-black text-gray-900 mt-1 mb-4">{item.name}</h3>
+                        <button 
+                          onClick={() => {
+                            const p = products.find(p => p.name.includes(item.category)) || products[0];
+                            setSelectedProduct(p);
+                            setIsOrderModalOpen(true);
+                          }}
+                          className="bg-white px-6 py-3 rounded-full text-sm font-bold text-gray-900 shadow-lg hover:shadow-xl transition-all border border-gray-50 flex items-center gap-2 group-hover:scale-110 active:scale-95"
+                        >
+                          이 시안으로 주문 <ArrowRight className="w-4 h-4" />
+                        </button>
+                      </div>
+                    </motion.div>
+                  ))}
+                </div>
+              )}
+            </div>
+          </section>
+        )}
+      </AnimatePresence>
 
       {/* Product Selector */}
       <section className="py-16 bg-white">

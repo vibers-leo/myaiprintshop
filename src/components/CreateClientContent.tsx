@@ -409,8 +409,8 @@ export default function CreateClientContent({ products }: { products: Product[] 
               <div className="w-full md:w-1/2 p-8 overflow-y-auto">
                 <div className="flex justify-between items-start mb-8">
                   <div>
-                    <h2 className="text-2xl font-black text-gray-900">Global Order</h2>
-                    <p className="text-gray-500 text-sm mt-1">전 세계 어디든 5~7일 내에 도착합니다.</p>
+                    <h2 className="text-2xl font-black text-gray-900">주문하기</h2>
+                    <p className="text-gray-500 text-sm mt-1">배송 정보를 입력해 주세요. (영업일 기준 5~7일 소요)</p>
                   </div>
                   <button 
                     onClick={() => setIsOrderModalOpen(false)}
@@ -423,41 +423,39 @@ export default function CreateClientContent({ products }: { products: Product[] 
                 <form className="space-y-5" onSubmit={(e) => { e.preventDefault(); alert('Global Order Placed!'); setIsOrderModalOpen(false); }}>
                   <div>
                     <label className="block text-sm font-bold text-gray-700 mb-2 flex items-center gap-2">
-                       <Globe className="w-4 h-4 text-primary-500" /> Shipping Country
+                       <Globe className="w-4 h-4 text-primary-500" /> 배송 국가
                     </label>
                     <select className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-transparent outline-none font-medium">
-                      <option>South Korea (KR)</option>
-                      <option>United States (US)</option>
-                      <option>Japan (JP)</option>
-                      <option>Germany (DE)</option>
-                      <option>United Kingdom (GB)</option>
+                      <option>대한민국 (KR)</option>
+                      <option>미국 (US)</option>
+                      <option>일본 (JP)</option>
                     </select>
                   </div>
 
                   <div className="grid grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-sm font-bold text-gray-700 mb-2">Recipient Name</label>
-                      <input type="text" placeholder="John Doe" className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-primary-500 outline-none font-medium" />
+                      <label className="block text-sm font-bold text-gray-700 mb-2">수령인 성함</label>
+                      <input type="text" placeholder="홍길동" className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-primary-500 outline-none font-medium" />
                     </div>
                     <div>
-                      <label className="block text-sm font-bold text-gray-700 mb-2">Phone</label>
-                      <input type="text" placeholder="+82 10..." className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-primary-500 outline-none font-medium" />
+                      <label className="block text-sm font-bold text-gray-700 mb-2">연락처</label>
+                      <input type="text" placeholder="010-0000-0000" className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-primary-500 outline-none font-medium" />
                     </div>
                   </div>
 
                   <div>
-                    <label className="block text-sm font-bold text-gray-700 mb-2">Detailed Address</label>
-                    <textarea rows={2} placeholder="Street, Apartment, City, State, Zip" className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-primary-500 outline-none font-medium resize-none"></textarea>
+                    <label className="block text-sm font-bold text-gray-700 mb-2">상세 주소 (배송지)</label>
+                    <textarea rows={2} placeholder="도로명 주소 및 상세 주소를 입력해 주세요" className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-primary-500 outline-none font-medium resize-none"></textarea>
                   </div>
 
                   <div className="pt-4 border-t border-gray-100">
                     <div className="flex justify-between items-center mb-4">
-                      <span className="text-gray-500 font-medium">Total Amount</span>
+                      <span className="text-gray-500 font-medium">최종 결제 금액</span>
                       <span className="text-2xl font-black text-gray-900">{(selectedProduct.price).toLocaleString()}원</span>
                     </div>
                     <button className="w-full py-4 bg-primary-600 text-white rounded-2xl font-black text-lg flex items-center justify-center gap-3 hover:bg-primary-700 transition-colors shadow-lg shadow-primary-500/20">
                       <CreditCard className="w-6 h-6" />
-                      Checkout and Order
+                      결제 및 주문 완료
                     </button>
                     <p className="text-center text-xs text-gray-400 mt-4 leading-relaxed">
                       By clicking the button, you agree to GOODZZ's <br />

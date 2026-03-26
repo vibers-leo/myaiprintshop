@@ -129,7 +129,7 @@ export default function PartnerProductList({
           {partnerName}에서 제공하는 서비스
         </h3>
         <p className="text-sm text-blue-700">
-          모든 상품은 MyAIPrintShop이 통신판매업자로서 판매하며,
+          모든 상품은 GOODZZ(굿쯔)가 통신판매업자로서 판매하며,
           결제, 배송, 환불 등 모든 책임을 부담합니다.
           안심하고 구매하세요.
         </p>

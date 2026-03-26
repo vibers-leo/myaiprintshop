@@ -1,4 +1,4 @@
-# MyAIPrintShop — 프로젝트 현황
+# GOODZZ — 프로젝트 현황
 
 > 최종 업데이트: 2026-03-24 by [TCC]
 > 상태: Phase 4 완료, 멀티벤더 + 크리에이터 플랫폼 운영 단계
@@ -74,7 +74,7 @@
 ## 앱 정보
 | 항목 | 값 |
 |------|-----|
-| 패키지명 | `@vibers/myaiprintshop` |
+| 패키지명 | `@vibers/goodzz` |
 | 포트 | 3300 |
 | 빌드 | 통과 |
 | git remote | vibers-leo/myaiprintshop |

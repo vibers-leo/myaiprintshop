@@ -42,7 +42,7 @@ export default function BusinessPlanPage() {
     ceo: '',
     establishmentDate: '',
     address: '',
-    website: 'https://myaiprintshop.com',
+    website: 'https://goodzz.co.kr',
     managerName: '',
     managerTel: '',
     managerEmail: '',

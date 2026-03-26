@@ -112,7 +112,7 @@ export default function DeveloperSignupPage() {
           <div className="mt-8 pt-6 border-t border-gray-100">
             <h3 className="font-bold mb-3">Quick Start</h3>
             <pre className="bg-gray-900 text-gray-100 p-4 rounded-lg text-xs overflow-x-auto">
-              <code>{`fetch('https://myaiprintshop.vercel.app/api/public/v1/products', {
+              <code>{`fetch('https://goodzz.co.kr/api/public/v1/products', {
   headers: {
     'x-api-key': '${apiKey}'
   }
@@ -135,7 +135,7 @@ export default function DeveloperSignupPage() {
           </div>
           <h1 className="text-3xl font-black mb-2">Get Your API Key</h1>
           <p className="text-gray-600">
-            Fill out the form below to get instant access to MyAIPrintShop Public API
+            Fill out the form below to get instant access to GOODZZ Public API
           </p>
         </div>
 

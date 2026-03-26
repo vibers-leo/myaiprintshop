@@ -1,8 +1,8 @@
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: '개인정보처리방침 | MyAIPrintShop',
-  description: 'MyAIPrintShop 개인정보처리방침',
+  title: '개인정보처리방침 | GOODZZ',
+  description: 'GOODZZ 개인정보처리방침',
 };
 
 export default function PrivacyPage() {
@@ -134,7 +134,7 @@ export default function PrivacyPage() {
             <p><strong>이름:</strong> 홍길동</p>
             <p><strong>직책:</strong> 개인정보보호책임자</p>
             <p><strong>전화:</strong> 02-1234-5678</p>
-            <p><strong>이메일:</strong> privacy@myaiprintshop.com</p>
+            <p><strong>이메일:</strong> privacy@goodzz.co.kr</p>
           </div>
         </section>
 

@@ -217,13 +217,13 @@ export default function PartnerProductDetail({
           <div className="mt-8 p-4 bg-yellow-50 border border-yellow-200 rounded-lg">
             <div className="text-xs text-yellow-800 space-y-1">
               <div>
-                <strong>통신판매업자:</strong> MyAIPrintShop
+                <strong>통신판매업자:</strong> GOODZZ(굿쯔)
               </div>
               <div>
                 <strong>판매 채널:</strong> {partnerName}
               </div>
               <div className="text-yellow-700 mt-2">
-                본 상품은 MyAIPrintShop이 판매하며,
+                본 상품은 GOODZZ(굿쯔)가 판매하며,
                 결제/배송/환불 등 모든 책임을 부담합니다.
               </div>
             </div>

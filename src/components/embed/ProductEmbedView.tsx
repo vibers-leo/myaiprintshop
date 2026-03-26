@@ -219,12 +219,12 @@ export default function ProductEmbedView({
       <div className="mt-6 text-center text-xs text-gray-400">
         Powered by{' '}
         <a
-          href="https://myaiprintshop.com"
+          href="https://goodzz.co.kr"
           target="_blank"
           rel="noopener noreferrer"
           className="text-blue-600 hover:underline"
         >
-          MyAIPrintShop
+          GOODZZ
         </a>
       </div>
     </div>

@@ -1,4 +1,4 @@
-# MyAIPrintShop 디자인 시스템
+# GOODZZ 디자인 시스템
 
 > Stripe + Aceternity UI 스타일 기반. Tailwind CSS v4 + CSS 커스텀 속성으로 관리.
 > 소스: `src/app/globals.css`

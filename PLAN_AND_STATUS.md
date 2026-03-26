@@ -1,4 +1,4 @@
-# MyAIPrintShop 개발 로드맵 & 현황
+# GOODZZ 개발 로드맵 & 현황
 
 ## 완료된 기능
 

@@ -4,9 +4,9 @@ import { getFirestore, collection, doc, setDoc, Timestamp } from 'firebase/fires
 // Firebase Client SDK 초기화
 const firebaseConfig = {
   apiKey: "AIzaSyBniRDTvu-VyRsrRjZ7tABCJPPMcS0w9yk",
-  authDomain: "myaiprintshop.firebaseapp.com",
-  projectId: "myaiprintshop",
-  storageBucket: "myaiprintshop.firebasestorage.app",
+  authDomain: "goodzz.firebaseapp.com",
+  projectId: "goodzz",
+  storageBucket: "goodzz.firebasestorage.app",
   messagingSenderId: "436157113796",
   appId: "1:436157113796:web:0f1c03b91632a5e0aff091",
 };

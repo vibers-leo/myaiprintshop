@@ -1,4 +1,4 @@
-# 🎨 MyAIPrintShop
+# 🎨 GOODZZ
 
 > AI로 디자인하고, 바로 제작하는 프리미엄 프린트샵
 
@@ -49,8 +49,8 @@
 
 ```bash
 # 저장소 클론
-git clone https://github.com/yourusername/myaiprintshop.git
-cd myaiprintshop
+git clone https://github.com/yourusername/goodzz.git
+cd goodzz
 
 # 의존성 설치
 npm install
@@ -70,7 +70,7 @@ npm run dev
 ## 🎯 프로젝트 구조
 
 ```
-myaiprintshop/
+goodzz/
 ├── src/
 │   ├── app/                    # Next.js App Router 페이지
 │   │   ├── page.tsx           # 홈페이지
@@ -283,4 +283,4 @@ MIT License - 자세한 내용은 [LICENSE](LICENSE) 파일을 참고하세요.
 
 프로젝트 관련 문의사항이 있으시면 이슈를 등록해주세요.
 
-**Built with ❤️ by MyAIPrintShop Team**
+**Built with ❤️ by GOODZZ Team**

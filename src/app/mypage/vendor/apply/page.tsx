@@ -120,7 +120,7 @@ export default function VendorApplyPage() {
           </div>
           <h1 className="text-4xl font-extrabold text-gray-900 mb-4">판매자 입점 신청</h1>
           <p className="text-lg text-gray-600">
-            MyAIPrintShop에서 상품을 판매하고 수익을 창출하세요!
+            GOODZZ에서 상품을 판매하고 수익을 창출하세요!
           </p>
         </motion.div>
 

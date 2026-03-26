@@ -27,7 +27,7 @@ if (isConfigValid) {
 } else {
   if (typeof window !== "undefined") {
     console.warn(
-      "[MyAIPrintShop] Firebase 환경변수가 설정되지 않았습니다. .env.local 파일을 확인하세요.\n" +
+      "[GOODZZ] Firebase 환경변수가 설정되지 않았습니다. .env.local 파일을 확인하세요.\n" +
       "필요한 변수: NEXT_PUBLIC_FIREBASE_API_KEY, NEXT_PUBLIC_FIREBASE_PROJECT_ID"
     );
   }

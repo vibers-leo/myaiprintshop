@@ -15,7 +15,7 @@ import ProductEmbedView from '@/components/embed/ProductEmbedView';
  * 사용 예시:
  * ```html
  * <iframe
- *   src="https://myaiprintshop.com/embed/product/prod_123?apiKey=sk_live_xxx"
+ *   src="https://goodzz.co.kr/embed/product/prod_123?apiKey=sk_live_xxx"
  *   width="400"
  *   height="600"
  *   frameborder="0"

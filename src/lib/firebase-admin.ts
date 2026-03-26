@@ -20,7 +20,7 @@ export async function getAdminApp(): Promise<any> {
   const projectId = process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID;
 
   if (!clientEmail || !privateKey || !projectId ||
-      clientEmail === 'your-service-account@myaiprintshop.iam.gserviceaccount.com') {
+      clientEmail === 'your-service-account@goodzz.iam.gserviceaccount.com') {
     console.warn('⚠️ Firebase Admin SDK credentials not configured. Using development mode.');
     // 개발 모드에서는 Admin SDK 없이 작동 (auth-middleware에서 fallback 처리)
     throw new Error('Firebase Admin SDK not configured');

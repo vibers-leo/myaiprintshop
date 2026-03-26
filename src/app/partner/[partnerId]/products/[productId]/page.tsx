@@ -82,7 +82,7 @@ export default async function PartnerProductDetailPage({
             </a>
 
             <a href="/" className="text-sm text-gray-600 hover:text-gray-900">
-              MyAIPrintShop 메인
+              GOODZZ 메인
             </a>
           </div>
         </div>
@@ -102,7 +102,7 @@ export default async function PartnerProductDetailPage({
         <div className="max-w-7xl mx-auto px-4 py-6">
           <div className="text-xs text-gray-600 space-y-2">
             <div className="font-medium">
-              통신판매업자: MyAIPrintShop | 대표: 홍길동 | 사업자등록번호:
+              통신판매업자: GOODZZ(굿쯔) | 대표: 홍길동 | 사업자등록번호:
               123-45-67890
             </div>
             <div className="font-medium">

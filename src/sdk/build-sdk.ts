@@ -22,7 +22,7 @@ import { resolve } from 'path';
 async function buildSDK() {
   const startTime = Date.now();
 
-  console.log('🚀 Building MyAIPrintShop Buy Button SDK...\n');
+  console.log('🚀 Building GOODZZ Buy Button SDK...\n');
 
   try {
     // 1. TypeScript → JavaScript 번들 생성
@@ -34,7 +34,7 @@ async function buildSDK() {
       target: 'es2020',
       outfile: 'public/sdk/buy-button.min.js',
       format: 'iife',
-      globalName: 'MyAIPrintShopSDKInit',
+      globalName: 'GoodzzSDKInit',
       external: [], // 외부 의존성 없음
       treeShaking: true,
       legalComments: 'none',

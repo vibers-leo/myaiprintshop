@@ -1,8 +1,8 @@
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: '환불/교환 정책 | MyAIPrintShop',
-  description: 'MyAIPrintShop 환불 및 교환 정책',
+  title: '환불/교환 정책 | GOODZZ',
+  description: 'GOODZZ 환불 및 교환 정책',
 };
 
 export default function RefundPage() {
@@ -60,7 +60,7 @@ export default function RefundPage() {
               <div>
                 <h3 className="font-semibold mb-1">환불 신청</h3>
                 <p className="text-gray-700">
-                  고객센터(02-1234-5678) 또는 이메일(support@myaiprintshop.com)로
+                  고객센터(02-1234-5678) 또는 이메일(support@goodzz.co.kr)로
                   환불 요청 접수
                 </p>
                 <p className="text-sm text-gray-600 mt-1">
@@ -178,10 +178,10 @@ export default function RefundPage() {
 
           <div className="p-4 bg-yellow-50 border-l-4 border-yellow-500">
             <p className="text-sm text-gray-700">
-              <strong>참고:</strong> MyAIPrintShop은 통신판매업자로서
+              <strong>참고:</strong> GOODZZ(굿쯔)은 통신판매업자로서
               모든 주문에 대한 환불 책임을 부담합니다.
               파트너사는 판매 채널 역할만 수행하며,
-              환불 문의는 MyAIPrintShop 고객센터로 연락 주시기 바랍니다.
+              환불 문의는 GOODZZ 고객센터로 연락 주시기 바랍니다.
             </p>
           </div>
         </section>
@@ -233,7 +233,7 @@ export default function RefundPage() {
               <h3 className="font-semibold mb-2">1차: 고객센터 상담</h3>
               <p className="text-sm text-gray-700">
                 전화: 02-1234-5678 (평일 9:00~18:00)<br />
-                이메일: support@myaiprintshop.com
+                이메일: support@goodzz.co.kr
               </p>
             </div>
 
@@ -259,8 +259,8 @@ export default function RefundPage() {
           <div className="text-gray-700 space-y-2">
             <p><strong>운영 시간:</strong> 평일 09:00 ~ 18:00 (주말/공휴일 휴무)</p>
             <p><strong>전화:</strong> 02-1234-5678</p>
-            <p><strong>이메일:</strong> support@myaiprintshop.com</p>
-            <p><strong>주소:</strong> 서울시 강남구 테헤란로 123 MyAIPrintShop</p>
+            <p><strong>이메일:</strong> support@goodzz.co.kr</p>
+            <p><strong>주소:</strong> 서울시 강남구 테헤란로 123 GOODZZ</p>
           </div>
         </section>
 

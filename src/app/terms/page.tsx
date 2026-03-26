@@ -1,8 +1,8 @@
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: '이용약관 | MyAIPrintShop',
-  description: 'MyAIPrintShop 서비스 이용약관',
+  title: '이용약관 | GOODZZ',
+  description: 'GOODZZ 서비스 이용약관',
 };
 
 /**
@@ -19,7 +19,7 @@ export default function TermsPage() {
         <section className="mb-8">
           <h2 className="text-2xl font-semibold mb-4">제1조 (목적)</h2>
           <p className="text-gray-700 leading-relaxed mb-4">
-            본 약관은 MyAIPrintShop(이하 "회사")이 제공하는
+            본 약관은 GOODZZ(이하 "회사")이 제공하는
             AI 기반 프린트샵 서비스(이하 "서비스")의 이용과 관련하여
             회사와 이용자 간의 권리, 의무 및 책임사항을 규정함을 목적으로 합니다.
           </p>
@@ -140,7 +140,7 @@ export default function TermsPage() {
               본 약관이 적용됩니다.
             </li>
             <li>
-              통신판매업자는 MyAIPrintShop이며, 파트너는 단순 판매 중개 역할을 수행합니다.
+              통신판매업자는 GOODZZ이며, 파트너는 단순 판매 중개 역할을 수행합니다.
             </li>
             <li>
               구매, 환불, AS 등 모든 거래 관련 사항은 회사가 책임집니다.
@@ -171,13 +171,13 @@ export default function TermsPage() {
         <section className="mb-8 p-6 bg-gray-50 rounded-lg">
           <h2 className="text-2xl font-semibold mb-4">사업자 정보</h2>
           <div className="text-gray-700 space-y-2">
-            <p><strong>상호:</strong> MyAIPrintShop</p>
+            <p><strong>상호:</strong> GOODZZ(굿쯔)</p>
             <p><strong>대표자:</strong> 홍길동</p>
             <p><strong>사업자등록번호:</strong> 123-45-67890</p>
             <p><strong>통신판매업신고:</strong> 제2024-서울강남-0001호</p>
             <p><strong>주소:</strong> 서울시 강남구 테헤란로 123</p>
             <p><strong>전화:</strong> 02-1234-5678</p>
-            <p><strong>이메일:</strong> support@myaiprintshop.com</p>
+            <p><strong>이메일:</strong> support@goodzz.co.kr</p>
           </div>
         </section>
 

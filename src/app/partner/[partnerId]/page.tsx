@@ -12,7 +12,7 @@ interface PartnerHomeProps {
 /**
  * 파트너 서브도메인 홈페이지
  *
- * URL: partner.myaiprintshop.com → /partner/partner/
+ * URL: partner.goodzz.co.kr → /partner/partner/
  *
  * Vercel rewrites를 통해 서브도메인이 이 라우트로 매핑됩니다.
  */
@@ -26,7 +26,7 @@ export async function generateMetadata({ params }: PartnerHomeProps): Promise<Me
     if (partnerDoc.exists()) {
       const partnerData = partnerDoc.data() as any;
       return {
-        title: `${partnerData.name || partnerId} | MyAIPrintShop`,
+        title: `${partnerData.name || partnerId} | GOODZZ`,
         description: `${partnerData.name || partnerId}에서 제공하는 AI 기반 인쇄 서비스`,
       };
     }
@@ -35,7 +35,7 @@ export async function generateMetadata({ params }: PartnerHomeProps): Promise<Me
   }
 
   return {
-    title: `${partnerId} | MyAIPrintShop`,
+    title: `${partnerId} | GOODZZ`,
     description: 'AI 기반 인쇄 서비스',
   };
 }

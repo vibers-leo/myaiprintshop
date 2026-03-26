@@ -21,25 +21,25 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://myaiprintshop.co.kr'),
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://goodzz.co.kr'),
   title: {
-    default: "Myaiprintshop - AI로 만드는 나만의 커스텀 굿즈",
-    template: "%s | 마이AI프린트샵",
+    default: "GOODZZ - 내 브랜드 굿즈, AI로 뚝딱",
+    template: "%s | GOODZZ",
   },
-  description: "누구나 쉽게 AI로 디자인하고 굿즈를 제작/판매하는 플랫폼. 명함, 스티커, 티셔츠, 에코백 등 다양한 커스텀 상품을 AI로 디자인하세요.",
-  keywords: ["AI 디자인", "커스텀 굿즈", "프린트샵", "명함 제작", "스티커 제작", "티셔츠 제작", "에코백", "AI 프린트", "마이AI프린트샵", "굿즈 제작"],
+  description: "디자이너 없이, 소량으로, 내 브랜드 굿즈를 만드세요. AI가 디자인하고, 굿쯔가 만들어드립니다.",
+  keywords: ["AI 디자인", "커스텀 굿즈", "프린트샵", "명함 제작", "스티커 제작", "티셔츠 제작", "에코백", "AI 프린트", "GOODZZ", "굿즈 제작"],
   openGraph: {
     type: "website",
     locale: "ko_KR",
     url: "/",
-    siteName: "마이AI프린트샵",
-    title: "Myaiprintshop - AI로 만드는 나만의 커스텀 굿즈",
-    description: "누구나 쉽게 AI로 디자인하고 굿즈를 제작/판매하는 플랫폼",
+    siteName: "GOODZZ",
+    title: "GOODZZ - 내 브랜드 굿즈, AI로 뚝딱",
+    description: "디자이너 없이, 소량으로, 내 브랜드 굿즈를 만드세요. AI가 디자인하고, 굿쯔가 만들어드립니다.",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Myaiprintshop - AI로 만드는 나만의 커스텀 굿즈",
-    description: "누구나 쉽게 AI로 디자인하고 굿즈를 제작/판매하는 플랫폼",
+    title: "GOODZZ - 내 브랜드 굿즈, AI로 뚝딱",
+    description: "디자이너 없이, 소량으로, 내 브랜드 굿즈를 만드세요. AI가 디자인하고, 굿쯔가 만들어드립니다.",
   },
   robots: {
     index: true,

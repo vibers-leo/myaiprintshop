@@ -1,14 +1,14 @@
 /**
- * MyAIPrintShop Buy Button SDK
+ * GOODZZ Buy Button SDK
  *
  * 파트너 웹사이트에 구매 버튼을 임베드하는 JavaScript SDK
  *
  * 사용 예시:
  * ```html
- * <script src="https://myaiprintshop.com/sdk/buy-button.min.js"></script>
+ * <script src="https://goodzz.co.kr/sdk/buy-button.min.js"></script>
  * <div id="buy-button"></div>
  * <script>
- *   MyAIPrintShop.createBuyButton({
+ *   Goodzz.createBuyButton({
  *     apiKey: 'sk_live_xxx',
  *     productId: 'prod_123',
  *     containerId: 'buy-button',
@@ -56,13 +56,13 @@ class BuyButtonSDK {
   constructor(config: BuyButtonConfig) {
     // 필수 파라미터 검증
     if (!config.apiKey) {
-      throw new Error('MyAIPrintShop SDK: apiKey is required');
+      throw new Error('GOODZZ SDK: apiKey is required');
     }
     if (!config.productId) {
-      throw new Error('MyAIPrintShop SDK: productId is required');
+      throw new Error('GOODZZ SDK: productId is required');
     }
     if (!config.containerId) {
-      throw new Error('MyAIPrintShop SDK: containerId is required');
+      throw new Error('GOODZZ SDK: containerId is required');
     }
 
     this.config = config;
@@ -77,14 +77,14 @@ class BuyButtonSDK {
     const container = document.getElementById(this.config.containerId);
     if (!container) {
       throw new Error(
-        `MyAIPrintShop SDK: Container element #${this.config.containerId} not found`
+        `GOODZZ SDK: Container element #${this.config.containerId} not found`
       );
     }
 
     // 버튼 생성
     const button = document.createElement('button');
     button.textContent = this.config.buttonText || '지금 구매';
-    button.className = 'myaiprintshop-buy-button';
+    button.className = 'goodzz-buy-button';
 
     // 기본 스타일 적용
     button.style.cssText = `
@@ -140,17 +140,17 @@ class BuyButtonSDK {
       // 2. 팝업 열기 시도
       this.popup = window.open(
         checkoutUrl,
-        'myaiprintshop_payment',
+        'goodzz_payment',
         'width=600,height=800,scrollbars=yes,resizable=yes'
       );
 
       // 3. 팝업 차단 시 iframe 모달 대체
       if (!this.popup || this.popup.closed || typeof this.popup.closed === 'undefined') {
-        console.warn('MyAIPrintShop SDK: Popup blocked, falling back to iframe modal');
+        console.warn('GOODZZ SDK: Popup blocked, falling back to iframe modal');
         this.showIframeModal(checkoutUrl);
       }
     } catch (error) {
-      console.error('MyAIPrintShop SDK: Failed to open payment popup:', error);
+      console.error('GOODZZ SDK: Failed to open payment popup:', error);
       if (this.config.onSessionError) {
         this.config.onSessionError(error as Error);
       }
@@ -222,7 +222,7 @@ class BuyButtonSDK {
   private showIframeModal(url: string): void {
     // 모달 오버레이 생성
     this.modal = document.createElement('div');
-    this.modal.className = 'myaiprintshop-modal';
+    this.modal.className = 'goodzz-modal';
     this.modal.style.cssText = `
       position: fixed;
       top: 0;
@@ -311,8 +311,8 @@ class BuyButtonSDK {
     window.addEventListener('message', (event) => {
       // 보안: 오리진 검증
       const trustedOrigins = [
-        'https://myaiprintshop.com',
-        'https://myaiprintshop.vercel.app',
+        'https://goodzz.co.kr',
+        'https://goodzz.vercel.app',
         'http://localhost:3300',
       ];
 
@@ -359,7 +359,7 @@ class BuyButtonSDK {
  */
 declare global {
   interface Window {
-    MyAIPrintShop: {
+    Goodzz: {
       createBuyButton: (config: BuyButtonConfig) => BuyButtonSDK;
     };
   }
@@ -367,11 +367,11 @@ declare global {
 
 // 전역 객체에 SDK API 추가
 if (typeof window !== 'undefined') {
-  (window as any).MyAIPrintShop = {
+  (window as any).Goodzz = {
     createBuyButton: (config: BuyButtonConfig) => new BuyButtonSDK(config),
   };
 
-  console.log('✅ MyAIPrintShop Buy Button SDK loaded');
+  console.log('✅ GOODZZ Buy Button SDK loaded');
 }
 
 export { BuyButtonSDK };

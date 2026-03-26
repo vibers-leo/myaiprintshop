@@ -1,7 +1,7 @@
 /**
  * WowPress 스펙 매퍼
  *
- * MyAIPrintShop 주문 형식을 WowPress 9-섹션 스펙으로 변환
+ * GOODZZ 주문 형식을 WowPress 9-섹션 스펙으로 변환
  *
  * WowPress 9-섹션 스펙:
  * 1. coverinfo  - 표지 정보 (앞/뒤표지 인쇄 여부, 색도)
@@ -87,9 +87,9 @@ export interface WowPressProductSpec {
 }
 
 /**
- * MyAIPrintShop 주문을 WowPress 스펙으로 변환
+ * GOODZZ 주문을 WowPress 스펙으로 변환
  *
- * @param order - MyAIPrintShop 주문 객체
+ * @param order - GOODZZ 주문 객체
  * @param product - 상품 정보
  * @returns WowPress 9-섹션 스펙
  */
@@ -174,7 +174,7 @@ export function mapOrderToWowPressSpec(
 /**
  * 옵션 그룹에서 WowPress 스펙 추출
  *
- * MyAIPrintShop 상품 옵션을 WowPress 스펙 형식으로 변환
+ * GOODZZ 상품 옵션을 WowPress 스펙 형식으로 변환
  *
  * @param optionGroups - 상품 옵션 그룹
  * @returns 부분적 WowPress 스펙

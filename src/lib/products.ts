@@ -64,7 +64,7 @@ export interface Product {
   // Multi-vendor fields (Phase 5)
   vendorId: string; // vendors 컬렉션 ID
   vendorName?: string; // 캐시 (판매자명)
-  vendorType: 'platform' | 'marketplace'; // 'platform' = MyAIPrintShop 직판
+  vendorType: 'platform' | 'marketplace'; // 'platform' = GOODZZ 직판
   // Metadata (확장 가능한 추가 정보)
   metadata?: Record<string, any>; // WowPress 연동 정보, 외부 시스템 ID 등
   createdAt: Date | Timestamp;
@@ -137,7 +137,7 @@ function docToProduct(doc: DocumentData, id: string): Product {
     volumePricing: data.volumePricing,
     // Multi-vendor fields (Phase 5)
     vendorId: data.vendorId || 'PLATFORM_DEFAULT',
-    vendorName: data.vendorName || 'MyAIPrintShop',
+    vendorName: data.vendorName || 'GOODZZ',
     vendorType: data.vendorType || 'platform',
     createdAt: data.createdAt?.toDate?.() || new Date(),
     updatedAt: data.updatedAt?.toDate?.() || new Date(),

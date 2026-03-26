@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-const STORAGE_KEY = 'myaiprintshop_search_history';
+const STORAGE_KEY = 'goodzz_search_history';
 const MAX_HISTORY = 10;
 
 export function useSearchHistory() {

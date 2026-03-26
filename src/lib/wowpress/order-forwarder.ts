@@ -1,7 +1,7 @@
 /**
  * WowPress 주문 포워더
  *
- * MyAIPrintShop에서 생성된 주문을 WowPress로 자동 전달합니다.
+ * GOODZZ에서 생성된 주문을 WowPress로 자동 전달합니다.
  *
  * 프로세스:
  * 1. 결제 완료 후 호출 (payment/verify 웹훅에서)
@@ -24,7 +24,7 @@ export const WOWPRESS_VENDOR_ID = 'VENDOR_WOWPRESS';
 /**
  * 주문을 WowPress로 전달
  *
- * @param order - MyAIPrintShop 주문 객체
+ * @param order - GOODZZ 주문 객체
  * @returns 전달 성공 여부
  */
 export async function forwardOrderToWowPress(order: any): Promise<void> {
@@ -137,9 +137,9 @@ export async function forwardOrderToWowPress(order: any): Promise<void> {
 /**
  * WowPress 주문 상태 동기화
  *
- * WowPress에서 주문 상태를 조회하여 MyAIPrintShop 주문 업데이트
+ * WowPress에서 주문 상태를 조회하여 GOODZZ 주문 업데이트
  *
- * @param myOrderId - MyAIPrintShop 주문 ID
+ * @param myOrderId - GOODZZ 주문 ID
  */
 export async function syncWowPressOrderStatus(myOrderId: string): Promise<void> {
   console.log(`🔄 WowPress 주문 상태 동기화: ${myOrderId}`);
@@ -147,7 +147,7 @@ export async function syncWowPressOrderStatus(myOrderId: string): Promise<void> 
   try {
     // 1. wowpress_order_logs에서 주문 로그 조회
     // 2. WowPress API로 상태 조회
-    // 3. MyAIPrintShop 주문 상태 업데이트
+    // 3. GOODZZ 주문 상태 업데이트
     // 4. 송장 번호가 있으면 업데이트
 
     // TODO: 구현

@@ -2,7 +2,7 @@
  * 소셜 공유 유틸리티
  */
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://myaiprintshop.co.kr';
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://goodzz.co.kr';
 
 export interface ShareData {
   title: string;

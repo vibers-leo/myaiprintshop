@@ -274,7 +274,7 @@ export default function CreatorRegisterPage() {
               <div>
                 <label className="block text-sm font-bold text-gray-700 mb-2">핸들 (고유 URL) *</label>
                 <div className="flex items-center">
-                  <span className="text-gray-400 text-sm mr-2">myaiprintshop.co.kr/creators/</span>
+                  <span className="text-gray-400 text-sm mr-2">goodzz.co.kr/creators/</span>
                   <input
                     type="text"
                     value={formData.handle}

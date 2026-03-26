@@ -1,6 +1,6 @@
-# 🚀 MyAIPrintShop 프로덕션 배포 가이드
+# 🚀 GOODZZ 프로덕션 배포 가이드
 
-MyAIPrintShop MVP (SDK, Widget, Embed, WowPress 통합 포함)를 프로덕션 환경에 배포하는 완전한 가이드입니다.
+GOODZZ MVP (SDK, Widget, Embed, WowPress 통합 포함)를 프로덕션 환경에 배포하는 완전한 가이드입니다.
 
 ## 📋 배포 전 체크리스트
 

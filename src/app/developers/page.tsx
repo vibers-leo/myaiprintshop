@@ -88,7 +88,7 @@ export default function DevelopersPage() {
           transition={{ duration: 0.6 }}
         >
           <h1 className="text-5xl md:text-6xl font-black mb-6 bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">
-            MyAIPrintShop Public API
+            GOODZZ Public API
           </h1>
           <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
             Integrate AI-powered print-on-demand products into your application with our powerful REST
@@ -145,8 +145,8 @@ export default function DevelopersPage() {
             <span className="text-sm font-bold">JavaScript</span>
           </div>
           <pre className="text-sm overflow-x-auto">
-            <code>{`// Fetch products from MyAIPrintShop API
-fetch('https://myaiprintshop.vercel.app/api/public/v1/products', {
+            <code>{`// Fetch products from GOODZZ API
+fetch('https://goodzz.co.kr/api/public/v1/products', {
   headers: {
     'x-api-key': 'sk_live_your_api_key_here'
   }

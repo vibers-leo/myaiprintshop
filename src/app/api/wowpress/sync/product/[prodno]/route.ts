@@ -9,13 +9,13 @@ import { collection, addDoc, Timestamp } from 'firebase/firestore';
 /**
  * POST /api/wowpress/sync/product/[prodno]
  *
- * WowPress 상품을 MyAIPrintShop 카탈로그에 동기화
+ * WowPress 상품을 GOODZZ 카탈로그에 동기화
  *
  * 권한: Admin only
  *
  * 프로세스:
  * 1. WowPress API에서 상품 정보 조회
- * 2. MyAIPrintShop products 컬렉션에 상품 생성
+ * 2. GOODZZ products 컬렉션에 상품 생성
  * 3. wowpress_products 캐시에 매핑 정보 저장
  *
  * 사용 예시:
@@ -55,7 +55,7 @@ export async function POST(
 
     console.log(`✅ WowPress 상품 조회 완료: ${wowProduct.prodname}`);
 
-    // 3. MyAIPrintShop 상품 생성
+    // 3. GOODZZ 상품 생성
     const productId = await createProduct({
       name: wowProduct.prodname,
       description: `${wowProduct.category} - WowPress 제품\n\n${
@@ -84,7 +84,7 @@ export async function POST(
       },
     });
 
-    console.log(`✅ MyAIPrintShop 상품 생성 완료: ${productId}`);
+    console.log(`✅ GOODZZ 상품 생성 완료: ${productId}`);
 
     // 4. wowpress_products 캐시에 매핑 저장
     await addDoc(collection(db, 'wowpress_products'), {

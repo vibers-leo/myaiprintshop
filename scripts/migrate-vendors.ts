@@ -55,9 +55,9 @@ async function createPlatformVendor() {
 
     const platformVendor = {
       ownerId: 'SYSTEM',
-      businessName: 'MyAIPrintShop',
+      businessName: 'GOODZZ',
       ownerName: 'Platform Admin',
-      email: process.env.ADMIN_EMAILS?.split(',')[0].trim() || 'admin@myaiprintshop.com',
+      email: process.env.ADMIN_EMAILS?.split(',')[0].trim() || 'admin@goodzz.co.kr',
       phone: '010-0000-0000',
       portone: {
         accountVerified: true,
@@ -65,7 +65,7 @@ async function createPlatformVendor() {
       bankAccount: {
         bankName: 'Platform',
         accountNumber: 'N/A',
-        accountHolder: 'MyAIPrintShop',
+        accountHolder: 'GOODZZ',
       },
       commissionRate: 0, // 플랫폼은 수수료 없음
       status: 'approved',
@@ -122,7 +122,7 @@ async function migrateProducts() {
       // vendorId, vendorType 추가
       batch.update(doc.ref, {
         vendorId: PLATFORM_VENDOR_ID,
-        vendorName: 'MyAIPrintShop',
+        vendorName: 'GOODZZ',
         vendorType: 'platform',
         updatedAt: admin.firestore.Timestamp.now(),
       });

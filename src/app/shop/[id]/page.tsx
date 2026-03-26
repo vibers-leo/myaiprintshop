@@ -62,7 +62,7 @@ export default async function ProductPage({ params }: PageProps) {
     notFound();
   }
 
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://myaiprintshop.co.kr';
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://goodzz.co.kr';
 
   const jsonLd = {
     "@context": "https://schema.org",

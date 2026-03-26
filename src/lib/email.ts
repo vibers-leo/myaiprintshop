@@ -142,7 +142,7 @@ export async function sendVendorApprovedEmail(
       <p>이제 상품을 등록하고 판매를 시작하실 수 있습니다.</p>
       <p><a href="${data.dashboardUrl}">판매자 대시보드로 이동</a></p>
 
-      <p>감사합니다.<br/>MyAIPrintShop 팀</p>
+      <p>감사합니다.<br/>GOODZZ 팀</p>
     `,
     text: `판매자 승인이 완료되었습니다. 수수료율: ${(data.commissionRate * 100).toFixed(1)}%`,
   };
@@ -170,7 +170,7 @@ export async function sendVendorRejectedEmail(
 
       <p>추가 문의사항이 있으시면 고객센터로 연락 주시기 바랍니다.</p>
 
-      <p>감사합니다.<br/>MyAIPrintShop 팀</p>
+      <p>감사합니다.<br/>GOODZZ 팀</p>
     `,
     text: `판매자 신청이 거부되었습니다. ${data.reason || ''}`,
   };
@@ -207,7 +207,7 @@ export async function sendOrderReceivedEmail(
 
       <p><a href="${data.orderUrl}">주문 상세 보기</a></p>
 
-      <p>신속한 배송 부탁드립니다.<br/>MyAIPrintShop 팀</p>
+      <p>신속한 배송 부탁드립니다.<br/>GOODZZ 팀</p>
     `,
     text: `신규 주문 접수: ${data.orderId} - ₩${data.orderAmount.toLocaleString()}`,
   };
@@ -240,7 +240,7 @@ export async function sendSettlementTransferredEmail(
 
       <p>등록하신 계좌로 입금이 완료되었습니다.</p>
 
-      <p>감사합니다.<br/>MyAIPrintShop 팀</p>
+      <p>감사합니다.<br/>GOODZZ 팀</p>
     `,
     text: `정산 완료: ₩${data.vendorAmount.toLocaleString()} (주문: ${data.orderId})`,
   };

@@ -11,7 +11,7 @@
       "has": [
         {
           "type": "host",
-          "value": "(?<partner>[^.]+)\\.myaiprintshop\\.com"
+          "value": "(?<partner>[^.]+)\\.goodzz\\.co\\.kr"
         }
       ],
       "destination": "/partner/:partner/:path*"

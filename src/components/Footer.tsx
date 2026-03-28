@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import CoupangBanner from './CoupangBanner';
 
 export default function Footer() {
   const glassStyle = {
@@ -91,6 +92,7 @@ export default function Footer() {
         style={{ borderTop: '1px solid rgba(255,255,255,0.05)' }}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+          <CoupangBanner />
           <p className="text-xs text-zinc-600">© 2025 GOODZZ. All rights reserved.</p>
           <div className="flex items-center gap-4">
             <a href="https://instagram.com" target="_blank" rel="noopener noreferrer"

@@ -35,8 +35,23 @@ export default function DesignEditorPage() {
   useEffect(() => {
     const init = async () => {
       if (!id) return;
-      const p = await getProductById(id as string);
+
+      let p;
+      if (typeof id === 'string' && id.startsWith('bp_')) {
+        // Creator Studio Base Product Mock 
+        p = {
+          id: id,
+          name: id === 'bp_1' ? '스트릿 오버핏 티셔츠' : id === 'bp_2' ? '세라믹 스튜디오 머그' : '프리미엄 하드 케이스',
+          price: 15000,
+          category: 'CreatorBase',
+          thumbnail: 'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&q=80&w=800',
+        };
+      } else {
+        p = await getProductById(id as string);
+      }
+
       if (p) {
+        // @ts-ignore
         setProduct(p);
       } else {
         toast.error('상품을 찾을 수 없습니다.');

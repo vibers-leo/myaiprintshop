@@ -42,16 +42,16 @@ export default function LandingHowItWorks() {
   }, []);
 
   return (
-    <section id="how" className="py-32" ref={sectionRef} style={{ borderTop: '1px solid rgba(255,255,255,0.05)' }}>
+    <section id="how" className="py-32 bg-white border-t border-gray-100" ref={sectionRef}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="step-row text-center mb-20">
-          <p className="text-amber-400 text-sm font-semibold uppercase tracking-widest mb-4">이용 방법</p>
+          <p className="text-gray-500 text-sm font-bold uppercase tracking-widest mb-4">이용 방법</p>
           <h2
-            className="font-black text-4xl sm:text-5xl text-white leading-tight"
+            className="font-black text-4xl sm:text-5xl text-gray-900 leading-tight"
             style={{ fontFamily: "'Outfit','Pretendard',sans-serif", wordBreak: 'keep-all' }}
           >
             정말 이렇게 쉬운가요?<br />
-            <span className="text-amber-400">네, 그렇습니다.</span>
+            <span className="text-gray-400">네, 그렇습니다.</span>
           </h2>
         </div>
 
@@ -59,12 +59,12 @@ export default function LandingHowItWorks() {
           {STEPS.map((step, idx) => {
             const isEven = idx % 2 === 0;
             return (
-              <div
+               <div
                 key={step.num}
                 className={`step-row grid grid-cols-1 md:grid-cols-2 gap-16 items-center`}
               >
                 {/* Image */}
-                <div className={`rounded-3xl overflow-hidden bg-zinc-800 ${!isEven ? 'md:order-2' : ''}`}
+                <div className={`rounded-[2rem] overflow-hidden bg-gray-50 border border-gray-100 shadow-lg ${!isEven ? 'md:order-2' : ''}`}
                   style={{ aspectRatio: '1/1' }}>
                   <img
                     src={step.img}
@@ -76,18 +76,18 @@ export default function LandingHowItWorks() {
                 </div>
                 {/* Text */}
                 <div className={!isEven ? 'md:order-1' : ''}>
-                  <div className="w-10 h-10 bg-amber-500 rounded-xl flex items-center justify-center mb-6">
-                    <span className="font-black text-zinc-950 text-sm" style={{ fontFamily: "'Outfit',sans-serif" }}>
+                  <div className="w-12 h-12 bg-gray-900 shadow-md rounded-2xl flex items-center justify-center mb-6">
+                    <span className="font-black text-white text-lg" style={{ fontFamily: "'Outfit',sans-serif" }}>
                       {step.num}
                     </span>
                   </div>
                   <h3
-                    className="font-bold text-3xl text-white mb-4"
+                    className="font-black text-3xl text-gray-900 mb-4 tracking-tight"
                     style={{ wordBreak: 'keep-all' }}
                   >
                     {step.title}
                   </h3>
-                  <p className="text-zinc-400 text-lg leading-relaxed" style={{ wordBreak: 'keep-all' }}>
+                  <p className="text-gray-500 text-lg leading-relaxed font-medium" style={{ wordBreak: 'keep-all' }}>
                     {step.desc}
                   </p>
                 </div>

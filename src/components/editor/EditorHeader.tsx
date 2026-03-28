@@ -8,8 +8,9 @@ import {
   Loader2,
   ShoppingCart,
   CheckCircle2,
+  Store,
 } from 'lucide-react';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { useEditorStore } from '@/store/useEditorStore';
 import { useAuth } from '@/context/AuthContext';
 import { useStore } from '@/store/useStore';
@@ -17,9 +18,13 @@ import { saveDesign, uploadDesignImage } from '@/lib/designs';
 import { exportToPNG } from '@/lib/fabric/export-utils';
 import { toast } from 'sonner';
 import OrderModal from '../common/OrderModal';
+import PublishModal from '../studio/PublishModal';
 
 export default function EditorHeader() {
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const isCreatorMode = searchParams.get('mode') === 'creator';
+  
   const { user } = useAuth();
   const addToCart = useStore((s) => s.addToCart);
 
@@ -34,6 +39,7 @@ export default function EditorHeader() {
   } = useEditorStore();
 
   const [isOrderModalOpen, setIsOrderModalOpen] = React.useState(false);
+  const [isPublishModalOpen, setIsPublishModalOpen] = React.useState(false);
   const [orderImageUrl, setOrderImageUrl] = React.useState<string | null>(null);
 
   const hasDesign = canvasRef
@@ -111,7 +117,12 @@ export default function EditorHeader() {
       
       const finalImageUrl = uploadedUrl || previewDataUrl;
       setOrderImageUrl(finalImageUrl);
-      setIsOrderModalOpen(true);
+      
+      if (isCreatorMode) {
+        setIsPublishModalOpen(true);
+      } else {
+        setIsOrderModalOpen(true);
+      }
       
     } catch (error) {
       console.error('Order preparation error:', error);
@@ -141,7 +152,7 @@ export default function EditorHeader() {
               </span>
             </div>
             <p className="text-[11px] text-gray-400 font-bold uppercase tracking-[0.2em] mt-0.5">
-              Editing: {product?.name || 'New Project'}
+              Editing: {product?.name || 'New Project'} {isCreatorMode && '(Creator Mode)'}
             </p>
           </div>
         </div>
@@ -173,10 +184,12 @@ export default function EditorHeader() {
           <button
             onClick={handleOrder}
             disabled={!hasDesign || isSaving}
-            className="px-8 py-3 bg-gray-900 text-white rounded-full text-sm font-black hover:bg-black transition-all shadow-[0_12px_32px_-8px_rgba(0,0,0,0.2)] active:scale-95 disabled:opacity-50 flex items-center gap-2"
+            className={`px-8 py-3 text-white rounded-full text-sm font-black transition-all shadow-[0_12px_32px_-8px_rgba(0,0,0,0.2)] active:scale-95 disabled:opacity-50 flex items-center gap-2 ${
+              isCreatorMode ? 'bg-primary-600 hover:bg-primary-700' : 'bg-gray-900 hover:bg-black'
+            }`}
           >
-            <ShoppingCart size={18} />
-            주문하기
+            {isCreatorMode ? <Store size={18} /> : <ShoppingCart size={18} />}
+            {isCreatorMode ? '스토어에 출시하기' : '주문하기'}
           </button>
         </div>
       </header>
@@ -192,6 +205,15 @@ export default function EditorHeader() {
         <OrderModal 
           isOpen={isOrderModalOpen}
           onClose={() => setIsOrderModalOpen(false)}
+          product={product}
+          customDesignUrl={orderImageUrl}
+        />
+      )}
+
+      {isPublishModalOpen && product && orderImageUrl && (
+        <PublishModal 
+          isOpen={isPublishModalOpen}
+          onClose={() => setIsPublishModalOpen(false)}
           product={product}
           customDesignUrl={orderImageUrl}
         />

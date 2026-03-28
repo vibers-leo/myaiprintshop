@@ -349,7 +349,7 @@ export default function AdminPage() {
             <h1 style={{ fontSize: '1.5rem', fontWeight: '700', color: '#1a1a2e', marginBottom: '8px' }}>
               🔐 관리자 로그인
             </h1>
-            <p style={{ color: '#666', fontSize: '0.9rem' }}>MY AI PRINT SHOP 관리자 페이지</p>
+            <p style={{ color: '#666', fontSize: '0.9rem' }}>GOODZZ 관리자 페이지</p>
           </div>
 
           <button

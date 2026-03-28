@@ -14,10 +14,10 @@ interface Product {
   badge?: string;
 }
 
-const glassStyle = {
-  background: 'rgba(255,255,255,0.03)',
-  border: '1px solid rgba(255,255,255,0.08)',
-  backdropFilter: 'blur(12px)',
+const cardStyle = {
+  background: '#ffffff',
+  border: '1px solid #E5E7EB',
+  boxShadow: '0 4px 6px -1px rgba(0,0,0,0.02)',
 };
 
 export default function CreateClientContent({ products }: { products: Product[] }) {
@@ -56,13 +56,9 @@ export default function CreateClientContent({ products }: { products: Product[] 
     : products;
 
   return (
-    <div className="min-h-[100dvh]">
+    <div className="min-h-[100dvh] bg-[#FAFAFA]">
       {/* Premium Hero Section */}
-      <section className="relative pt-32 pb-24 lg:pt-48 lg:pb-32 overflow-hidden">
-        {/* Abstract Background Accents */}
-        <div className="absolute top-0 right-0 w-1/3 h-full bg-amber-500/5 blur-[120px] -z-10" />
-        <div className="absolute bottom-0 left-0 w-1/2 h-64 bg-amber-500/5 blur-[120px] -z-10" />
-        
+      <section className="relative pt-28 pb-16 lg:pt-36 lg:pb-24 overflow-hidden bg-white border-b border-gray-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             <motion.div
@@ -71,18 +67,17 @@ export default function CreateClientContent({ products }: { products: Product[] 
               transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
             >
               <div
-                className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-bold mb-8 uppercase tracking-widest text-amber-400"
-                style={{ ...glassStyle, borderRadius: 999 }}
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-[11px] font-bold mb-6 uppercase tracking-widest text-gray-600 bg-gray-50 border border-gray-200 shadow-sm"
               >
                 {/* @ts-ignore */}
                 <iconify-icon icon="solar:magic-stick-3-bold" />
                 사진 1장으로 기획 끝
               </div>
-              <h1 className="text-5xl md:text-7xl font-black text-white leading-[1.1] mb-8 tracking-tighter" style={{ wordBreak: 'keep-all' }}>
+              <h1 className="text-4xl md:text-6xl font-black text-gray-900 leading-[1.1] mb-6 tracking-tighter" style={{ wordBreak: 'keep-all' }}>
                 내 사진이 그대로<br />
-                <span className="text-amber-500">글로벌 굿즈로.</span>
+                <span className="text-black">글로벌 굿즈로.</span>
               </h1>
-              <p className="text-lg text-zinc-400 max-w-xl mb-12 leading-relaxed" style={{ wordBreak: 'keep-all' }}>
+              <p className="text-base text-gray-500 font-medium max-w-xl mb-10 leading-relaxed" style={{ wordBreak: 'keep-all' }}>
                 복잡한 디자인 툴은 잊으세요. 원하는 사진만 올리면 AI가
                 최적의 시안을 제안하고, 전문 생산 기지에서 프리미엄 굿즈로 제작합니다.
               </p>
@@ -97,10 +92,10 @@ export default function CreateClientContent({ products }: { products: Product[] 
                 />
                 <button 
                   onClick={() => fileInputRef.current?.click()}
-                  className="px-8 py-5 bg-amber-500 text-zinc-950 rounded-[20px] font-bold text-lg flex items-center justify-center gap-3 hover:bg-amber-400 transition-all shadow-xl active:scale-[0.98]"
+                  className="px-6 py-4 bg-gray-900 text-white rounded-xl font-bold text-base flex items-center justify-center gap-3 hover:bg-black transition-all shadow-xl hover:-translate-y-1 active:scale-[0.98]"
                 >
                   {/* @ts-ignore */}
-                  <iconify-icon icon="solar:gallery-add-bold" class="text-2xl" />
+                  <iconify-icon icon="solar:gallery-add-bold" class="text-xl" />
                   {uploadedImage ? '다른 사진으로 변경' : '사진 업로드하여 시작'}
                 </button>
                 <button 
@@ -111,11 +106,10 @@ export default function CreateClientContent({ products }: { products: Product[] 
                       setIsGenerating(false);
                     }, 1000);
                   }}
-                  className="px-8 py-5 text-white rounded-[20px] font-bold text-lg hover:bg-white/5 transition-all active:scale-[0.98] flex items-center justify-center gap-2"
-                  style={glassStyle}
+                  className="px-6 py-4 bg-white text-gray-900 border border-gray-200 rounded-xl font-bold text-base hover:bg-gray-50 hover:shadow-md transition-all active:scale-[0.98] flex items-center justify-center gap-2 shadow-sm"
                 >
                   {/* @ts-ignore */}
-                  <iconify-icon icon="solar:wand-magic-bold" class="text-amber-500 text-xl" />
+                  <iconify-icon icon="solar:wand-magic-bold" class="text-gray-900 text-lg" />
                   샘플로 미리보기
                 </button>
               </div>
@@ -127,20 +121,19 @@ export default function CreateClientContent({ products }: { products: Product[] 
               transition={{ duration: 1, delay: 0.2 }}
               className="relative aspect-square"
             >
-              <div className="absolute inset-0 bg-amber-500/20 rounded-[40px] blur-3xl -z-10" />
               <img 
                 src="/premium_goodzz_hero_shot_1774576377465.png"
                 alt="Premium Goods Showcase"
-                className="w-full h-full object-cover rounded-[48px] shadow-2xl border border-white/10 animate-[float_6s_ease-in-out_infinite]"
-                onError={(e) => { e.currentTarget.src = "https://picsum.photos/seed/create-hero/800/800" }}
+                className="w-full h-full object-cover rounded-[48px] shadow-2xl border border-gray-100 animate-[float_6s_ease-in-out_infinite]"
+                onError={(e) => { e.currentTarget.src = "https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&fit=crop&q=80&w=800" }}
               />
             </motion.div>
           </div>
         </div>
       </section>
 
-      {/* How it works - Dark Bento Mini Cards */}
-      <section className="py-24" style={{ borderTop: '1px solid rgba(255,255,255,0.05)', borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
+      {/* How it works - Light Bento Mini Cards */}
+      <section className="py-16 bg-[#FAFAFA]" style={{ borderBottom: '1px solid #E5E7EB' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid md:grid-cols-3 gap-6">
             {[
@@ -148,14 +141,14 @@ export default function CreateClientContent({ products }: { products: Product[] 
               { icon: 'solar:flashlight-bold', title: '실시간 시안 합성', desc: '모든 상품을 1초 만에 확인하세요' },
               { icon: 'solar:box-minimalistic-bold', title: '글로벌 주문 제작', desc: '전 세계 어디든 프리미엄 직배송' },
             ].map((item, i) => (
-              <div key={item.title} className="flex flex-col gap-4 p-8 rounded-3xl" style={glassStyle}>
-                <div className="w-12 h-12 rounded-2xl flex items-center justify-center" style={{ background: 'rgba(245,158,11,0.1)', border: '1px solid rgba(245,158,11,0.2)' }}>
+              <div key={item.title} className="flex flex-col gap-3 p-6 rounded-3xl group hover:shadow-md hover:-translate-y-1 transition-all duration-300 shadow-sm" style={cardStyle}>
+                <div className="w-14 h-14 rounded-2xl flex items-center justify-center bg-gray-50 border border-gray-100 shadow-inner group-hover:bg-white transition-colors">
                   {/* @ts-ignore */}
-                  <iconify-icon icon={item.icon} class="text-2xl text-amber-500" />
+                  <iconify-icon icon={item.icon} class="text-3xl text-gray-900" />
                 </div>
                 <div>
-                  <h3 className="text-xl font-bold text-white mb-2">{item.title}</h3>
-                  <p className="text-zinc-500 text-sm">{item.desc}</p>
+                  <h3 className="text-xl font-bold text-gray-900 mb-2">{item.title}</h3>
+                  <p className="text-gray-500 font-medium text-sm">{item.desc}</p>
                 </div>
               </div>
             ))}
@@ -166,15 +159,15 @@ export default function CreateClientContent({ products }: { products: Product[] 
       {/* Showcase Section (Visible after upload) */}
       <AnimatePresence>
         {uploadedImage && (
-          <section className="py-32 overflow-hidden">
+          <section className="py-24 overflow-hidden bg-white border-b border-gray-100">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-              <header className="max-w-3xl mb-16 text-center mx-auto">
+              <header className="max-w-3xl mb-12 text-center mx-auto">
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                 >
-                  <p className="text-amber-500 text-sm font-bold uppercase tracking-widest mb-4">자동 시안 제안</p>
-                  <h2 className="text-4xl md:text-5xl font-black text-white leading-tight mb-6 tracking-tight" style={{ wordBreak: 'keep-all' }}>
+                  <p className="text-gray-500 text-xs font-bold uppercase tracking-widest mb-3">자동 시안 제안</p>
+                  <h2 className="text-3xl md:text-5xl font-black text-gray-900 leading-tight mb-4 tracking-tight" style={{ wordBreak: 'keep-all' }}>
                     {isGenerating ? '시안을 생성하고 있어요...' : '방금 올린 사진으로 만든\n오늘의 추천 굿즈'}
                   </h2>
                 </motion.div>
@@ -186,34 +179,34 @@ export default function CreateClientContent({ products }: { products: Product[] 
                     <motion.div 
                       animate={{ rotate: 360 }}
                       transition={{ repeat: Infinity, duration: 2, ease: "linear" }}
-                      className="absolute inset-0 border-[4px] border-zinc-800 border-t-amber-500 rounded-full"
+                      className="absolute inset-0 border-[4px] border-gray-100 border-t-gray-900 rounded-full"
                     />
                     <div className="absolute inset-0 flex items-center justify-center">
                       {/* @ts-ignore */}
-                      <iconify-icon icon="solar:magic-stick-3-bold" class="text-3xl text-amber-500 animate-pulse" />
+                      <iconify-icon icon="solar:magic-stick-3-bold" class="text-3xl text-gray-900 animate-pulse" />
                     </div>
                   </div>
-                  <p className="text-lg text-zinc-400 font-bold animate-pulse">이미지 분석 및 프리미엄 시안 합성 중...</p>
+                  <p className="text-lg text-gray-500 font-bold animate-pulse">이미지 분석 및 프리미엄 시안 합성 중...</p>
                 </div>
               ) : (
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                   {[
-                    { name: '오버핏 코튼 티셔츠', category: '패션', bg: 'bg-zinc-800', rotate: -1 },
-                    { name: '세라믹 머그컵', category: '리빙', bg: 'bg-zinc-900', rotate: 2 },
-                    { name: '프리미엄 폰케이스', category: '액세서리', bg: 'bg-zinc-800', rotate: -2 },
+                    { name: '오버핏 코튼 티셔츠', category: '패션', bg: 'bg-gray-50', rotate: -1 },
+                    { name: '세라믹 머그컵', category: '리빙', bg: 'bg-gray-100', rotate: 2 },
+                    { name: '프리미엄 폰케이스', category: '액세서리', bg: 'bg-gray-50', rotate: -2 },
                   ].map((item, idx) => (
                     <motion.div
                       key={item.name}
                       initial={{ opacity: 0, y: 40 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: idx * 0.15, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-                      className={`p-3 rounded-3xl group overflow-hidden`}
-                      style={glassStyle}
+                      className={`p-4 rounded-3xl group overflow-hidden shadow-lg hover:shadow-xl transition-all hover:-translate-y-1`}
+                      style={cardStyle}
                     >
                       {/* Realistic Mockup Canvas */}
-                      <div className={`aspect-[4/5] rounded-[20px] ${item.bg} mb-4 relative flex items-center justify-center p-8 overflow-hidden`}>
+                      <div className={`aspect-[4/5] rounded-[24px] ${item.bg} border border-gray-200 mb-6 relative flex items-center justify-center p-8 overflow-hidden`}>
                         {/* Shadow underneath */}
-                        <div className="absolute bottom-10 w-2/3 h-10 bg-black/40 blur-2xl rounded-full" />
+                        <div className="absolute bottom-6 w-2/3 h-6 bg-black/10 blur-xl rounded-full" />
                         
                         {/* The Mockup Layer */}
                         <motion.div 
@@ -221,44 +214,43 @@ export default function CreateClientContent({ products }: { products: Product[] 
                           animate={{ scale: 1, opacity: 1 }}
                           transition={{ delay: 0.5 + idx * 0.1 }}
                           style={{ rotate: item.rotate }}
-                          className="relative w-full h-full bg-zinc-950 p-3 shadow-2xl rounded-md border border-white/5"
+                          className="relative w-full h-full bg-white p-3 shadow-xl rounded-md border border-gray-200"
                         >
                           <img 
                             src={uploadedImage!} 
                             alt={item.name} 
-                            className="w-full h-full object-cover opacity-90"
+                            className="w-full h-full object-cover opacity-95"
                           />
                           {/* Gloss & Texture Effect Overlay */}
-                          <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/5 to-white/10 pointer-events-none" />
+                          <div className="absolute inset-0 bg-gradient-to-tr from-white/0 via-white/20 to-white/40 pointer-events-none" />
                         </motion.div>
                         
                         {/* Floating Badge */}
-                        <div className="absolute top-4 left-4 px-3 py-1 rounded-full text-[10px] font-black text-amber-500 tracking-tighter" style={{ background: 'rgba(9,9,11,0.6)', backdropFilter: 'blur(8px)' }}>
+                        <div className="absolute top-4 left-4 px-3 py-1.5 rounded-full text-[10px] font-black text-gray-600 bg-white border border-gray-200 shadow-sm tracking-tighter">
                           AUTO-MOCKUP
                         </div>
                       </div>
                       
-                      <div className="p-4">
+                      <div className="p-2">
                         <div className="mb-6">
-                          <span className="text-amber-500 font-bold text-xs uppercase tracking-widest block mb-1">{item.category}</span>
-                          <h3 className="text-xl font-bold text-white leading-tight">{item.name}</h3>
+                          <span className="text-gray-500 font-black text-[10px] uppercase tracking-widest block mb-1">{item.category}</span>
+                          <h3 className="text-xl font-bold text-gray-900 leading-tight">{item.name}</h3>
                         </div>
                         
-                        <div className="grid grid-cols-2 gap-2">
+                        <div className="grid grid-cols-2 gap-3">
                           <button 
                             onClick={() => {
                               const p = products.find(p => p.name.includes(item.category)) || products[0];
                               setSelectedProduct(p);
                               setIsOrderModalOpen(true);
                             }}
-                            className="bg-amber-500 text-zinc-950 py-3.5 rounded-[12px] text-sm font-bold flex items-center justify-center gap-2 hover:bg-amber-400 transition-all"
+                            className="bg-gray-900 text-white py-3.5 rounded-xl text-sm font-bold flex items-center justify-center gap-2 hover:bg-black shadow-md transition-all active:scale-[0.98]"
                           >
                             바로 주문
                           </button>
                           <Link 
                             href={`/editor/${(products.find(p => p.name.includes(item.category)) || products[0]).id}?imageUrl=${encodeURIComponent(uploadedImage!)}`}
-                            className="text-white py-3.5 rounded-[12px] text-sm font-bold hover:bg-white/5 transition-all flex items-center justify-center gap-2"
-                            style={{ border: '1px solid rgba(255,255,255,0.1)' }}
+                            className="bg-white text-gray-900 py-3.5 rounded-xl text-sm font-bold hover:bg-gray-50 transition-all flex items-center justify-center gap-2 border border-gray-200 shadow-sm"
                           >
                             편집하기 
                           </Link>
@@ -274,38 +266,40 @@ export default function CreateClientContent({ products }: { products: Product[] 
       </AnimatePresence>
 
       {/* Product Selector */}
-      <section className="py-24" style={{ borderTop: uploadedImage ? '1px solid rgba(255,255,255,0.05)' : 'none' }}>
+      <section className="py-20 bg-[#FAFAFA]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="mb-12 text-center">
-            <h2 className="text-3xl font-black text-white mb-4">어떤 굿즈에 입혀볼까요?</h2>
-            <p className="text-zinc-400 text-lg">원하는 상품을 선택하고 사진을 적용해보세요.</p>
-          </div>
+          <div className="mb-10 text-center lg:text-left flex flex-col lg:flex-row lg:items-end justify-between gap-6">
+            <div>
+              <h2 className="text-2xl font-black text-gray-900 mb-2 tracking-tight">어떤 굿즈에 입혀볼까요?</h2>
+              <p className="text-gray-500 font-medium text-sm">원하는 상품을 선택하고 사진을 적용해보세요.</p>
+            </div>
 
-          {/* Category Filter */}
-          <div className="flex flex-wrap justify-center gap-2 mb-12">
-            <button
-              onClick={() => setSelectedCategory(null)}
-              className={`px-5 py-2.5 rounded-full text-sm font-bold transition-all ${
-                !selectedCategory
-                  ? 'bg-amber-500 text-zinc-950'
-                  : 'bg-white/5 text-zinc-400 hover:text-white hover:bg-white/10'
-              }`}
-            >
-              전체
-            </button>
-            {categories.map(cat => (
+            {/* Category Filter */}
+            <div className="flex flex-wrap justify-center lg:justify-end gap-2">
               <button
-                key={cat}
-                onClick={() => setSelectedCategory(cat)}
-                className={`px-5 py-2.5 rounded-full text-sm font-bold transition-all ${
-                  selectedCategory === cat
-                    ? 'bg-amber-500 text-zinc-950'
-                    : 'bg-white/5 text-zinc-400 hover:text-white hover:bg-white/10'
+                onClick={() => setSelectedCategory(null)}
+                className={`px-5 py-2.5 rounded-full text-sm font-bold transition-all shadow-sm ${
+                  !selectedCategory
+                    ? 'bg-gray-900 text-white hover:bg-black'
+                    : 'bg-white text-gray-600 border border-gray-200 hover:bg-gray-50 hover:text-gray-900'
                 }`}
               >
-                {cat}
+                전체
               </button>
-            ))}
+              {categories.map(cat => (
+                <button
+                  key={cat}
+                  onClick={() => setSelectedCategory(cat)}
+                  className={`px-5 py-2.5 rounded-full text-sm font-bold transition-all shadow-sm ${
+                    selectedCategory === cat
+                      ? 'bg-gray-900 text-white hover:bg-black'
+                      : 'bg-white text-gray-600 border border-gray-200 hover:bg-gray-50 hover:text-gray-900'
+                  }`}
+                >
+                  {cat}
+                </button>
+              ))}
+            </div>
           </div>
 
           {/* Mini Product Grid */}
@@ -318,10 +312,10 @@ export default function CreateClientContent({ products }: { products: Product[] 
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: (i % 8) * 0.05 }}
-                className="group cursor-pointer rounded-3xl p-3 relative overflow-hidden transition-all hover:-translate-y-1"
-                style={glassStyle}
+                className="group cursor-pointer rounded-[24px] p-3 relative overflow-hidden transition-all hover:-translate-y-1 hover:shadow-lg shadow-sm"
+                style={cardStyle}
               >
-                <div className="relative aspect-square rounded-2xl overflow-hidden bg-zinc-800 mb-4 flex items-center justify-center p-6">
+                <div className="relative aspect-square rounded-[16px] overflow-hidden bg-gray-50 border border-gray-100 mb-4 flex items-center justify-center p-6">
                   {uploadedImage ? (
                     <motion.div 
                       initial={{ opacity: 0, scale: 0.8 }}
@@ -331,38 +325,44 @@ export default function CreateClientContent({ products }: { products: Product[] 
                       <img 
                         src={uploadedImage} 
                         alt="Mockup Preview" 
-                        className="w-3/4 h-3/4 object-cover shadow-2xl rounded-md border border-white/10 rotate-[-2deg]"
+                        className="w-3/4 h-3/4 object-cover shadow-2xl rounded-md border border-gray-200 rotate-[-2deg]"
                       />
                     </motion.div>
                   ) : (
-                    <img src={product.thumbnail} alt={product.name} className="w-full h-full object-cover rounded-xl opacity-80 mix-blend-screen grayscale group-hover:grayscale-0 transition-all duration-500" />
+                    <img src={product.thumbnail} alt={product.name} className="w-full h-full object-cover rounded-xl opacity-90 mix-blend-multiply transition-all duration-500 group-hover:scale-105" />
                   )}
 
                   {/* Hover Actions */}
-                  <div className="absolute inset-0 bg-black/40 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center gap-3">
+                  <div className="absolute inset-0 bg-white/60 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center gap-3">
                     <button 
                       onClick={(e) => handleProductClick(e, product)}
-                      className="bg-amber-500 text-zinc-950 px-5 py-2.5 rounded-full font-bold text-sm hover:scale-105 transition-transform"
+                      className="bg-gray-900 text-white px-6 py-3 rounded-xl font-bold text-sm hover:scale-105 transition-transform shadow-lg"
                     >
                       바로 주문
                     </button>
                     <Link 
                       href={`/editor/${product.id}${uploadedImage ? `?imageUrl=${encodeURIComponent(uploadedImage)}` : ''}`}
-                      className="text-white px-5 py-2.5 rounded-full font-bold text-sm border border-white/20 hover:bg-white/10 transition-colors"
+                      className="bg-white text-gray-900 px-6 py-3 rounded-xl font-bold text-sm border border-gray-200 hover:bg-gray-50 transition-colors shadow-sm"
                     >
                       {uploadedImage ? '편집하기' : '커스텀 시작'}
                     </Link>
                   </div>
                 </div>
 
-                <div className="px-2 pb-1">
-                  <p className="text-xs text-amber-500 font-bold mb-1">{product.category}</p>
-                  <h3 className="font-bold text-white group-hover:text-amber-400 transition-colors line-clamp-1">
+                <div className="px-2 pb-2">
+                  <p className="text-[10px] text-gray-500 font-black mb-1.5 uppercase tracking-widest">{product.category}</p>
+                  <h3 className="font-bold text-gray-900 group-hover:text-black transition-colors line-clamp-1 mb-2 tracking-tight">
                     {product.name}
                   </h3>
-                  <p className="text-lg font-black text-white mt-1" style={{ fontFamily: "'Outfit',sans-serif" }}>
-                    {product.price.toLocaleString()}원~
-                  </p>
+                  <div className="flex items-center justify-between">
+                    <p className="text-lg font-black text-gray-900 tracking-tighter" style={{ fontFamily: "'Outfit',sans-serif" }}>
+                      {product.price.toLocaleString()}<span className="text-xs font-bold text-gray-600 ml-0.5">원~</span>
+                    </p>
+                    <div className="w-8 h-8 rounded-full bg-gray-50 border border-gray-100 flex items-center justify-center group-hover:bg-gray-900 group-hover:border-gray-900 group-hover:text-white transition-colors">
+                      {/* @ts-ignore */}
+                      <iconify-icon icon="solar:arrow-right-linear" class="text-sm" />
+                    </div>
+                  </div>
                 </div>
               </motion.div>
             ))}

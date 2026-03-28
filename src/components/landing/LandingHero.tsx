@@ -19,54 +19,58 @@ export default function LandingHero() {
   return (
     <section
       ref={heroRef}
-      className="relative min-h-[100dvh] flex items-center pt-16"
-      style={{
-        backgroundImage: `
-          radial-gradient(ellipse 80% 60% at 20% -10%, rgba(245,158,11,0.12) 0%, transparent 50%),
-          radial-gradient(ellipse 60% 50% at 80% 110%, rgba(245,158,11,0.08) 0%, transparent 50%)
-        `,
-      }}
+      className="relative min-h-[100dvh] flex items-center pt-16 bg-white overflow-hidden"
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 w-full">
+      {/* Subtle modern background dots/mesh representing light canvas */}
+      <div 
+        className="absolute inset-0 z-0 opacity-[0.03] pointer-events-none"
+        style={{
+          backgroundImage: 'radial-gradient(#000 1px, transparent 1px)',
+          backgroundSize: '24px 24px'
+        }}
+      />
+      <div 
+        className="absolute top-0 inset-x-0 h-[500px] z-0 pointer-events-none"
+        style={{
+          background: 'radial-gradient(circle at 50% -20%, rgba(0,0,0,0.03) 0%, transparent 70%)'
+        }}
+      />
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 w-full relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           {/* Left: Text */}
           <div>
             {/* Badge */}
             <div
-              className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full mb-8"
-              style={{
-                background: 'rgba(255,255,255,0.03)',
-                border: '1px solid rgba(255,255,255,0.08)',
-              }}
+              className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full mb-8 bg-gray-50 border border-gray-200 shadow-sm"
             >
-              <span className="w-2 h-2 bg-amber-400 rounded-full" />
-              <span className="text-xs text-zinc-400" style={{ wordBreak: 'keep-all' }}>
+              <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
+              <span className="text-xs font-medium text-gray-600" style={{ wordBreak: 'keep-all' }}>
                 지금 47,200명이 굿즈를 만들고 있습니다
               </span>
             </div>
 
             <h1
-              className="font-black text-5xl sm:text-6xl lg:text-7xl leading-tight tracking-tight text-white mb-6"
+              className="font-black text-4xl sm:text-5xl lg:text-6xl leading-tight tracking-tight text-gray-900 mb-4"
               style={{ fontFamily: "'Outfit', 'Pretendard', sans-serif", wordBreak: 'keep-all' }}
             >
               사진 한 장으로<br />
-              <span className="text-amber-400">나만의 굿즈를.</span>
+              <span className="text-black">나만의 굿즈를.</span>
             </h1>
 
             <p
-              className="text-zinc-400 text-lg leading-relaxed mb-10"
-              style={{ maxWidth: '55ch', wordBreak: 'keep-all' }}
+              className="text-gray-500 text-base leading-relaxed mb-8 font-medium"
+              style={{ maxWidth: '45ch', wordBreak: 'keep-all' }}
             >
               AI가 내 사진을 분석해 최적의 굿즈 시안을 만들어드립니다.
-              명함부터 포스터, 스티커, 에코백까지. 주문부터 배송까지 3분이면 됩니다.
+              명함부터 스티커, 에코백까지.
             </p>
 
             {/* CTAs */}
-            <div className="flex flex-col sm:flex-row gap-4">
+            <div className="flex flex-col sm:flex-row gap-3">
               <Link
                 href="/create"
-                className="flex items-center justify-center gap-2 bg-amber-500 hover:bg-amber-400 text-zinc-950 font-bold text-lg px-8 py-4 rounded-xl transition-all duration-300 hover:scale-[1.02] active:scale-[0.98]"
-                style={{ minHeight: 56 }}
+                className="flex items-center justify-center gap-2 bg-gray-900 hover:bg-black text-white font-bold text-base px-6 py-3.5 rounded-xl transition-all duration-300 shadow-md hover:shadow-lg hover:-translate-y-1"
               >
                 {/* @ts-ignore */}
                 <iconify-icon icon="solar:magic-stick-3-bold" />
@@ -74,12 +78,7 @@ export default function LandingHero() {
               </Link>
               <Link
                 href="/shop"
-                className="flex items-center justify-center gap-2 text-white font-semibold text-lg px-8 py-4 rounded-xl transition-all duration-300 hover:border-zinc-600"
-                style={{
-                  minHeight: 56,
-                  background: 'rgba(255,255,255,0.03)',
-                  border: '1px solid rgba(255,255,255,0.08)',
-                }}
+                className="flex items-center justify-center gap-2 bg-white text-gray-700 hover:text-gray-900 hover:bg-gray-50 font-semibold text-base px-6 py-3.5 rounded-xl transition-all duration-300 border border-gray-200 shadow-sm"
               >
                 상품 구경하기
                 {/* @ts-ignore */}
@@ -89,28 +88,27 @@ export default function LandingHero() {
 
             {/* Stats */}
             <div
-              className="flex items-center gap-6 mt-10 pt-10"
-              style={{ borderTop: '1px solid rgba(255,255,255,0.08)' }}
+              className="flex items-center gap-5 mt-10 pt-8 border-t border-gray-100"
             >
               <div>
-                <div className="font-black text-2xl text-white" style={{ fontFamily: "'Outfit', sans-serif" }}>
-                  47,200<span className="text-amber-400">+</span>
+                <div className="font-black text-2xl text-gray-900" style={{ fontFamily: "'Outfit', sans-serif" }}>
+                  47,200<span className="text-gray-400">+</span>
                 </div>
-                <div className="text-xs text-zinc-500">총 주문 건수</div>
+                <div className="text-xs font-semibold uppercase tracking-wider text-gray-400 mt-1">총 주문 건수</div>
               </div>
-              <div className="w-px h-10 bg-zinc-800" />
+              <div className="w-px h-10 bg-gray-200" />
               <div>
-                <div className="font-black text-2xl text-white" style={{ fontFamily: "'Outfit', sans-serif" }}>
-                  4.87<span className="text-amber-400">/5</span>
+                <div className="font-black text-2xl text-gray-900" style={{ fontFamily: "'Outfit', sans-serif" }}>
+                  4.87<span className="text-gray-400">/5</span>
                 </div>
-                <div className="text-xs text-zinc-500">고객 만족도</div>
+                <div className="text-xs font-semibold uppercase tracking-wider text-gray-400 mt-1">고객 만족도</div>
               </div>
-              <div className="w-px h-10 bg-zinc-800" />
+              <div className="w-px h-10 bg-gray-200" />
               <div>
-                <div className="font-black text-2xl text-white" style={{ fontFamily: "'Outfit', sans-serif" }}>
-                  3<span className="text-amber-400">분</span>
+                <div className="font-black text-2xl text-gray-900" style={{ fontFamily: "'Outfit', sans-serif" }}>
+                  3<span className="text-gray-400">분</span>
                 </div>
-                <div className="text-xs text-zinc-500">평균 주문 완료</div>
+                <div className="text-xs font-semibold uppercase tracking-wider text-gray-400 mt-1">평균 주문 완료</div>
               </div>
             </div>
           </div>
@@ -119,57 +117,46 @@ export default function LandingHero() {
           <div className="relative flex justify-center lg:justify-end">
             <div className="animate-[float_6s_ease-in-out_infinite] relative">
               <div
-                className="rounded-3xl p-5 w-80 sm:w-96"
-                style={{
-                  background: 'rgba(255,255,255,0.03)',
-                  border: '1px solid rgba(255,255,255,0.08)',
-                  boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.06)',
-                }}
+                className="bg-white rounded-[2rem] p-5 w-80 sm:w-96 shadow-2xl border border-gray-100"
               >
-                <div className="rounded-2xl overflow-hidden mb-4 bg-zinc-800" style={{ aspectRatio: '1/1' }}>
+                <div className="rounded-2xl overflow-hidden mb-5 bg-gray-50 border border-gray-100" style={{ aspectRatio: '1/1' }}>
                   <img
                     src="https://images.unsplash.com/photo-1597484661643-2f5fef640dd1?auto=format&fit=crop&q=80&w=800"
                     alt="굿즈 미리보기"
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-cover mix-blend-multiply"
                     loading="eager"
                   />
                 </div>
-                <div className="flex items-center justify-between">
+                <div className="flex items-center justify-between px-1">
                   <div>
-                    <div className="font-semibold text-white text-sm">나만의 에코백</div>
-                    <div className="text-zinc-400 text-xs mt-0.5">AI 시안 완성 · 즉시 주문 가능</div>
+                    <div className="font-bold text-gray-900 text-sm">나만의 에코백</div>
+                    <div className="text-gray-500 font-medium text-[11px] mt-0.5">AI 시안 완성 · 즉시 주문 가능</div>
                   </div>
-                  <div className="w-10 h-10 bg-amber-500 rounded-xl flex items-center justify-center">
+                  <div className="w-9 h-9 bg-gray-900 rounded-xl flex items-center justify-center shadow-md">
                     {/* @ts-ignore */}
-                    <iconify-icon icon="solar:cart-large-4-bold" class="text-zinc-950 text-lg" />
+                    <iconify-icon icon="solar:cart-large-4-bold" class="text-white text-base" />
                   </div>
                 </div>
               </div>
 
               {/* Floating badges */}
               <div
-                className="absolute -top-4 -right-4 rounded-2xl px-3 py-2 flex items-center gap-2"
-                style={{
-                  background: 'rgba(255,255,255,0.05)',
-                  border: '1px solid rgba(255,255,255,0.1)',
-                  backdropFilter: 'blur(12px)',
-                }}
+                className="absolute -top-6 -right-6 bg-white rounded-2xl px-4 py-3 flex items-center gap-3 shadow-xl border border-gray-100"
               >
-                {/* @ts-ignore */}
-                <iconify-icon icon="solar:star-bold" class="text-amber-400 text-base" />
-                <span className="text-white text-xs font-semibold">AI 자동 시안</span>
+                <div className="w-8 h-8 rounded-full bg-blue-50 flex items-center justify-center">
+                  {/* @ts-ignore */}
+                  <iconify-icon icon="solar:star-bold" class="text-blue-500 text-lg" />
+                </div>
+                <span className="text-gray-900 text-sm font-bold">AI 자동 시안</span>
               </div>
               <div
-                className="absolute -bottom-4 -left-4 rounded-2xl px-3 py-2 flex items-center gap-2"
-                style={{
-                  background: 'rgba(255,255,255,0.05)',
-                  border: '1px solid rgba(255,255,255,0.1)',
-                  backdropFilter: 'blur(12px)',
-                }}
+                className="absolute -bottom-6 -left-6 bg-white rounded-2xl px-4 py-3 flex items-center gap-3 shadow-xl border border-gray-100"
               >
-                {/* @ts-ignore */}
-                <iconify-icon icon="solar:delivery-bold" class="text-amber-400 text-base" />
-                <span className="text-white text-xs font-semibold">국내외 배송</span>
+                <div className="w-8 h-8 rounded-full bg-green-50 flex items-center justify-center">
+                  {/* @ts-ignore */}
+                  <iconify-icon icon="solar:delivery-bold" class="text-green-500 text-lg" />
+                </div>
+                <span className="text-gray-900 text-sm font-bold">국내외 배송</span>
               </div>
             </div>
           </div>

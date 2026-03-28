@@ -73,8 +73,8 @@
 }
 
 body {
-  background: #09090b;
-  color: #e4e4e7;
+  background: #ffffff;
+  color: #111827;
   font-family: 'Pretendard', 'Outfit', system-ui, sans-serif;
   line-height: 1.6;
 }
@@ -89,10 +89,10 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .glass {
-  background: var(--glass-bg);
-  backdrop-filter: blur(var(--glass-blur));
-  -webkit-backdrop-filter: blur(var(--glass-blur));
-  border: 1px solid var(--glass-border);
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(0, 0, 0, 0.06);
 }
 
 .gradient-text {

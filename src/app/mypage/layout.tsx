@@ -3,9 +3,10 @@
 import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { usePathname } from 'next/navigation';
-import { User, Package, Ticket, Heart, LogOut, Settings } from 'lucide-react';
+import { usePathname, useRouter } from 'next/navigation';
+import { User, Package, Ticket, Heart, LogOut, Settings, LayoutDashboard } from 'lucide-react';
 import { useAuth } from '@/context/AuthContext';
+import { useEffect } from 'react';
 
 export default function MyPageLayout({
   children,
@@ -13,13 +14,30 @@ export default function MyPageLayout({
   children: React.ReactNode;
 }) {
   const pathname = usePathname();
-  const { user, logout } = useAuth();
+  const router = useRouter();
+  const { user, loading, logout } = useAuth();
+
+  useEffect(() => {
+    if (!loading && !user) {
+      router.push('/login');
+    }
+  }, [user, loading, router]);
+
+  if (loading || !user) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-[#FAFAFA]">
+        <div className="w-8 h-8 border-4 border-primary-200 border-t-primary-600 rounded-full animate-spin"></div>
+      </div>
+    );
+  }
 
   const menuItems = [
     { name: '대시보드', href: '/mypage', icon: User },
     { name: '주문/배송 조회', href: '/mypage/orders', icon: Package },
     { name: '쿠폰함', href: '/mypage/coupons', icon: Ticket },
     { name: '위시리스트', href: '/wishlist', icon: Heart },
+    { name: '판매자 대시보드', href: '/vendor/dashboard', icon: LayoutDashboard },
+    { name: '크리에이터 스튜디오', href: '/studio', icon: Settings },
   ];
 
   return (

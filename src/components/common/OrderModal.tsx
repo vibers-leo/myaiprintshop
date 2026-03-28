@@ -103,7 +103,7 @@ export default function OrderModal({ isOpen, onClose, product, customDesignUrl }
             className="relative w-full max-w-5xl bg-white rounded-[32px] shadow-[0_32px_128px_-16px_rgba(0,0,0,0.3)] overflow-hidden flex flex-col md:flex-row min-h-[600px] max-h-[90vh]"
           >
             {/* Left: Premium Preview */}
-            <div className="w-full md:w-[45%] bg-gray-50/50 p-12 flex flex-col items-center justify-center border-b md:border-b-0 md:border-r border-gray-100 relative overflow-hidden">
+            <div className="w-full md:w-[45%] bg-gray-50/50 p-8 flex flex-col items-center justify-center border-b md:border-b-0 md:border-r border-gray-100 relative overflow-hidden">
               <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_center,rgba(var(--primary-500-rgb),0.05)_0%,transparent_100%)]" />
               
               <motion.div 
@@ -121,21 +121,21 @@ export default function OrderModal({ isOpen, onClose, product, customDesignUrl }
                  <div className="absolute inset-0 ring-1 ring-inset ring-black/5 rounded-[24px]" />
               </motion.div>
 
-              <div className="mt-12 text-center relative z-10">
-                <span className="text-primary-600 font-black text-[10px] uppercase tracking-[0.3em] mb-3 block">{product.category}</span>
-                <h3 className="text-3xl font-display font-black text-gray-900 leading-tight tracking-tighter">{product.name}</h3>
-                <div className="mt-6 flex items-center justify-center gap-2 text-gray-400 text-sm font-bold">
+              <div className="mt-8 text-center relative z-10">
+                <span className="text-primary-600 font-black text-[10px] uppercase tracking-[0.3em] mb-2 block">{product.category}</span>
+                <h3 className="text-2xl font-display font-black text-gray-900 leading-tight tracking-tighter">{product.name}</h3>
+                <div className="mt-4 flex items-center justify-center gap-2 text-gray-400 text-xs font-bold">
                    <Globe className="w-4 h-4" /> Global Worldwide Shipping
                 </div>
               </div>
             </div>
 
             {/* Right: Checkout Form (Clean & Modern) */}
-            <div className="w-full md:w-[55%] p-12 overflow-y-auto flex flex-col">
-              <div className="flex justify-between items-start mb-12">
+            <div className="w-full md:w-[55%] p-8 overflow-y-auto flex flex-col">
+              <div className="flex justify-between items-start mb-8">
                 <div>
-                  <h2 className="text-3xl font-display font-black text-gray-900 tracking-tighter">주문하기</h2>
-                  <p className="text-gray-400 font-bold text-sm mt-2">안전하고 빠른 글로벌 배송 서비스를 제공합니다.</p>
+                  <h2 className="text-2xl font-display font-black text-gray-900 tracking-tighter">주문하기</h2>
+                  <p className="text-gray-400 font-bold text-xs mt-2">안전하고 빠른 글로벌 배송 서비스를 제공합니다.</p>
                 </div>
                 <button 
                   onClick={onClose}
@@ -145,42 +145,42 @@ export default function OrderModal({ isOpen, onClose, product, customDesignUrl }
                 </button>
               </div>
 
-              <form className="space-y-8 flex-1" onSubmit={handleSubmitOrder}>
-                <div className="space-y-6">
-                  <div className="grid grid-cols-2 gap-6">
+              <form className="space-y-6 flex-1" onSubmit={handleSubmitOrder}>
+                <div className="space-y-5">
+                  <div className="grid grid-cols-2 gap-4">
                     <div className="space-y-2">
-                      <label className="text-[11px] font-black text-gray-400 uppercase tracking-widest ml-1">수령인</label>
+                      <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-1">수령인</label>
                       <input 
                         type="text" 
                         required
                         value={formData.name}
                         onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                         placeholder="이름을 입력하세요" 
-                        className="w-full px-5 py-4 bg-gray-50 border border-gray-100 rounded-2xl focus:bg-white focus:ring-4 focus:ring-primary-50 outline-none font-bold text-gray-900 transition-all placeholder:text-gray-300" 
+                        className="w-full px-4 py-3 bg-gray-50 border border-gray-100 rounded-xl focus:bg-white focus:ring-2 focus:ring-primary-50 outline-none font-bold text-sm text-gray-900 transition-all placeholder:text-gray-400" 
                       />
                     </div>
                     <div className="space-y-2">
-                      <label className="text-[11px] font-black text-gray-400 uppercase tracking-widest ml-1">연락처</label>
+                      <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-1">연락처</label>
                       <input 
                         type="text" 
                         required
                         value={formData.phone}
                         onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                         placeholder="010-0000-0000" 
-                        className="w-full px-5 py-4 bg-gray-50 border border-gray-100 rounded-2xl focus:bg-white focus:ring-4 focus:ring-primary-50 outline-none font-bold text-gray-900 transition-all placeholder:text-gray-300" 
+                        className="w-full px-4 py-3 bg-gray-50 border border-gray-100 rounded-xl focus:bg-white focus:ring-2 focus:ring-primary-50 outline-none font-bold text-sm text-gray-900 transition-all placeholder:text-gray-400" 
                       />
                     </div>
                   </div>
 
                   <div className="space-y-2">
-                    <label className="text-[11px] font-black text-gray-400 uppercase tracking-widest ml-1">배송지 주소</label>
+                    <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-1">배송지 주소</label>
                     <textarea 
                       rows={3} 
                       required
                       value={formData.address}
                       onChange={(e) => setFormData({ ...formData, address: e.target.value })}
                       placeholder="도로명 주소와 상세 주소를 입력하세요" 
-                      className="w-full px-5 py-4 bg-gray-50 border border-gray-100 rounded-2xl focus:bg-white focus:ring-4 focus:ring-primary-50 outline-none font-bold text-gray-900 transition-all placeholder:text-gray-300 resize-none"
+                      className="w-full px-4 py-3 bg-gray-50 border border-gray-100 rounded-xl focus:bg-white focus:ring-2 focus:ring-primary-50 outline-none font-bold text-sm text-gray-900 transition-all placeholder:text-gray-400 resize-none"
                     ></textarea>
                   </div>
                 </div>

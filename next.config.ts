@@ -39,6 +39,16 @@ const nextConfig: NextConfig = {
   env: {
     NEXT_PUBLIC_APP_VERSION: '1.0.0',
   },
+  async redirects() {
+    return [
+      {
+        source: '/:path*',
+        destination: 'https://goodzz.co.kr/:path*',
+        permanent: true,
+        has: [{ type: 'host', value: 'www.goodzz.co.kr' }],
+      },
+    ];
+  },
 };
 
 export default nextConfig;

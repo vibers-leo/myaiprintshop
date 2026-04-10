@@ -34,9 +34,11 @@ export const metadata: Metadata = {
   },
 };
 
-import { Toaster } from 'sonner';
-import { AuthProvider } from "@/context/AuthContext";
-import CartSync from "@/components/CartSync";
+import dynamic from 'next/dynamic';
+
+const ClientProviders = dynamic(() => import('@/components/ClientProviders'), {
+  ssr: false,
+});
 
 export default function RootLayout({
   children,
@@ -91,11 +93,9 @@ export default function RootLayout({
             gtag('config', 'G-CGK1BSBM63');
           `}
         </Script>
-        <AuthProvider>
-          <CartSync />
+        <ClientProviders>
           {children}
-        </AuthProvider>
-        <Toaster position="top-center" richColors />
+        </ClientProviders>
       </body>
     </html>
   );

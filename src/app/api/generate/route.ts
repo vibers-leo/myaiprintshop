@@ -2,40 +2,49 @@ import { GoogleGenerativeAI } from '@google/generative-ai';
 import { NextRequest, NextResponse } from 'next/server';
 
 // 인메모리 레이트 리밋 (IP당 분당 5회, 시간당 30회)
-const rateLimitMap = new Map<string, { minute: number[]; hour: number[] }>();
+const rateLimitMap = new Map<string, { timestamps: number[] }>();
+let lastCleanup = Date.now();
+
+const RATE_LIMIT = { perMinute: 5, perHour: 30 };
+const ONE_MINUTE = 60_000;
+const ONE_HOUR = 3_600_000;
+const CLEANUP_INTERVAL = 5 * 60_000; // 5분마다 전체 정리
+const MAX_ENTRIES = 500;
 
 function checkRateLimit(ip: string): { allowed: boolean; retryAfter?: number } {
   const now = Date.now();
-  const oneMinuteAgo = now - 60_000;
-  const oneHourAgo = now - 3_600_000;
+
+  // 주기적 전체 정리 (5분마다 또는 엔트리 초과 시)
+  if (now - lastCleanup > CLEANUP_INTERVAL || rateLimitMap.size > MAX_ENTRIES) {
+    const cutoff = now - ONE_HOUR;
+    for (const [key, r] of rateLimitMap) {
+      r.timestamps = r.timestamps.filter(t => t > cutoff);
+      if (r.timestamps.length === 0) rateLimitMap.delete(key);
+    }
+    lastCleanup = now;
+  }
 
   let record = rateLimitMap.get(ip);
   if (!record) {
-    record = { minute: [], hour: [] };
+    record = { timestamps: [] };
     rateLimitMap.set(ip, record);
   }
 
-  // 오래된 기록 정리
-  // 오래된 엔트리 정리 (Map이 커지면 전체 정리)
-  if (rateLimitMap.size > 1000) {
-    for (const [key, r] of rateLimitMap) {
-      r.hour = r.hour.filter(t => t > oneHourAgo);
-      if (r.hour.length === 0) rateLimitMap.delete(key);
-    }
+  // 1시간 이내 기록만 유지
+  record.timestamps = record.timestamps.filter(t => t > now - ONE_HOUR);
+
+  // 분당 체크
+  const recentMinute = record.timestamps.filter(t => t > now - ONE_MINUTE);
+  if (recentMinute.length >= RATE_LIMIT.perMinute) {
+    return { allowed: false, retryAfter: Math.ceil((recentMinute[0] + ONE_MINUTE - now) / 1000) };
   }
 
-  record.minute = record.minute.filter(t => t > oneMinuteAgo);
-  record.hour = record.hour.filter(t => t > oneHourAgo);
-
-  if (record.minute.length >= 5) {
-    return { allowed: false, retryAfter: Math.ceil((record.minute[0] + 60_000 - now) / 1000) };
-  }
-  if (record.hour.length >= 30) {
-    return { allowed: false, retryAfter: Math.ceil((record.hour[0] + 3_600_000 - now) / 1000) };
+  // 시간당 체크
+  if (record.timestamps.length >= RATE_LIMIT.perHour) {
+    return { allowed: false, retryAfter: Math.ceil((record.timestamps[0] + ONE_HOUR - now) / 1000) };
   }
 
-  record.minute.push(now);
-  record.hour.push(now);
+  record.timestamps.push(now);
   return { allowed: true };
 }
 

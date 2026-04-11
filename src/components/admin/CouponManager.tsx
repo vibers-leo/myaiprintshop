@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { Ticket, Plus, ToggleLeft, ToggleRight, Loader2 } from 'lucide-react';
 import { toast } from 'sonner';
+import { useAuth } from '@/context/AuthContext';
 
 interface Coupon {
   id: string;
@@ -19,6 +20,7 @@ interface Coupon {
 }
 
 export default function CouponManager() {
+  const { user } = useAuth();
   const [coupons, setCoupons] = useState<Coupon[]>([]);
   const [loading, setLoading] = useState(true);
   const [showForm, setShowForm] = useState(false);
@@ -37,9 +39,15 @@ export default function CouponManager() {
     fetchCoupons();
   }, []);
 
+  async function getAuthHeaders(): Promise<HeadersInit> {
+    const token = await user?.getIdToken();
+    return { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` };
+  }
+
   async function fetchCoupons() {
     try {
-      const res = await fetch('/api/admin/coupons');
+      const headers = await getAuthHeaders();
+      const res = await fetch('/api/admin/coupons', { headers });
       const data = await res.json();
       setCoupons(data.coupons || []);
     } catch {
@@ -53,9 +61,10 @@ export default function CouponManager() {
     e.preventDefault();
     setCreating(true);
     try {
+      const headers = await getAuthHeaders();
       const res = await fetch('/api/admin/coupons', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers,
         body: JSON.stringify(form),
       });
       const data = await res.json();
@@ -76,9 +85,10 @@ export default function CouponManager() {
 
   async function toggleActive(id: string, active: boolean) {
     try {
+      const headers = await getAuthHeaders();
       await fetch('/api/admin/coupons', {
         method: 'PATCH',
-        headers: { 'Content-Type': 'application/json' },
+        headers,
         body: JSON.stringify({ id, active: !active }),
       });
       setCoupons((prev) => prev.map((c) => (c.id === id ? { ...c, active: !active } : c)));

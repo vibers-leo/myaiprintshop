@@ -14,6 +14,15 @@
  * - EMAIL_FROM: 발신 이메일 주소
  */
 
+function escapeHtml(str: string): string {
+  return str
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#039;');
+}
+
 export type EmailType =
   | 'vendor_approved'
   | 'vendor_rejected'
@@ -130,15 +139,15 @@ export async function sendVendorApprovedEmail(
 ): Promise<boolean> {
   const emailData: EmailData = {
     to: email,
-    subject: `🎉 판매자 승인 완료 - ${data.businessName}`,
+    subject: `판매자 승인 완료 - ${data.businessName}`,
     html: `
       <h2>판매자 승인이 완료되었습니다!</h2>
-      <p>안녕하세요, ${data.vendorName}님</p>
-      <p><strong>${data.businessName}</strong>의 판매자 승인이 완료되었습니다.</p>
+      <p>안녕하세요, ${escapeHtml(data.vendorName)}님</p>
+      <p><strong>${escapeHtml(data.businessName)}</strong>의 판매자 승인이 완료되었습니다.</p>
 
       <h3>승인 정보</h3>
       <ul>
-        <li>사업자명: ${data.businessName}</li>
+        <li>사업자명: ${escapeHtml(data.businessName)}</li>
         <li>수수료율: ${(data.commissionRate * 100).toFixed(1)}%</li>
       </ul>
 
@@ -165,11 +174,11 @@ export async function sendVendorRejectedEmail(
     subject: `판매자 신청 검토 결과 - ${data.businessName}`,
     html: `
       <h2>판매자 신청 검토 결과</h2>
-      <p>안녕하세요, ${data.vendorName}님</p>
-      <p>귀하의 <strong>${data.businessName}</strong> 판매자 신청을 검토한 결과,
+      <p>안녕하세요, ${escapeHtml(data.vendorName)}님</p>
+      <p>귀하의 <strong>${escapeHtml(data.businessName)}</strong> 판매자 신청을 검토한 결과,
       현재 승인이 어려운 상황입니다.</p>
 
-      ${data.reason ? `<p><strong>사유:</strong> ${data.reason}</p>` : ''}
+      ${data.reason ? `<p><strong>사유:</strong> ${escapeHtml(data.reason)}</p>` : ''}
 
       <p>추가 문의사항이 있으시면 고객센터로 연락 주시기 바랍니다.</p>
 
@@ -197,7 +206,7 @@ export async function sendOrderReceivedEmail(
     subject: `🛒 신규 주문 접수 - ${data.orderId}`,
     html: `
       <h2>신규 주문이 접수되었습니다</h2>
-      <p>안녕하세요, ${data.vendorName}님</p>
+      <p>안녕하세요, ${escapeHtml(data.vendorName)}님</p>
 
       <h3>주문 정보</h3>
       <ul>
@@ -230,7 +239,7 @@ export async function sendSettlementTransferredEmail(
     subject: `💰 정산 완료 - ₩${data.vendorAmount.toLocaleString()}`,
     html: `
       <h2>정산이 완료되었습니다</h2>
-      <p>안녕하세요, ${data.vendorName}님</p>
+      <p>안녕하세요, ${escapeHtml(data.vendorName)}님</p>
 
       <h3>정산 내역</h3>
       <ul>
@@ -265,7 +274,7 @@ export async function sendOrderConfirmEmail(
   }
 ): Promise<boolean> {
   const itemsList = data.items
-    .map((item) => `<li>${item.name} x${item.quantity} — ₩${item.price.toLocaleString()}</li>`)
+    .map((item) => `<li>${escapeHtml(item.name)} x${item.quantity} — ₩${item.price.toLocaleString()}</li>`)
     .join('');
 
   const grandTotal = data.totalAmount + data.shippingFee;
@@ -276,7 +285,7 @@ export async function sendOrderConfirmEmail(
     html: `
       <div style="max-width:600px;margin:0 auto;font-family:'Apple SD Gothic Neo',sans-serif">
         <h2 style="color:#8b5cf6">주문이 완료되었습니다</h2>
-        <p>${data.customerName}님, 주문해 주셔서 감사합니다.</p>
+        <p>${escapeHtml(data.customerName)}님, 주문해 주셔서 감사합니다.</p>
 
         <table style="width:100%;border-collapse:collapse;margin:16px 0">
           <tr style="background:#f9fafb"><td style="padding:8px;font-weight:bold">주문번호</td><td style="padding:8px">${data.orderId}</td></tr>

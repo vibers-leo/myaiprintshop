@@ -34,11 +34,7 @@ export const metadata: Metadata = {
   },
 };
 
-import dynamic from 'next/dynamic';
-
-const ClientProviders = dynamic(() => import('@/components/ClientProviders'), {
-  ssr: false,
-});
+import ClientProviders from '@/components/ClientProviders';
 
 export default function RootLayout({
   children,

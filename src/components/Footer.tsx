@@ -92,6 +92,17 @@ export default function Footer() {
         </div>
       </div>
 
+      {/* 사업자 정보 (전자상거래법 필수) */}
+      <div className="py-6" style={{ borderTop: '1px solid rgba(0,0,0,0.06)', background: '#F4F4F5' }}>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-[11px] text-gray-400 leading-relaxed space-y-1">
+            <p><span className="font-semibold text-gray-500">상호명:</span> 계발자들 (Vibers) | <span className="font-semibold text-gray-500">대표:</span> {process.env.NEXT_PUBLIC_CEO_NAME || '대표자명'} | <span className="font-semibold text-gray-500">사업자등록번호:</span> {process.env.NEXT_PUBLIC_BIZ_NUMBER || '000-00-00000'}</p>
+            <p><span className="font-semibold text-gray-500">주소:</span> {process.env.NEXT_PUBLIC_BIZ_ADDRESS || '사업장 주소'} | <span className="font-semibold text-gray-500">통신판매업신고:</span> {process.env.NEXT_PUBLIC_ECOMMERCE_NUMBER || '제0000-서울-00000호'}</p>
+            <p><span className="font-semibold text-gray-500">고객센터:</span> support@goodzz.co.kr | 010-4866-5805 (평일 10:00-18:00)</p>
+          </div>
+        </div>
+      </div>
+
       {/* Bottom bar */}
       <div
         className="py-8"
@@ -99,7 +110,7 @@ export default function Footer() {
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-6">
           <CoupangBanner />
-          
+
           <div className="flex flex-col md:flex-row items-center gap-4 md:gap-8">
             <p className="text-xs font-medium text-gray-500">© 2026 GOODZZ. All rights reserved.</p>
             <div className="flex items-center gap-5">

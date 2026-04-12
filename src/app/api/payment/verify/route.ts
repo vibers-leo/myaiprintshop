@@ -5,6 +5,7 @@ import { batchTransferToVendors } from '@/lib/portone-settlement';
 import { getAllVendors } from '@/lib/vendors';
 import { forwardOrderToWowPress } from '@/lib/wowpress/order-forwarder';
 import { sendOrderConfirmEmail, sendOrderReceivedEmail } from '@/lib/email';
+import { createNotification } from '@/lib/notifications';
 
 // 멱등성 보호: 처리 중인 orderId 추적
 const processingOrders = new Set<string>();
@@ -181,6 +182,19 @@ export async function POST(request: NextRequest) {
         totalAmount: updatedOrder.totalAmount,
         shippingFee: updatedOrder.shippingFee,
       }).catch((err: any) => console.error('❌ Order confirm email failed:', err));
+    }
+
+    // 구매자 in-app 알림 (비차단)
+    if (updatedOrder?.userId) {
+      const itemName = updatedOrder.items[0]?.productName || '상품';
+      const itemCount = updatedOrder.items.length;
+      createNotification({
+        userId: updatedOrder.userId,
+        type: 'order_status',
+        title: '주문이 완료되었습니다',
+        message: itemCount > 1 ? `${itemName} 외 ${itemCount - 1}건` : itemName,
+        link: `/mypage/orders/${orderId}`,
+      }).catch(() => {});
     }
 
     // Phase 5: 배분정산 실행

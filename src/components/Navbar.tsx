@@ -131,6 +131,11 @@ export default function Navbar() {
                 <iconify-icon icon="solar:magnifer-linear" class="text-xl" />
               </button>
 
+              {/* Notifications */}
+              <div className="p-2">
+                <NotificationDropdown />
+              </div>
+
               {/* Cart */}
               <Link href="/cart" className="relative p-2 text-gray-500 hover:text-gray-900 hover:bg-gray-100 rounded-lg transition-all">
                 {/* @ts-ignore */}

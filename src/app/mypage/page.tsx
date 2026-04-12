@@ -35,6 +35,16 @@ export default function MyPageDashboard() {
           const shippingCount = orders.filter(o => ['SHIPPED', 'PREPARING'].includes(o.orderStatus)).length;
           setStats(prev => ({ ...prev, shipping: shippingCount }));
         }
+
+        // 사용 가능한 쿠폰 수 조회
+        try {
+          const token = await user.getIdToken();
+          const couponRes = await fetch('/api/coupons/available', { headers: { Authorization: `Bearer ${token}` } });
+          const couponData = await couponRes.json();
+          if (couponData.success) {
+            setStats(prev => ({ ...prev, coupons: couponData.count }));
+          }
+        } catch {}
       } catch (error) {
         console.error('Error fetching dashboard data:', error);
       } finally {

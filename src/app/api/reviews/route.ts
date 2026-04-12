@@ -1,10 +1,11 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { 
-  getReviewsByProduct, 
-  getReviewsByUser, 
+import {
+  getReviewsByProduct,
+  getReviewsByUser,
   createReview,
   deleteReview
 } from '@/lib/reviews';
+import { updateProduct } from '@/lib/products';
 
 // GET: 리뷰 목록 조회
 export async function GET(request: NextRequest) {
@@ -66,6 +67,16 @@ export async function POST(request: NextRequest) {
       );
     }
     
+    // 상품 평점/리뷰수 자동 업데이트
+    try {
+      const reviews = await getReviewsByProduct(productId);
+      const avgRating = reviews.reduce((sum, r) => sum + r.rating, 0) / reviews.length;
+      await updateProduct(productId, {
+        rating: Math.round(avgRating * 10) / 10,
+        reviewCount: reviews.length,
+      });
+    } catch {}
+
     return NextResponse.json({
       success: true,
       message: '리뷰가 등록되었습니다.',

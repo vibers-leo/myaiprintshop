@@ -16,12 +16,14 @@ export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
     
-    const { items, shippingInfo, totalAmount, shippingFee, userId } = body as {
+    const { items, shippingInfo, totalAmount, shippingFee, userId, couponCode, couponDiscount } = body as {
       items: OrderItem[];
       shippingInfo: Order['shippingInfo'];
       totalAmount: number;
       shippingFee: number;
       userId?: string;
+      couponCode?: string;
+      couponDiscount?: number;
     };
 
     // 유효성 검사
@@ -68,6 +70,7 @@ export async function POST(request: NextRequest) {
       paymentStatus: 'PENDING',
       orderStatus: 'PENDING',
       ...(userId ? { userId } : {}),
+      ...(couponCode ? { couponCode, couponDiscount: couponDiscount || 0 } : {}),
     };
 
     // Firestore에 주문 생성 (ID는 Firestore가 자동 생성하거나 수동 지정 가능)

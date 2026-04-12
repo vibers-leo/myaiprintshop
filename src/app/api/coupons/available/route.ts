@@ -10,15 +10,25 @@ export async function GET() {
       .where('active', '==', true)
       .get();
 
-    // 만료되지 않고 사용 한도 초과하지 않은 쿠폰 수
-    const count = snap.docs.filter((d) => {
-      const data = d.data();
-      if (data.expiresAt && data.expiresAt < now) return false;
-      if (data.maxUses > 0 && data.usedCount >= data.maxUses) return false;
-      return true;
-    }).length;
+    const available = snap.docs
+      .map((d) => ({ id: d.id, ...d.data() }))
+      .filter((c: any) => {
+        if (c.expiresAt && c.expiresAt < now) return false;
+        if (c.maxUses > 0 && c.usedCount >= c.maxUses) return false;
+        return true;
+      })
+      .map((c: any) => ({
+        id: c.id,
+        code: c.code,
+        discountType: c.discountType,
+        discountValue: c.discountValue,
+        minOrderAmount: c.minOrderAmount || 0,
+        description: c.description || '',
+        expiresAt: c.expiresAt,
+        active: c.active,
+      }));
 
-    return NextResponse.json({ success: true, count });
+    return NextResponse.json({ success: true, count: available.length, coupons: available });
   } catch {
     return NextResponse.json({ success: true, count: 0 });
   }

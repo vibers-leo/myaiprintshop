@@ -6,6 +6,7 @@ import { getAllVendors } from '@/lib/vendors';
 import { forwardOrderToWowPress } from '@/lib/wowpress/order-forwarder';
 import { sendOrderConfirmEmail, sendOrderReceivedEmail } from '@/lib/email';
 import { createNotification } from '@/lib/notifications';
+import { getAdminFirestore } from '@/lib/firebase-admin';
 
 // 멱등성 보호
 const processingOrders = new Set<string>();
@@ -63,6 +64,21 @@ export async function POST(request: NextRequest) {
 
       const updatedOrder = await getOrderById(orderId);
       console.log(`✅ Toss payment confirmed: ${orderId} (${paymentKey})`);
+
+      // 쿠폰 사용 처리 (usedCount 증가)
+      if ((updatedOrder as any)?.couponCode) {
+        try {
+          const db = await getAdminFirestore();
+          const couponSnap = await db.collection('coupons').where('code', '==', (updatedOrder as any).couponCode).get();
+          if (!couponSnap.empty) {
+            const couponDoc = couponSnap.docs[0];
+            await couponDoc.ref.update({ usedCount: (couponDoc.data().usedCount || 0) + 1 });
+            console.log(`🎫 Coupon ${(updatedOrder as any).couponCode} usedCount incremented`);
+          }
+        } catch (err) {
+          console.error('❌ Coupon usage tracking failed:', err);
+        }
+      }
 
       // === 후처리 (비차단) ===
 

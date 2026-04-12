@@ -84,7 +84,6 @@ export default function Navbar() {
     { name: '크리에이터 스튜디오', href: '/studio' },
     { name: '아카데미', href: '/academy' },
     { name: '쇼케이스', href: '/showcase' },
-    { name: '개발자 센터', href: '/developers' },
   ];
 
   return (

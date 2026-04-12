@@ -167,6 +167,8 @@ export default function CheckoutPage() {
           },
           totalAmount: subtotal,
           shippingFee: shipping,
+          couponCode: appliedCoupon?.code || null,
+          couponDiscount,
           userId: user?.uid || null,
         }),
       });

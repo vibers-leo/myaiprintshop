@@ -4,6 +4,7 @@ import LandingTrustStrip from '@/components/landing/LandingTrustStrip';
 import LandingFeatures from '@/components/landing/LandingFeatures';
 import LandingHowItWorks from '@/components/landing/LandingHowItWorks';
 import LandingTestimonials from '@/components/landing/LandingTestimonials';
+import LandingProducts from '@/components/landing/LandingProducts';
 import LandingBrands from '@/components/landing/LandingBrands';
 import LandingCTA from '@/components/landing/LandingCTA';
 import LandingFooter from '@/components/landing/LandingFooter';
@@ -39,6 +40,7 @@ export default function Home() {
       <LandingHero />
       <LandingTrustStrip />
       <LandingFeatures />
+      <LandingProducts />
       <LandingHowItWorks />
       <LandingTestimonials />
       <LandingBrands />

@@ -4,7 +4,7 @@ import { getOrderById, updateOrder } from '@/lib/orders';
 import { batchTransferToVendors } from '@/lib/portone-settlement';
 import { getAllVendors } from '@/lib/vendors';
 import { forwardOrderToWowPress } from '@/lib/wowpress/order-forwarder';
-import { sendOrderConfirmEmail } from '@/lib/email';
+import { sendOrderConfirmEmail, sendOrderReceivedEmail } from '@/lib/email';
 
 // 멱등성 보호: 처리 중인 orderId 추적
 const processingOrders = new Set<string>();
@@ -198,6 +198,24 @@ export async function POST(request: NextRequest) {
         );
 
         console.log(`✅ Settlement completed for ${settlementResults.size} vendors`);
+
+        // 벤더에게 신규 주문 이메일 알림 (비차단)
+        for (const vo of updatedOrder.vendorOrders!) {
+          const vendor = vendorsMap.get(vo.vendorId);
+          if (vendor?.email) {
+            sendOrderReceivedEmail(vendor.email, {
+              vendorName: vo.vendorName,
+              orderId,
+              orderAmount: vo.subtotal,
+              items: vo.items.map((item: any) => ({
+                name: item.productName || item.name,
+                quantity: item.quantity,
+                price: item.price * item.quantity,
+              })),
+              orderUrl: `${process.env.NEXT_PUBLIC_SITE_URL || 'https://goodzz.co.kr'}/mypage/vendor/orders`,
+            }).catch((err: any) => console.error(`❌ Vendor email failed (${vo.vendorId}):`, err));
+          }
+        }
       } catch (error) {
         console.error('❌ Settlement error (order still completed):', error);
         // 정산 실패해도 주문은 완료됨 (정산은 나중에 재시도 가능)

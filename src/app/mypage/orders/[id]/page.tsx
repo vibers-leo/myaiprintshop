@@ -190,6 +190,26 @@ export default function OrderDetailPage() {
                 </div>
               ))}
             </div>
+
+            {/* 벤더 정보 */}
+            {order.vendorOrders && order.vendorOrders.length > 0 && (
+              <div className="mt-6 pt-6 border-t border-gray-100">
+                <p className="text-xs font-bold text-gray-400 uppercase tracking-wider mb-3">판매자</p>
+                <div className="flex flex-wrap gap-3">
+                  {order.vendorOrders.map((vo: any, i: number) => (
+                    <div key={i} className="inline-flex items-center gap-2 px-3 py-2 bg-purple-50 border border-purple-100 rounded-xl">
+                      <span className="w-6 h-6 rounded-full bg-purple-500 text-white text-[10px] font-bold flex items-center justify-center">
+                        {vo.vendorName?.charAt(0) || 'V'}
+                      </span>
+                      <span className="text-sm font-medium text-purple-700">{vo.vendorName}</span>
+                      <span className="text-[10px] px-1.5 py-0.5 rounded bg-purple-100 text-purple-500 font-medium">
+                        {vo.status === 'pending' ? '준비중' : vo.status === 'shipped' ? '배송중' : vo.status === 'delivered' ? '배송완료' : vo.status}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
           </section>
 
           {/* Payment Info */}

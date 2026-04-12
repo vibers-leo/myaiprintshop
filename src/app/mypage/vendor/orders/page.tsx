@@ -43,6 +43,9 @@ export default function VendorOrdersPage() {
   const [loading, setLoading] = useState(true);
   const [filter, setFilter] = useState<string>('all');
   const [expandedId, setExpandedId] = useState<string | null>(null);
+  const [vendorId, setVendorId] = useState('');
+  const [shipForm, setShipForm] = useState<{ orderId: string; carrier: string; trackingNumber: string } | null>(null);
+  const [shipping, setShipping] = useState(false);
 
   useEffect(() => {
     if (!user) return;
@@ -52,6 +55,7 @@ export default function VendorOrdersPage() {
         const vendorsData = await vendorsRes.json();
         const vendor = vendorsData.vendors?.find((v: any) => v.ownerId === user.uid);
         if (!vendor) { toast.error('판매자 정보를 찾을 수 없습니다.'); return; }
+        setVendorId(vendor.id);
 
         const res = await fetch(`/api/vendors/orders?vendorId=${vendor.id}`);
         const data = await res.json();
@@ -60,6 +64,33 @@ export default function VendorOrdersPage() {
       finally { setLoading(false); }
     })();
   }, [user]);
+
+  async function handleShip() {
+    if (!shipForm || !shipForm.trackingNumber.trim()) {
+      toast.error('운송장 번호를 입력해주세요.');
+      return;
+    }
+    setShipping(true);
+    try {
+      const res = await fetch('/api/vendors/orders/ship', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ orderId: shipForm.orderId, vendorId, ...shipForm }),
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error);
+      toast.success(data.message);
+      setShipForm(null);
+      // 목록 새로고침
+      setOrders((prev) => prev.map((o) =>
+        o.orderId === shipForm.orderId ? { ...o, status: 'shipped' as const, shippingInfo: { trackingNumber: shipForm.trackingNumber, carrier: shipForm.carrier, shippedAt: new Date().toISOString() } } : o
+      ));
+    } catch (err: any) {
+      toast.error(err.message || '배송 처리 실패');
+    } finally {
+      setShipping(false);
+    }
+  }
 
   const filtered = filter === 'all' ? orders : orders.filter((o) => o.status === filter);
 
@@ -219,6 +250,43 @@ export default function VendorOrdersPage() {
                           <span className="text-purple-600 font-semibold">{order.shippingInfo.carrier}</span>
                           <span className="text-purple-800 ml-2 font-mono">{order.shippingInfo.trackingNumber}</span>
                         </div>
+                      )}
+
+                      {/* 배송 처리 */}
+                      {(order.status === 'pending' || order.status === 'confirmed') && (
+                        shipForm?.orderId === order.orderId ? (
+                          <div className="flex gap-2 items-end">
+                            <div className="flex-1">
+                              <label className="text-xs text-gray-500 mb-1 block">택배사</label>
+                              <input
+                                value={shipForm.carrier}
+                                onChange={(e) => setShipForm({ ...shipForm, carrier: e.target.value })}
+                                className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm"
+                                placeholder="CJ대한통운"
+                              />
+                            </div>
+                            <div className="flex-1">
+                              <label className="text-xs text-gray-500 mb-1 block">운송장 번호</label>
+                              <input
+                                value={shipForm.trackingNumber}
+                                onChange={(e) => setShipForm({ ...shipForm, trackingNumber: e.target.value })}
+                                className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm font-mono"
+                                placeholder="123456789012"
+                              />
+                            </div>
+                            <button onClick={handleShip} disabled={shipping} className="px-4 py-2 bg-purple-600 text-white rounded-lg text-sm font-bold hover:bg-purple-700 disabled:opacity-50 whitespace-nowrap">
+                              {shipping ? '처리중...' : '발송'}
+                            </button>
+                            <button onClick={() => setShipForm(null)} className="px-3 py-2 text-gray-500 text-sm hover:text-gray-700">취소</button>
+                          </div>
+                        ) : (
+                          <button
+                            onClick={() => setShipForm({ orderId: order.orderId, carrier: '', trackingNumber: '' })}
+                            className="flex items-center gap-2 px-4 py-2 bg-purple-50 text-purple-700 rounded-lg text-sm font-bold hover:bg-purple-100 border border-purple-200"
+                          >
+                            <Truck className="w-4 h-4" /> 배송 처리
+                          </button>
+                        )
                       )}
 
                       <p className="text-[11px] text-gray-400">주문번호: {order.orderId}</p>

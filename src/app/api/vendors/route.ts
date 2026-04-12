@@ -3,6 +3,7 @@ import { createVendor, getAllVendors } from '@/lib/vendors';
 import { getUser, addRole } from '@/lib/users';
 import { requireRole, unauthorizedResponse } from '@/lib/auth-middleware';
 import { ApiError } from '@/lib/api-error-handler';
+import { createNotification } from '@/lib/notifications';
 
 /**
  * POST /api/vendors
@@ -58,6 +59,15 @@ export async function POST(request: NextRequest) {
     });
 
     console.log(`✅ Vendor application created: ${vendor.id} by ${userId}`);
+
+    // 어드민에게 알림 (admin userId를 알 수 없으므로 시스템 알림으로 기록)
+    createNotification({
+      userId: 'ADMIN',
+      type: 'system',
+      title: '새 판매자 신청',
+      message: `${businessName} (${ownerName}) — 승인 대기 중`,
+      link: '/admin',
+    }).catch(() => {});
 
     return NextResponse.json(
       {

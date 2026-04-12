@@ -248,7 +248,7 @@ export default function CheckoutPage() {
       clearCart();
       
       // 주문 완료 페이지로 이동
-      router.push(`/order/complete?orderId=${orderId}`);
+      router.push(`/order-success/${orderId}`);
 
     } catch (error: any) {
       throw error;

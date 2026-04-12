@@ -4,8 +4,9 @@ import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import styles from "./AdminComponents.module.css";
 import { toast } from "sonner";
-import { Loader2, ExternalLink, RefreshCw, Search, Package } from "lucide-react";
+import { Loader2, ExternalLink, RefreshCw, Search, Package, XCircle } from "lucide-react";
 import { Order, OrderStatus } from "@/lib/payment";
+import { useAuth } from "@/context/AuthContext";
 
 const statusLabels: Record<string, string> = {
   All: "전체",
@@ -18,12 +19,35 @@ const statusLabels: Record<string, string> = {
 };
 
 export default function OrderManager() {
+  const { user } = useAuth();
   const [orders, setOrders] = useState<Order[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [filter, setFilter] = useState("All");
   const [selectedOrder, setSelectedOrder] = useState<Order | null>(null);
   const [searchTerm, setSearchTerm] = useState("");
   const [isUpdating, setIsUpdating] = useState<string | null>(null);
+
+  const handleCancelOrder = async (order: Order) => {
+    const reason = prompt('환불 사유를 입력하세요:');
+    if (!reason) return;
+    setIsUpdating(order.id);
+    try {
+      const token = await user?.getIdToken();
+      const res = await fetch('/api/payment/cancel', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
+        body: JSON.stringify({ orderId: order.id, cancelReason: reason }),
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error);
+      toast.success(data.message);
+      fetchOrders();
+    } catch (err: any) {
+      toast.error(err.message || '환불 처리 실패');
+    } finally {
+      setIsUpdating(null);
+    }
+  };
 
   const fetchOrders = async () => {
     setIsLoading(true);
@@ -201,6 +225,16 @@ export default function OrderManager() {
                       >
                         상세
                       </button>
+                      {order.paymentStatus === 'PAID' && (
+                        <button
+                          className={styles.viewBtn}
+                          style={{ color: '#ef4444', borderColor: '#fecaca' }}
+                          onClick={() => handleCancelOrder(order)}
+                          disabled={isUpdating === order.id}
+                        >
+                          환불
+                        </button>
+                      )}
                     </div>
                   </td>
                 </tr>

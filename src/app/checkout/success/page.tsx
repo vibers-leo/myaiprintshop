@@ -45,7 +45,7 @@ export default function CheckoutSuccessPage() {
 
         // 3초 후 주문 완료 페이지로 이동
         setTimeout(() => {
-          router.push(`/order/complete?orderId=${orderId}`);
+          router.push(`/order-success/${orderId}`);
         }, 2000);
       })
       .catch((err) => {

@@ -29,7 +29,8 @@ export async function GET() {
       }));
 
     return NextResponse.json({ success: true, count: available.length, coupons: available });
-  } catch {
-    return NextResponse.json({ success: true, count: 0 });
+  } catch (error) {
+    console.error('Coupon fetch error:', error);
+    return NextResponse.json({ success: false, error: '쿠폰 조회 실패', coupons: [], count: 0 }, { status: 500 });
   }
 }

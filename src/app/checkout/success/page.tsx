@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 import { Loader2, CheckCircle } from 'lucide-react';
 import { useStore } from '@/store/useStore';
@@ -12,8 +12,12 @@ export default function CheckoutSuccessPage() {
   const { clearCart } = useStore();
   const [status, setStatus] = useState<'loading' | 'success' | 'error'>('loading');
   const [errorMessage, setErrorMessage] = useState('');
+  const confirmedRef = React.useRef(false);
 
   useEffect(() => {
+    // 중복 호출 방지 (새로고침/StrictMode)
+    if (confirmedRef.current) return;
+    confirmedRef.current = true;
     const paymentKey = searchParams.get('paymentKey');
     const orderId = searchParams.get('orderId');
     const amount = searchParams.get('amount');

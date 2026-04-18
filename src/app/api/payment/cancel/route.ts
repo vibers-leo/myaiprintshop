@@ -16,6 +16,10 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'orderId와 cancelReason이 필요합니다.' }, { status: 400 });
     }
 
+    if (cancelAmount !== undefined && (typeof cancelAmount !== 'number' || cancelAmount <= 0)) {
+      return NextResponse.json({ error: '취소 금액은 0보다 커야 합니다.' }, { status: 400 });
+    }
+
     const order = await getOrderById(orderId);
     if (!order) {
       return NextResponse.json({ error: '주문을 찾을 수 없습니다.' }, { status: 404 });

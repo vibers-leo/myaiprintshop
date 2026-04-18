@@ -61,7 +61,7 @@ export async function getPayment(paymentKey: string): Promise<TossPayment> {
  */
 export async function cancelPayment(paymentKey: string, cancelReason: string, cancelAmount?: number): Promise<TossPayment> {
   const body: any = { cancelReason };
-  if (cancelAmount) body.cancelAmount = cancelAmount;
+  if (cancelAmount !== undefined) body.cancelAmount = cancelAmount;
 
   const res = await fetch(`${TOSS_CONFIG.apiUrl}/payments/${encodeURIComponent(paymentKey)}/cancel`, {
     method: 'POST',

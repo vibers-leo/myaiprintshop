@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getOrderById, updateOrder } from '@/lib/orders';
 import { createNotification } from '@/lib/notifications';
+import { requireRole, unauthorizedResponse } from '@/lib/auth-middleware';
+import { getVendorById } from '@/lib/vendors';
 
 /**
  * 벤더 배송 처리 API
@@ -8,10 +10,24 @@ import { createNotification } from '@/lib/notifications';
  */
 export async function POST(request: NextRequest) {
   try {
+    // 인증: seller 또는 admin만 접근 가능
+    const authResult = await requireRole(request, ['seller', 'admin']);
+    if (!authResult.authorized) {
+      return unauthorizedResponse(authResult.error);
+    }
+
     const { orderId, vendorId, trackingNumber, carrier } = await request.json();
 
     if (!orderId || !vendorId) {
       return NextResponse.json({ error: 'orderId와 vendorId가 필요합니다.' }, { status: 400 });
+    }
+
+    // 소유권 검증
+    if (!authResult.roles?.includes('admin')) {
+      const vendor = await getVendorById(vendorId);
+      if (!vendor || vendor.ownerId !== authResult.userId) {
+        return NextResponse.json({ error: '접근 권한이 없습니다.' }, { status: 403 });
+      }
     }
 
     const order = await getOrderById(orderId);

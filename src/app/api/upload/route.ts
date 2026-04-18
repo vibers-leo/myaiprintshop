@@ -1,12 +1,19 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { PutObjectCommand } from '@aws-sdk/client-s3';
 import { s3Client, S3_BUCKET } from '@/lib/s3-client';
+import { requireRole, unauthorizedResponse } from '@/lib/auth-middleware';
 
 const ALLOWED_TYPES = ['image/jpeg', 'image/png', 'image/webp', 'image/gif'];
 const MAX_SIZE = 5 * 1024 * 1024; // 5MB
 
 export async function POST(request: NextRequest) {
   try {
+    // 인증: 로그인한 사용자만 업로드 가능
+    const authResult = await requireRole(request, ['customer', 'seller', 'admin']);
+    if (!authResult.authorized) {
+      return unauthorizedResponse(authResult.error);
+    }
+
     const formData = await request.formData();
     const file = formData.get('file') as File | null;
 

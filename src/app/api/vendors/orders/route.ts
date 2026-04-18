@@ -1,11 +1,27 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getOrders } from '@/lib/orders';
+import { requireRole, unauthorizedResponse } from '@/lib/auth-middleware';
+import { getVendorById } from '@/lib/vendors';
 
 export async function GET(request: NextRequest) {
   try {
+    // 인증: seller 또는 admin만 접근 가능
+    const authResult = await requireRole(request, ['seller', 'admin']);
+    if (!authResult.authorized) {
+      return unauthorizedResponse(authResult.error);
+    }
+
     const vendorId = request.nextUrl.searchParams.get('vendorId');
     if (!vendorId) {
       return NextResponse.json({ error: 'vendorId가 필요합니다.' }, { status: 400 });
+    }
+
+    // 소유권 검증: 해당 벤더의 ownerId가 요청자와 일치하는지 확인
+    if (!authResult.roles?.includes('admin')) {
+      const vendor = await getVendorById(vendorId);
+      if (!vendor || vendor.ownerId !== authResult.userId) {
+        return NextResponse.json({ error: '접근 권한이 없습니다.' }, { status: 403 });
+      }
     }
 
     const allOrders = await getOrders({ paymentStatus: 'PAID' });

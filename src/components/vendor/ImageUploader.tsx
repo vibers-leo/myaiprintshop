@@ -3,6 +3,7 @@
 import React, { useRef, useState } from 'react';
 import { Upload, X, Loader2, GripVertical } from 'lucide-react';
 import { toast } from 'sonner';
+import { useAuth } from '@/contexts/AuthContext';
 
 interface ImageUploaderProps {
   images: string[];
@@ -11,6 +12,7 @@ interface ImageUploaderProps {
 }
 
 export default function ImageUploader({ images, onChange, max = 5 }: ImageUploaderProps) {
+  const { user } = useAuth();
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [uploading, setUploading] = useState(false);
 
@@ -33,7 +35,10 @@ export default function ImageUploader({ images, onChange, max = 5 }: ImageUpload
         const formData = new FormData();
         formData.append('file', file);
 
-        const res = await fetch('/api/upload', { method: 'POST', body: formData });
+        const token = await user?.getIdToken();
+        const headers: Record<string, string> = {};
+        if (token) headers['Authorization'] = `Bearer ${token}`;
+        const res = await fetch('/api/upload', { method: 'POST', headers, body: formData });
         const data = await res.json();
 
         if (!res.ok) {

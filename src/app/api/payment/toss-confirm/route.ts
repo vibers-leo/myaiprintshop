@@ -8,9 +8,6 @@ import { sendOrderConfirmEmail, sendOrderReceivedEmail } from '@/lib/email';
 import { createNotification } from '@/lib/notifications';
 import { getAdminFirestore } from '@/lib/firebase-admin';
 
-// 멱등성 보호
-const processingOrders = new Set<string>();
-
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
@@ -20,26 +17,34 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'paymentKey, orderId, amount가 필요합니다.' }, { status: 400 });
     }
 
-    // 멱등성 체크
-    if (processingOrders.has(orderId)) {
+    // Firestore 트랜잭션으로 멱등성 보호
+    const db = await getAdminFirestore();
+    const orderRef = db.collection('orders').doc(orderId);
+
+    // 주문 확인 + 이미 결제됐는지 체크
+    const order = await getOrderById(orderId);
+    if (!order) {
+      return NextResponse.json({ error: '주문을 찾을 수 없습니다.' }, { status: 404 });
+    }
+
+    if (order.paymentStatus === 'PAID') {
+      return NextResponse.json({ success: true, message: '이미 결제 완료된 주문입니다.', order });
+    }
+
+    // CAS: PENDING → PROCESSING (원자적 상태 전환)
+    const snap = await orderRef.get();
+    if (snap.exists && snap.data()?.paymentStatus === 'PROCESSING') {
       return NextResponse.json({ error: '해당 주문이 처리 중입니다.' }, { status: 409 });
     }
-    processingOrders.add(orderId);
+    await orderRef.update({ paymentStatus: 'PROCESSING' });
 
     try {
-      // DB 주문 확인
-      const order = await getOrderById(orderId);
-      if (!order) {
-        return NextResponse.json({ error: '주문을 찾을 수 없습니다.' }, { status: 404 });
-      }
 
-      if (order.paymentStatus === 'PAID') {
-        return NextResponse.json({ success: true, message: '이미 결제 완료된 주문입니다.', order });
-      }
-
-      // 금액 검증
-      const expectedAmount = order.totalAmount + order.shippingFee;
+      // 금액 검증 (쿠폰 할인 반영)
+      const couponDiscount = (order as any).couponDiscount || 0;
+      const expectedAmount = order.totalAmount + order.shippingFee - couponDiscount;
       if (amount !== expectedAmount) {
+        console.error(`❌ Amount mismatch: expected=${expectedAmount} (total=${order.totalAmount} + ship=${order.shippingFee} - coupon=${couponDiscount}), got=${amount}`);
         return NextResponse.json({ error: '결제 금액이 일치하지 않습니다.' }, { status: 400 });
       }
 
@@ -72,7 +77,8 @@ export async function POST(request: NextRequest) {
           const couponSnap = await db.collection('coupons').where('code', '==', (updatedOrder as any).couponCode).get();
           if (!couponSnap.empty) {
             const couponDoc = couponSnap.docs[0];
-            await couponDoc.ref.update({ usedCount: (couponDoc.data().usedCount || 0) + 1 });
+            const admin = await import('firebase-admin');
+            await couponDoc.ref.update({ usedCount: admin.firestore.FieldValue.increment(1) });
             console.log(`🎫 Coupon ${(updatedOrder as any).couponCode} usedCount incremented`);
           }
         } catch (err) {
@@ -156,8 +162,10 @@ export async function POST(request: NextRequest) {
         },
       });
 
-    } finally {
-      processingOrders.delete(orderId);
+    } catch (innerError) {
+      // 결제 실패 시 PROCESSING → PENDING 복구
+      await orderRef.update({ paymentStatus: 'PENDING' }).catch(() => {});
+      throw innerError;
     }
   } catch (error: any) {
     console.error('Toss payment confirm error:', error);

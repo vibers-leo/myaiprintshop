@@ -57,7 +57,10 @@ export default function VendorOrdersPage() {
         if (!vendor) { toast.error('판매자 정보를 찾을 수 없습니다.'); return; }
         setVendorId(vendor.id);
 
-        const res = await fetch(`/api/vendors/orders?vendorId=${vendor.id}`);
+        const token = await user.getIdToken();
+        const res = await fetch(`/api/vendors/orders?vendorId=${vendor.id}`, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
         const data = await res.json();
         if (data.success) setOrders(data.orders);
       } catch { toast.error('주문 목록을 불러올 수 없습니다.'); }
@@ -72,9 +75,10 @@ export default function VendorOrdersPage() {
     }
     setShipping(true);
     try {
+      const token = await user?.getIdToken();
       const res = await fetch('/api/vendors/orders/ship', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
         body: JSON.stringify({ orderId: shipForm.orderId, vendorId, ...shipForm }),
       });
       const data = await res.json();

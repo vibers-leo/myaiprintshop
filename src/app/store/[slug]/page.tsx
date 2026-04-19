@@ -11,11 +11,19 @@ interface PageProps {
 
 async function fetchStore(slug: string) {
   try {
-    const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3300';
-    const res = await fetch(`${baseUrl}/api/store/${slug}`, { cache: 'no-store' });
-    if (!res.ok) return null;
-    const data = await res.json();
-    return data.success ? data : null;
+    const { getAdminFirestore } = await import('@/lib/firebase-admin');
+    const db = await getAdminFirestore();
+    const snap = await db.collection('vendors')
+      .where('store.slug', '==', slug)
+      .where('status', '==', 'approved')
+      .limit(1).get();
+    if (snap.empty) return null;
+    const vendor = { id: snap.docs[0].id, ...snap.docs[0].data() };
+    const prodSnap = await db.collection('products')
+      .where('vendorId', '==', vendor.id)
+      .where('isActive', '==', true).get();
+    const products = prodSnap.docs.map(d => ({ id: d.id, ...d.data() }));
+    return { success: true, vendor, products };
   } catch {
     return null;
   }

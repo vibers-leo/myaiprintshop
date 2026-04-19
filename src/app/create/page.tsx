@@ -4,11 +4,11 @@ import Footer from '@/components/Footer';
 import CreateClientContent from '@/components/CreateClientContent';
 
 async function getProducts() {
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3300';
   try {
-    const res = await fetch(`${baseUrl}/api/products?limit=12`, { cache: 'no-store' });
-    const data = await res.json();
-    return data.success ? data.products : [];
+    const { getAdminFirestore } = await import('@/lib/firebase-admin');
+    const db = await getAdminFirestore();
+    const snap = await db.collection('products').where('isActive', '==', true).limit(12).get();
+    return snap.docs.map(d => ({ id: d.id, ...d.data() }));
   } catch {
     return [];
   }

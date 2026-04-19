@@ -3,6 +3,7 @@ import React from 'react';
 import { notFound } from 'next/navigation';
 import ProductDetailClient from '@/components/ProductDetailClient';
 import type { Metadata } from 'next';
+import { getAdminFirestore } from '@/lib/firebase-admin';
 
 interface PageProps {
   params: Promise<{
@@ -12,12 +13,16 @@ interface PageProps {
 
 async function fetchProduct(id: string) {
   try {
-    const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3300';
-    const res = await fetch(`${baseUrl}/api/products/${id}`, { cache: 'no-store' });
-    const data = await res.json();
-    if (data.success) {
-      return data.product;
-    }
+    const db = await getAdminFirestore();
+    const docSnap = await db.collection('products').doc(id).get();
+    if (!docSnap.exists) return null;
+    const data = docSnap.data()!;
+    return {
+      id: docSnap.id,
+      ...data,
+      createdAt: data.createdAt?.toDate?.()?.toISOString() || null,
+      updatedAt: data.updatedAt?.toDate?.()?.toISOString() || null,
+    };
   } catch (error) {
     console.error('Error fetching product:', error);
   }

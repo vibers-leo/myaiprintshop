@@ -11,10 +11,10 @@ export const metadata: Metadata = {
 
 async function fetchBrands() {
   try {
-    const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3300';
-    const res = await fetch(`${baseUrl}/api/store`, { cache: 'no-store' });
-    const data = await res.json();
-    return data.success ? data.brands : [];
+    const { getAdminFirestore } = await import('@/lib/firebase-admin');
+    const db = await getAdminFirestore();
+    const snap = await db.collection('vendors').where('status', '==', 'approved').get();
+    return snap.docs.map(d => ({ id: d.id, ...d.data() }));
   } catch {
     return [];
   }

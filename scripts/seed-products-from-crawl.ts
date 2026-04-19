@@ -17,16 +17,35 @@ if (!getApps().length) {
 
 const db = getFirestore();
 
-// 크롤링한 실제 상품 데이터
-const crawledProducts = [
-  {
-    id: "knPBouf9EjunYOep6fpOsH",
-    name: "[한장 포스터 캘린더]",
-    price: 5800,
-    imageUrl: "https://cdn.webeasy.co.kr/private/users/01962d0f-5414-7c6c-9a9b-0e3014d04194/products/019758e1-40e8-7d8a-aa89-85124d0ae4aa-4.jpg",
-    category: "goods",
-    subcategory: "문구"
-  },
+// 2026-04-19 스크래핑 — references/myaiprintshop-products.json에서 로드
+import rawProducts from '../references/myaiprintshop-products.json';
+
+const categoryMap: Record<string, string> = {
+  '인쇄': 'print', '굿즈 / 팬시': 'goods', '패션 / 어패럴': 'fashion',
+  '우리가게': 'store', '주문제작': 'custom', '레시피': 'recipe',
+};
+
+function guessPrintMethod(name: string, cat: string): string {
+  if (name.includes('시트') || name.includes('아크릴')) return 'uv';
+  if (cat === '패션 / 어패럴' || name.includes('프린팅')) return 'dtg';
+  if (name.includes('포토카드') || name.includes('스티커')) return 'sublimation';
+  return 'dtg';
+}
+
+const crawledProducts = rawProducts.products.map((p, i) => ({
+  id: p.id,
+  name: p.name.replace(/^\[/, '').replace(/\]/, ' — ').replace(/\]$/, ''),
+  price: p.price,
+  imageUrl: p.image,
+  category: categoryMap[p.category] || 'goods',
+  subcategory: '',
+  printMethod: guessPrintMethod(p.name, p.category),
+  badge: i < 5 ? 'BEST' : i < 10 ? 'NEW' : i % 7 === 0 ? 'HOT' : '',
+  tags: [p.category, '맞춤제작'],
+}));
+
+// 아래는 기존 하드코딩 데이터 (참고용 — 위 crawledProducts가 우선)
+const _legacyProducts = [
   {
     id: "knPBooeVxlkT4odEOPgfko",
     name: "[캔버스 액자] 다양한 사이즈의 캔버스 액자",
@@ -263,25 +282,38 @@ async function seedProducts() {
   const batch = writeBatch(db);
   let count = 0;
 
-  // 1. 크롤링한 실제 상품 추가
-  console.log('📦 크롤링한 상품 추가 중...');
+  // 1. 크롤링한 실제 상품 추가 (55개 — myaiprintshop.co.kr)
+  console.log('📦 마이AI프린트샵 상품 추가 중...');
   for (const product of crawledProducts) {
     const docRef = doc(db, 'products', product.id);
     batch.set(docRef, {
-      ...product,
-      description: product.name,
+      name: product.name,
+      description: `${product.name} — GOODZZ에서 AI로 맞춤 제작. 소량 주문 가능.`,
+      price: product.price,
+      originalPrice: Math.round(product.price * 1.2),
       thumbnail: product.imageUrl,
       images: [product.imageUrl],
-      stock: 100,
-      rating: 4.5 + Math.random() * 0.5,
-      reviewCount: Math.floor(Math.random() * 50) + 10,
-      isBest: Math.random() > 0.7,
-      isNew: Math.random() > 0.5,
+      category: product.category,
+      subcategory: product.subcategory || '',
+      badge: product.badge || '',
+      tags: product.tags || [],
+      stock: 999,
+      isActive: true,
+      rating: +(3.5 + Math.random() * 1.5).toFixed(1),
+      reviewCount: Math.floor(Math.random() * 30),
+      printMethod: product.printMethod || 'dtg',
+      vendorId: 'PLATFORM_DEFAULT',
+      vendorName: 'GOODZZ',
+      vendorType: 'platform',
+      volumePricing: [
+        { minQuantity: 100, discountRate: 0.05 },
+        { minQuantity: 500, discountRate: 0.1 },
+      ],
       createdAt: new Date(),
-      updatedAt: new Date()
+      updatedAt: new Date(),
     });
     count++;
-    console.log(`  ✓ ${product.name}`);
+    console.log(`  ✅ [${count}] ${product.name}`);
   }
 
   // 2. 추가 생성 상품

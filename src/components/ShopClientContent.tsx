@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useMemo } from 'react';
+import React, { useMemo, useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
@@ -13,18 +13,37 @@ interface ShopClientContentProps {
   query?: string;
   currentCategory: any;
   allCategories: any[];
+  fetchOnMount?: boolean;
 }
 
 export default function ShopClientContent({
-  products,
+  products: initialProducts,
   category,
   subcategory,
   query,
   currentCategory,
   allCategories,
+  fetchOnMount,
 }: ShopClientContentProps) {
   const searchParams = useSearchParams();
   const brandFilter = searchParams.get('brand');
+  const [products, setProducts] = useState(initialProducts);
+  const [loading, setLoading] = useState(fetchOnMount && initialProducts.length === 0);
+
+  useEffect(() => {
+    if (!fetchOnMount && initialProducts.length > 0) return;
+    const params = new URLSearchParams();
+    if (query) { params.append('q', query); params.append('type', 'search'); }
+    if (category) params.append('category', category);
+    if (subcategory) params.append('subcategory', subcategory);
+
+    setLoading(true);
+    fetch(`/api/products?${params.toString()}`)
+      .then(r => r.json())
+      .then(data => { if (data.success) setProducts(data.products); })
+      .catch(() => {})
+      .finally(() => setLoading(false));
+  }, [category, subcategory, query]);
 
   // 브랜드 목록 추출
   const brands = useMemo(() => {
@@ -195,7 +214,14 @@ export default function ShopClientContent({
           ))}
         </div>
 
-        {filteredProducts.length === 0 && (
+        {loading && (
+          <div className="py-24 text-center">
+            <div className="animate-spin w-10 h-10 border-4 border-purple-500 border-t-transparent rounded-full mx-auto mb-4" />
+            <p className="text-gray-500 font-medium">상품을 불러오는 중...</p>
+          </div>
+        )}
+
+        {!loading && filteredProducts.length === 0 && (
           <div className="py-24 text-center bg-white border border-gray-200 rounded-3xl mt-10 shadow-sm">
             {/* @ts-ignore */}
             <iconify-icon icon="solar:ghost-bold" class="text-6xl text-gray-300 mb-4" />

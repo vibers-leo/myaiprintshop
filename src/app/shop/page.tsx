@@ -43,40 +43,19 @@ export default async function ShopPage({ searchParams }: ShopPageProps) {
   const category = resolvedSearchParams.category as string | undefined;
   const subcategory = resolvedSearchParams.subcategory as string | undefined;
 
-  // 현재 선택된 카테고리 정보
   const currentCategory = category ? getCategoryBySlug(category) : null;
-
-  // Fetch products from API
-  let products = [];
-  try {
-    const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3300';
-    let apiUrl = `${baseUrl}/api/products`;
-    
-    const params = new URLSearchParams();
-    if (query) params.append('q', query);
-    if (category) params.append('category', category);
-    if (subcategory) params.append('subcategory', subcategory);
-    if (query) params.append('type', 'search');
-    
-    const res = await fetch(`${apiUrl}?${params.toString()}`, { cache: 'no-store' });
-    const data = await res.json();
-    if (data.success) {
-      products = data.products;
-    }
-  } catch (error) {
-    console.error('Error fetching products:', error);
-  }
 
   return (
     <>
       <Navbar />
-      <ShopClientContent 
-        products={products}
+      <ShopClientContent
+        products={[]}
         category={category}
         subcategory={subcategory}
         query={query}
         currentCategory={currentCategory}
         allCategories={getAllCategories()}
+        fetchOnMount={true}
       />
       <Footer />
     </>

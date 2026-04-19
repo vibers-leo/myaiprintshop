@@ -1,0 +1,406 @@
+{
+  "source": "https://myaiprintshop.co.kr",
+  "scraped_at": "2026-04-19",
+  "store_info": {
+    "name": "마이AI프린트샵",
+    "description": "크리에이터와 함께~! AI 프린트 샵",
+    "contact": "01048665805",
+    "business_number": "545-16-01046",
+    "platform": "webeasy.co.kr"
+  },
+  "categories": [
+    { "id": "10NXDCAqDuy9mAKfBZX9gwL", "name": "인쇄", "product_count": 88 },
+    { "id": "10NXDCBFMQqhWtuPPiqVONj", "name": "굿즈 / 팬시", "product_count": 31 },
+    { "id": "10NXDHmZLBdrsFJQJqqFntM", "name": "패션 / 어패럴", "product_count": 131 },
+    { "id": "10NXDVGcJL8OeWvfxV9wLqR", "name": "우리가게", "product_count": 150 },
+    { "id": "10NXzGoXpy7YrO3T7EhfF4x", "name": "주문제작", "product_count": 69 },
+    { "id": "10NY0NQ7A6k77FdKOv4GCC8", "name": "레시피", "product_count": 89 }
+  ],
+  "products": [
+    {
+      "id": "knPqrmLuUEQ4I4xb8TuhKz",
+      "name": "무선책자",
+      "price": 10800,
+      "category": "인쇄",
+      "image": "https://cdn.webeasy.co.kr/private/users/01962d0f-5414-7c6c-9a9b-0e3014d04194/products/019785c7-7833-7e3f-8618-35845c2959f9-1.jpg"
+    },
+    {
+      "id": "knP8v3CHAHUynPM1WCIEzn",
+      "name": "[컬러 레터링 스티커] 돔보 시트 커팅",
+      "price": 19360,
+      "category": "인쇄",
+      "image": "https://cdn.webeasy.co.kr/private/users/01962d0f-5414-7c6c-9a9b-0e3014d04194/products/01977d32-7a0d-79bc-acd7-48785d9b5f93-1.jpg"
+    },
+    {
+      "id": "knPBouf9EjunYOep6fpOsH",
+      "name": "[한장 포스터 캘린더]",
+      "price": 5800,
+      "category": "인쇄",
+      "image": "https://cdn.webeasy.co.kr/private/users/01962d0f-5414-7c6c-9a9b-0e3014d04194/products/019758e1-2269-73e8-b155-c108de3dea61-1.jpg"
+    },
+    {
+      "id": "knP8x4guBxgPDnItbrtfQa",
+      "name": "[클래퍼] 양면으로 만드는 나만의 멋진 응원도구",
+      "price": 6270,
+      "category": "인쇄",
+      "image": "https://cdn.webeasy.co.kr/private/users/01962d0f-5414-7c6c-9a9b-0e3014d04194/products/019777ce-d7e7-72d4-95a3-0ff4db8b5b3f-1.jpg"
+    },
+    {
+      "id": "knP8v0Zh2ZYrnQe9VxKaxc",
+      "name": "[레터링 스티커] 유리창, 벽, 문에 붙이는 깔끔한 단색 시트 커팅",
+      "price": 12320,
+      "category": "인쇄",
+      "image": "https://cdn.webeasy.co.kr/private/users/01962d0f-5414-7c6c-9a9b-0e3014d04194/products/01977d3d-1b55-7662-b6c7-cf97fea8e26c-1.jpg"
+    },
+    {
+      "id": "knPBomqaS7usTKE9n9v2Kf",
+      "name": "[네컷 스티커] 최애사진으로 네컷 스타일의 스티커 꾸미기",
+      "price": 2310,
+      "category": "인쇄",
+      "image": "https://cdn.webeasy.co.kr/private/users/01962d0f-5414-7c6c-9a9b-0e3014d04194/products/019763f0-8da5-7027-95df-d15f4be27eb1-4.jpg"
+    },
+    {
+      "id": "knP8vF9FytEMljDkCYS8q4",
+      "name": "[폼보드] 시상보드, 시상판용 폼보드 + 실사출력",
+      "price": 9900,
+      "category": "인쇄",
+      "image": "https://cdn.webeasy.co.kr/private/users/01962d0f-5414-7c6c-9a9b-0e3014d04194/products/01977b87-0e73-7cb3-a2ab-4d84bf653712-1.jpg"
+    },
+    {
+      "id": "knP8xe5UyUYAhowQ4PK6Oi",
+      "name": "[차량용 자석 스티커] 탄력성 좋은 자석 스티커",
+      "price": 11440,
+      "category": "인쇄",
+      "image": "https://cdn.webeasy.co.kr/private/users/01962d0f-5414-7c6c-9a9b-0e3014d04194/products/01976174-eef9-7e66-b338-e4db18993de8-1.jpg"
+    },
+    {
+      "id": "knP8v5PDyTUHKrAX1iNCIm",
+      "name": "[자석 시트] 철제 입간판 탈부착용 자석시트",
+      "price": 22000,
+      "category": "인쇄",
+      "image": "https://cdn.webeasy.co.kr/private/users/01962d0f-5414-7c6c-9a9b-0e3014d04194/products/01977bc4-ba47-7188-a423-04dd83ab45ca-4.jpg"
+    },
+    {
+      "id": "knP8wzffKFxFFR9wyMnQoF",
+      "name": "[포스터(소량)] 1장부터 제작가능한 포스터",
+      "price": 4530,
+      "category": "인쇄",
+      "image": "https://cdn.webeasy.co.kr/private/users/01962d0f-5414-7c6c-9a9b-0e3014d04194/products/019777e4-6e33-7732-97f2-201ee54b5e9c-1.jpg"
+    },
+    {
+      "id": "knP8wyaT1VKuUOema0JYhM",
+      "name": "[미니 투명배너] 테이블에 올려두면 시선 강탈",
+      "price": 6292,
+      "category": "인쇄",
+      "image": "https://cdn.webeasy.co.kr/private/users/01962d0f-5414-7c6c-9a9b-0e3014d04194/products/019777e9-c6b3-72a6-8b05-f4d24b965a50-4.jpg"
+    },
+    {
+      "id": "knP8wxldUOkOocTDLK62z2",
+      "name": "[미니 배너] 테이블에 올려두면 시선 고정",
+      "price": 3110,
+      "category": "인쇄",
+      "image": "https://cdn.webeasy.co.kr/private/users/01962d0f-5414-7c6c-9a9b-0e3014d04194/products/019777ed-a6f8-745d-8d62-38a21349e8a3-1.jpg"
+    },
+    {
+      "id": "knP8wnAwO5EjfgWmT4kMLJ",
+      "name": "[자유 모양 보드] 원하는 모양대로 자유롭게",
+      "price": 41140,
+      "category": "인쇄",
+      "image": "https://cdn.webeasy.co.kr/private/users/01962d0f-5414-7c6c-9a9b-0e3014d04194/products/01977b3b-6ea4-7d32-81ee-225899d7bc6f-2.jpg"
+    },
+    {
+      "id": "knP8wlbgkylVA8uOm8Gobn",
+      "name": "[일반 등신대] 포맥스 or 폼보드 원하는 재질로 선택",
+      "price": 36630,
+      "category": "인쇄",
+      "image": "https://cdn.webeasy.co.kr/private/users/01962d0f-5414-7c6c-9a9b-0e3014d04194/products/01977b50-b08a-7fa0-a0cb-e198af45bd86-1.jpg"
+    },
+    {
+      "id": "knP8wkCQcBlIV2xz1kblGR",
+      "name": "[미니 등신대] 폼보드 or 포맥스 원하는 재질로 선택",
+      "price": 29621,
+      "category": "인쇄",
+      "image": "https://cdn.webeasy.co.kr/private/users/01962d0f-5414-7c6c-9a9b-0e3014d04194/products/01977b60-5e97-7535-a0e4-87cc339b05e1-1.jpg"
+    },
+    {
+      "id": "knP8vJrJ6RAICWw6cBHnpC",
+      "name": "[아크릴 보드] 고급스러운 아크릴 + 실사출력 보드",
+      "price": 38930,
+      "category": "인쇄",
+      "image": "https://cdn.webeasy.co.kr/private/users/01962d0f-5414-7c6c-9a9b-0e3014d04194/products/01977b77-d8b6-7eae-91c0-6e360a97b7e5-4.jpg"
+    },
+    {
+      "id": "knP8vHpzeAHFGZAYyRHHxC",
+      "name": "[포맥스 보드] 메뉴 안내, 미니 간판, 표지판으로 딱",
+      "price": 8778,
+      "category": "인쇄",
+      "image": "https://cdn.webeasy.co.kr/private/users/01962d0f-5414-7c6c-9a9b-0e3014d04194/products/01977b7e-e2e5-79cd-8ebf-f95bf431e5b6-1.jpg"
+    },
+    {
+      "id": "knP8vCwwG7rAnnim1ImCFM",
+      "name": "[걸이형 철제 입간판 시트] 단색 시트커팅",
+      "price": 27280,
+      "category": "인쇄",
+      "image": "https://cdn.webeasy.co.kr/private/users/01962d0f-5414-7c6c-9a9b-0e3014d04194/products/01977b8f-20af-7d35-8835-a7f32c533eb8-1.jpg"
+    },
+    {
+      "id": "knP8vBEfHkMCwF8VDyXZF3",
+      "name": "[선반형 철제 입간판 시트] 단색 시트 부착",
+      "price": 27280,
+      "category": "인쇄",
+      "image": "https://cdn.webeasy.co.kr/private/users/01962d0f-5414-7c6c-9a9b-0e3014d04194/products/01977b99-169c-7de1-aa8a-cc04e7fea0f5-1.jpg"
+    },
+    {
+      "id": "knP8v8ltR3vLfg73z6j8QO",
+      "name": "[철제 입간판 시트] 개폐형 철제 입간판에 부착",
+      "price": 9625,
+      "category": "인쇄",
+      "image": "https://cdn.webeasy.co.kr/private/users/01962d0f-5414-7c6c-9a9b-0e3014d04194/products/01977baa-f200-703c-9f81-76c4d6b29c20-1.jpg"
+    },
+    {
+      "id": "knPBooeVxlkT4odEOPgfko",
+      "name": "[캔버스 액자] 다양한 사이즈의 캔버스 액자",
+      "price": 21550,
+      "category": "굿즈 / 팬시",
+      "image": "https://cdn.webeasy.co.kr/private/users/01962d0f-5414-7c6c-9a9b-0e3014d04194/products/01976734-3e73-70b2-9fc8-f8c76ecd28af-1.jpg"
+    },
+    {
+      "id": "knPBoIL4uaAasy2miKdPB7",
+      "name": "[에어팟 케이스] 나만의 디자인으로 꾸미는 에어팟 케이스",
+      "price": 10010,
+      "category": "굿즈 / 팬시",
+      "image": "https://cdn.webeasy.co.kr/private/users/01962d0f-5414-7c6c-9a9b-0e3014d04194/products/01975868-6ee8-76b4-ab98-cf0954768229-1.jpg"
+    },
+    {
+      "id": "knPBoHeCKriIGiNx2sC2CG",
+      "name": "[아크릴톡] 나만의 디자인으로 꾸미는 아크릴톡",
+      "price": 6930,
+      "category": "굿즈 / 팬시",
+      "image": "https://cdn.webeasy.co.kr/private/users/01962d0f-5414-7c6c-9a9b-0e3014d04194/products/01975870-3f76-7f1c-b402-9a2c3f231136-1.jpg"
+    },
+    {
+      "id": "knPBoqE0hWPJjNNHS3EmIW",
+      "name": "[행잉액자] 원목테두리와 매트한 질감의 액자",
+      "price": 25410,
+      "category": "굿즈 / 팬시",
+      "image": "https://cdn.webeasy.co.kr/private/users/01962d0f-5414-7c6c-9a9b-0e3014d04194/products/019763eb-9e5b-726d-a9be-f2a77154d440-1.jpg"
+    },
+    {
+      "id": "knP8xPOyOGzMDTOsieRTCk",
+      "name": "[틴케이스] 유니크한 추억 보관함",
+      "price": 5920,
+      "category": "굿즈 / 팬시",
+      "image": "https://cdn.webeasy.co.kr/private/users/01962d0f-5414-7c6c-9a9b-0e3014d04194/products/01977775-bd0b-76ff-9eb0-34d1e634b831-9.jpg"
+    },
+    {
+      "id": "knPMagGJDtiyqFqCsthBvj",
+      "name": "에코백 (프린팅)",
+      "price": 16500,
+      "category": "패션 / 어패럴",
+      "image": "https://cdn.webeasy.co.kr/public/stores/0199051d-ab85-7457-9ce5-a6428b10f117/products/0199848a-35a2-71ca-8228-32bd9e004e05-210428-.png"
+    },
+    {
+      "id": "knP8rNT2Lic2T2lgIh7Fgh",
+      "name": "[후드 집업] 쭈리원단의 후드 집업 + 선명한 디지털 프린팅",
+      "price": 40910,
+      "category": "패션 / 어패럴",
+      "image": "https://cdn.webeasy.co.kr/private/users/01962d0f-5414-7c6c-9a9b-0e3014d04194/products/0197820d-8f28-7d1a-88c1-b2decdbb9816-1.jpg"
+    },
+    {
+      "id": "knP8rMEyGVlglffulDbbdG",
+      "name": "[후드] 쭈리원단의 후드 + 선명한 디지털 프린팅",
+      "price": 38610,
+      "category": "패션 / 어패럴",
+      "image": "https://cdn.webeasy.co.kr/private/users/01962d0f-5414-7c6c-9a9b-0e3014d04194/products/0198ee95-52d9-70aa-a4de-4023e29c95df-1.jpg"
+    },
+    {
+      "id": "knP8rKJC23CkH1OGWse1ez",
+      "name": "[맨투맨] 높은 퀄리티의 맨투맨 + 선명한 디지털 프린팅",
+      "price": 45210,
+      "category": "패션 / 어패럴",
+      "image": "https://cdn.webeasy.co.kr/private/users/01962d0f-5414-7c6c-9a9b-0e3014d04194/products/01978219-5d14-7a8a-92ab-a9ca9f6c3420-4.jpg"
+    },
+    {
+      "id": "knP8rICmXzQEeynx4271kk",
+      "name": "[긴팔 티셔츠] 면100% 17수 티셔츠에 선명한 디지털 프린팅",
+      "price": 19140,
+      "category": "패션 / 어패럴",
+      "image": "https://cdn.webeasy.co.kr/private/users/01962d0f-5414-7c6c-9a9b-0e3014d04194/products/0197821e-7fdc-73cf-9bba-7c7f4fb1b516-t-.jpg"
+    },
+    {
+      "id": "knP8rF0tDE6MsUez8Fcoxo",
+      "name": "[반팔 티셔츠] 면100% 17수 티셔츠에 선명한 디지털 프린팅",
+      "price": 15840,
+      "category": "패션 / 어패럴",
+      "image": "https://cdn.webeasy.co.kr/private/users/01962d0f-5414-7c6c-9a9b-0e3014d04194/products/01978222-689b-7ff0-b313-8fc0bb7ef8bd-t-1.jpg"
+    },
+    {
+      "id": "knP8rCRnORbMpW4nOAzutb",
+      "name": "[에코백(프린팅)]",
+      "price": 8448,
+      "category": "패션 / 어패럴",
+      "image": "https://cdn.webeasy.co.kr/private/users/01962d0f-5414-7c6c-9a9b-0e3014d04194/products/01978263-f472-7b59-b0db-bb422516f47a-.jpg"
+    },
+    {
+      "id": "knPBosRmaiXEkkoMOLmqrQ",
+      "name": "[사원증] AI로 다시 만드는 사원증",
+      "price": 4950,
+      "category": "우리가게",
+      "image": "https://cdn.webeasy.co.kr/private/users/01962d0f-5414-7c6c-9a9b-0e3014d04194/products/01975d87-aacf-7104-b31a-17fde76918a6-7.jpg"
+    },
+    {
+      "id": "knPBofZXA1SKC184ug1LmR",
+      "name": "[냅킨] 우리가게 카페용품",
+      "price": 59400,
+      "category": "우리가게",
+      "image": "https://cdn.webeasy.co.kr/private/users/01962d0f-5414-7c6c-9a9b-0e3014d04194/products/0197585d-9f81-7ccc-bbbd-8282429fc826-5.jpg"
+    },
+    {
+      "id": "knPBoen2mC3ovMrFh2hSLd",
+      "name": "[종이컵] 우리가게 카페용품",
+      "price": 70070,
+      "category": "우리가게",
+      "image": "https://cdn.webeasy.co.kr/private/users/01962d0f-5414-7c6c-9a9b-0e3014d04194/products/0197578c-f8a5-757b-b51a-724b7ac999ba-3.jpg"
+    },
+    {
+      "id": "knPBodXQ5cP1cSBuOnpbEF",
+      "name": "[컵뚜껑] 우리가게 카페용품",
+      "price": 34177,
+      "category": "우리가게",
+      "image": "https://cdn.webeasy.co.kr/private/users/01962d0f-5414-7c6c-9a9b-0e3014d04194/products/0197c12e-1859-717c-be6e-ff5fa5303356-6.jpg"
+    },
+    {
+      "id": "knPBobm5i6BO9mOFFHCsM8",
+      "name": "[스트로우] 우리가게 카페용품",
+      "price": 7351,
+      "category": "우리가게",
+      "image": "https://cdn.webeasy.co.kr/private/users/01962d0f-5414-7c6c-9a9b-0e3014d04194/products/0197c131-cf8e-7ecb-85bf-208605445ab4-2.jpg"
+    },
+    {
+      "id": "knPBoal9aGNTH305BDn13j",
+      "name": "[일반컵] 우리가게 카페용품",
+      "price": 141570,
+      "category": "우리가게",
+      "image": "https://cdn.webeasy.co.kr/private/users/01962d0f-5414-7c6c-9a9b-0e3014d04194/products/0197584d-cb46-7955-a6ea-27406974ed4f-6.jpg"
+    },
+    {
+      "id": "knPBoa4bTfWh87M4t3Ay36",
+      "name": "[이중컵] 우리가게 시그니처 카페용품",
+      "price": 200200,
+      "category": "우리가게",
+      "image": "https://cdn.webeasy.co.kr/private/users/01962d0f-5414-7c6c-9a9b-0e3014d04194/products/01975846-379d-788f-8e50-cc75ad2290a0-6.jpg"
+    },
+    {
+      "id": "knPBoZ70yxR5YVsC8NTJ4T",
+      "name": "[에어홀더] 우리가게 시그니처 상품",
+      "price": 122980,
+      "category": "우리가게",
+      "image": "https://cdn.webeasy.co.kr/private/users/01962d0f-5414-7c6c-9a9b-0e3014d04194/products/01975835-e704-780a-843b-39080cf0709b-1.jpg"
+    },
+    {
+      "id": "knPuqHZtm2mJ55G73ajAaL",
+      "name": "[기장장애인복지관] A4 컬러링북",
+      "price": 5500,
+      "category": "주문제작",
+      "image": "https://cdn.webeasy.co.kr/public/stores/0199051d-ab85-7457-9ce5-a6428b10f117/products/019aba01-13c8-7957-9a5f-7bdce9d86f4e-generated-image-november-25-2025-4-17pm.jpeg"
+    },
+    {
+      "id": "knPvxNuA7taz4YeU1tcEzX",
+      "name": "[전자책+종이책] AI 레시피 : 나노 바나나 Pro",
+      "price": 29000,
+      "category": "레시피",
+      "image": "https://cdn.webeasy.co.kr/public/stores/0199051d-ab85-7457-9ce5-a6428b10f117/products/019ac411-97e7-7cd4-bce0-c1d2f6042ce6-2025-11-27t154334.530.jpg"
+    },
+    {
+      "id": "knPvx0FXzzZ0jyq92gtvN0",
+      "name": "[전자책] AI 레시피 : 나노바나나 Pro",
+      "price": 19000,
+      "category": "레시피",
+      "image": "https://cdn.webeasy.co.kr/public/stores/0199051d-ab85-7457-9ce5-a6428b10f117/products/019ac40e-fe0c-7115-ba35-763a3eb5e293-2025-11-27t154327.149.jpg"
+    },
+    {
+      "id": "knP8mjTCwqfHllXlwZM3tX",
+      "name": "[소량 스티커(사각)] 소량으로 라벨이 필요할 때~!",
+      "price": 4950,
+      "category": "굿즈 / 팬시",
+      "image": "https://cdn.webeasy.co.kr/private/users/01962d0f-5414-7c6c-9a9b-0e3014d04194/products/019787be-6fb8-7655-9749-faf08a2553e6-1.jpg"
+    },
+    {
+      "id": "knP8mln3Iq7vSMQWZUjKeN",
+      "name": "[탈부착 스티커(사각)] 뒷묻음 없이 탈부착이 쉬운 스티커",
+      "price": 6105,
+      "category": "굿즈 / 팬시",
+      "image": "https://cdn.webeasy.co.kr/private/users/01962d0f-5414-7c6c-9a9b-0e3014d04194/products/019787b1-da3c-7094-ba66-1ab7ea88810f-1.jpg"
+    },
+    {
+      "id": "knP8quPt5mOvBz9juxobr8",
+      "name": "[PVC 커버노트] 나만의 PVC 커버 노트 만들기",
+      "price": 10000,
+      "category": "굿즈 / 팬시",
+      "image": "https://cdn.webeasy.co.kr/private/users/01962d0f-5414-7c6c-9a9b-0e3014d04194/products/019782e2-e38a-7080-8940-49172c196787-pvc-7.jpg"
+    },
+    {
+      "id": "knP8wp8gfG1JAbvaMyHsYc",
+      "name": "[투명 포토카드] 깨끗하고 투명한 포토카드 100장",
+      "price": 20440,
+      "category": "굿즈 / 팬시",
+      "image": "https://cdn.webeasy.co.kr/private/users/01962d0f-5414-7c6c-9a9b-0e3014d04194/products/01977b32-c04b-7ab9-8985-02fcf181eeff-1.jpg"
+    },
+    {
+      "id": "knP8wtqtFFyrqkGey0cZOn",
+      "name": "[포토카드] 양면으로 자유롭게 제작하는 포토카드",
+      "price": 5570,
+      "category": "굿즈 / 팬시",
+      "image": "https://cdn.webeasy.co.kr/private/users/01962d0f-5414-7c6c-9a9b-0e3014d04194/products/01977b30-3b9c-7e3e-b8bf-3bc6e61e72c5-8.jpg"
+    },
+    {
+      "id": "knP8x1QYP97sEAXom7ERsX",
+      "name": "[PVC 포토카드] 신용카드 소재로 단단한 포토카드",
+      "price": 5570,
+      "category": "굿즈 / 팬시",
+      "image": "https://cdn.webeasy.co.kr/private/users/01962d0f-5414-7c6c-9a9b-0e3014d04194/products/019777d9-4cc7-7423-8eef-3a5e92bc835e-pvc-1.jpg"
+    },
+    {
+      "id": "knPBoBkYYTI6y8Ov2oBYL4",
+      "name": "[폰케이스(슬림하드)] 나만의 디자인으로 꾸미는 폰케이스",
+      "price": 18590,
+      "category": "굿즈 / 팬시",
+      "image": "https://cdn.webeasy.co.kr/private/users/01962d0f-5414-7c6c-9a9b-0e3014d04194/products/019758c2-f7bb-74ce-b58d-679a3a2fce41-8.jpg"
+    },
+    {
+      "id": "knPBoEhL0VXpwkylRciekx",
+      "name": "[폰케이스(투명젤리)] 나만의 디자인으로 꾸미는 폰케이스",
+      "price": 13010,
+      "category": "굿즈 / 팬시",
+      "image": "https://cdn.webeasy.co.kr/private/users/01962d0f-5414-7c6c-9a9b-0e3014d04194/products/019758ad-bc9f-7aca-8145-dd5a4f9cd733-3.jpg"
+    },
+    {
+      "id": "knPBoGeWg0XoJFZCoxVVnG",
+      "name": "[스마트톡] 나만의 디자인으로 꾸미는 스마트톡",
+      "price": 7060,
+      "category": "굿즈 / 팬시",
+      "image": "https://cdn.webeasy.co.kr/private/users/01962d0f-5414-7c6c-9a9b-0e3014d04194/products/019758a1-7e80-7de4-92cb-17fd8c3d7244-1.jpg"
+    },
+    {
+      "id": "knPBoJEteAPUqLzFyDI87R",
+      "name": "[버즈케이스] 나만의 디자인으로 꾸미는 버즈케이스",
+      "price": 14870,
+      "category": "굿즈 / 팬시",
+      "image": "https://cdn.webeasy.co.kr/private/users/01962d0f-5414-7c6c-9a9b-0e3014d04194/products/01975864-3ae1-796f-8e73-e6b9c8baeeda-2.jpg"
+    },
+    {
+      "id": "knPBoKW89lbuHsNOtzOpJu",
+      "name": "[소량 PP홀더] 소량제작가능한 PP홀더",
+      "price": 7430,
+      "category": "굿즈 / 팬시",
+      "image": "https://cdn.webeasy.co.kr/private/users/01962d0f-5414-7c6c-9a9b-0e3014d04194/products/019758e6-40ea-75fe-a6c6-a065241f2960-pp-1.jpg"
+    },
+    {
+      "id": "knPBokYadLl4QciUWliCqq",
+      "name": "[폴라로이드팩] 폴꾸 필수템",
+      "price": 6930,
+      "category": "굿즈 / 팬시",
+      "image": "https://cdn.webeasy.co.kr/private/users/01962d0f-5414-7c6c-9a9b-0e3014d04194/products/019766b1-78a4-7937-bd83-3c2be39c8e88-1.jpg"
+    }
+  ]
+}

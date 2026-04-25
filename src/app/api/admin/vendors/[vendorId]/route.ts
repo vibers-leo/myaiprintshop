@@ -3,6 +3,7 @@ import { requireRole, unauthorizedResponse, forbiddenResponse } from '@/lib/auth
 import { ApiError } from '@/lib/api-error-handler';
 import { approveVendor, rejectVendor, suspendVendor, getVendor } from '@/lib/vendors';
 import { addRole } from '@/lib/users';
+import { createNotification } from '@/lib/notifications';
 
 /**
  * PATCH /api/admin/vendors/[vendorId]
@@ -49,18 +50,39 @@ export async function PATCH(
         // users 컬렉션에 seller 역할 추가
         await addRole(vendor.ownerId, 'seller');
         console.log(`✅ Vendor ${vendorId} approved with commission rate ${rate * 100}%`);
+
+        createNotification({
+          userId: vendor.ownerId,
+          type: 'vendor',
+          title: '판매자 신청이 승인되었습니다! 🎉',
+          message: `${vendor.businessName} 스토어를 오픈하세요`,
+          link: '/mypage/vendor',
+        }).catch(() => {});
         break;
 
       case 'reject':
-        // 거부
         await rejectVendor(vendorId);
         console.log(`✅ Vendor ${vendorId} rejected`);
+
+        createNotification({
+          userId: vendor.ownerId,
+          type: 'vendor',
+          title: '판매자 신청이 반려되었습니다',
+          message: '자세한 내용은 이메일을 확인해주세요',
+          link: '/mypage/vendor/apply',
+        }).catch(() => {});
         break;
 
       case 'suspend':
-        // 정지
         await suspendVendor(vendorId);
         console.log(`✅ Vendor ${vendorId} suspended`);
+
+        createNotification({
+          userId: vendor.ownerId,
+          type: 'vendor',
+          title: '스토어가 일시 정지되었습니다',
+          message: '자세한 내용은 이메일을 확인해주세요',
+        }).catch(() => {});
         break;
 
       default:

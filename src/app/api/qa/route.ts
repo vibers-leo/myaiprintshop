@@ -1,6 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getQAsByProduct, getAllQAs, getUnansweredQAs, createQA, answerQA } from '@/lib/product-qa';
 import { requireRole, unauthorizedResponse } from '@/lib/auth-middleware';
+import { createNotification } from '@/lib/notifications';
+import { doc, getDoc } from 'firebase/firestore';
+import { db } from '@/lib/firebase';
 
 // GET: 상품별 Q&A 조회 또는 전체 조회 (관리자)
 export async function GET(request: NextRequest) {
@@ -49,6 +52,22 @@ export async function POST(request: NextRequest) {
 
       const success = await answerQA(qaId, answer, auth.userId || 'admin');
       if (!success) return NextResponse.json({ error: '답변 등록 실패' }, { status: 500 });
+
+      // 질문자에게 알림
+      try {
+        const qaDoc = await getDoc(doc(db, 'productQA', qaId));
+        if (qaDoc.exists()) {
+          const qaData = qaDoc.data();
+          createNotification({
+            userId: qaData.userId,
+            type: 'qa',
+            title: 'Q&A 답변이 등록되었습니다',
+            message: qaData.subject,
+            link: `/shop/${qaData.productId}`,
+          }).catch(() => {});
+        }
+      } catch {}
+
       return NextResponse.json({ success: true, message: '답변이 등록되었습니다.' });
     }
 

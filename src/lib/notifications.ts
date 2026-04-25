@@ -11,7 +11,7 @@ import { db } from './firebase';
 export interface Notification {
   id?: string;
   userId: string;
-  type: 'order_status' | 'review' | 'promotion' | 'system';
+  type: 'order_status' | 'review' | 'promotion' | 'system' | 'point' | 'qa' | 'coupon' | 'vendor' | 'settlement';
   title: string;
   message: string;
   link?: string;

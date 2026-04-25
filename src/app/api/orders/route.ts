@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { createNotification } from '@/lib/notifications';
 import {
   getOrders,
   getOrderById,
@@ -90,7 +91,9 @@ export async function PATCH(request: NextRequest): Promise<NextResponse> {
         { status: 400 }
       );
     }
-    
+
+    const order = await getOrderById(orderId);
+
     // 배송 정보 업데이트
     if (trackingNumber) {
       const success = await updateShippingInfo(orderId, trackingNumber, carrier);
@@ -115,6 +118,30 @@ export async function PATCH(request: NextRequest): Promise<NextResponse> {
           { status: 500 }
         );
       }
+
+      // 배송 완료 → 리뷰 유도 알림
+      if (status === 'DELIVERED' && order.userId) {
+        const itemName = order.items[0]?.productName || '상품';
+        createNotification({
+          userId: order.userId,
+          type: 'review',
+          title: '상품이 도착했어요! 리뷰를 남겨주세요 ⭐',
+          message: `${itemName} — 리뷰 작성 시 최대 1,000P 적립`,
+          link: `/mypage/orders/${orderId}`,
+        }).catch(() => {});
+      }
+
+      // 배송 시작 알림
+      if (status === 'SHIPPED' && order.userId) {
+        createNotification({
+          userId: order.userId,
+          type: 'order_status',
+          title: '주문하신 상품이 배송 시작되었습니다',
+          message: order.shippingInfo?.carrier ? `${order.shippingInfo.carrier} ${order.shippingInfo.trackingNumber || ''}` : '배송 정보를 확인해주세요',
+          link: `/mypage/orders/${orderId}`,
+        }).catch(() => {});
+      }
+
       return NextResponse.json({
         success: true,
         message: '주문 상태가 업데이트되었습니다.',

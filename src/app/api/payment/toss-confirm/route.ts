@@ -140,6 +140,16 @@ export async function POST(request: NextRequest) {
                 orderUrl: `${process.env.NEXT_PUBLIC_SITE_URL || 'https://goodzz.co.kr'}/mypage/vendor/orders`,
               }).catch(() => {});
             }
+            // 벤더 in-app 알림
+            if (vendor?.ownerId) {
+              createNotification({
+                userId: vendor.ownerId,
+                type: 'order_status',
+                title: '새 주문이 접수되었습니다',
+                message: `${vo.items.map((i: any) => i.productName || i.name).join(', ')} | ₩${vo.subtotal.toLocaleString()}`,
+                link: '/mypage/vendor/orders',
+              }).catch(() => {});
+            }
           }
         } catch (error) {
           console.error('❌ Settlement error (order still completed):', error);

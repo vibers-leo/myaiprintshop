@@ -9,6 +9,9 @@ import {
 import { updateProduct } from '@/lib/products';
 import { requireRole, unauthorizedResponse } from '@/lib/auth-middleware';
 import { earnPoints, POINT_CONFIG } from '@/lib/points';
+import { createNotification } from '@/lib/notifications';
+import { doc, getDoc } from 'firebase/firestore';
+import { db } from '@/lib/firebase';
 
 // GET: 리뷰 목록 조회
 export async function GET(request: NextRequest) {
@@ -53,6 +56,21 @@ export async function PATCH(request: NextRequest) {
 
     const success = await replyToReview(reviewId, replyContent, auth.userId || 'admin');
     if (!success) return NextResponse.json({ error: '답변 등록 실패' }, { status: 500 });
+
+    // 리뷰 작성자에게 알림
+    try {
+      const reviewDoc = await getDoc(doc(db, 'reviews', reviewId));
+      if (reviewDoc.exists()) {
+        const reviewData = reviewDoc.data();
+        createNotification({
+          userId: reviewData.userId,
+          type: 'review',
+          title: '리뷰에 사장님 답변이 달렸습니다',
+          message: replyContent.slice(0, 50),
+          link: `/shop/${reviewData.productId}`,
+        }).catch(() => {});
+      }
+    } catch {}
 
     return NextResponse.json({ success: true, message: '답변이 등록되었습니다.' });
   } catch (error) {

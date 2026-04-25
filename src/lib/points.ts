@@ -2,6 +2,7 @@ import {
   collection, doc, getDocs, getDoc, addDoc, updateDoc, query, where, orderBy, Timestamp, DocumentData
 } from 'firebase/firestore';
 import { db } from './firebase';
+import { createNotification } from './notifications';
 
 export interface PointTransaction {
   id: string;
@@ -100,6 +101,16 @@ export async function earnPoints(
 
     // users 컬렉션의 잔액 업데이트
     await updateDoc(doc(db, 'users', userId), { pointBalance: newBalance });
+
+    // 알림
+    createNotification({
+      userId,
+      type: 'point',
+      title: `${amount.toLocaleString()}P 적립`,
+      message: `${reason} | 잔액 ${newBalance.toLocaleString()}P`,
+      link: '/mypage/points',
+    }).catch(() => {});
+
     return true;
   } catch (error) {
     console.error('Error earning points:', error);

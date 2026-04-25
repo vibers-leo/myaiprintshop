@@ -65,11 +65,16 @@ export default function NotificationDropdown() {
     setIsOpen(false);
   };
 
-  const typeIcon: Record<Notification["type"], string> = {
+  const typeIcon: Record<string, string> = {
     order_status: "📦",
     review: "⭐",
     promotion: "🎉",
     system: "🔔",
+    point: "💰",
+    qa: "💬",
+    coupon: "🎫",
+    vendor: "🏪",
+    settlement: "💳",
   };
 
   return (

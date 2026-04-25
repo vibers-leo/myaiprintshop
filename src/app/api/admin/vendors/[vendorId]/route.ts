@@ -54,7 +54,7 @@ export async function PATCH(
         createNotification({
           userId: vendor.ownerId,
           type: 'vendor',
-          title: '축하해요! 판매자 승인이 완료됐어요 🎉',
+          title: '축하해요! 판매자 승인이 완료됐어요',
           message: `${vendor.businessName} 스토어를 지금 바로 오픈할 수 있어요 — 상품을 등록해보세요`,
           link: '/mypage/vendor',
         }).catch(() => {});

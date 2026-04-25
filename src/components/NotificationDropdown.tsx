@@ -108,7 +108,6 @@ export default function NotificationDropdown() {
           <div className="max-h-96 overflow-y-auto">
             {notifications.length === 0 ? (
               <div className="px-4 py-12 text-center">
-                <span className="text-3xl mb-2 block">🔔</span>
                 <p className="text-sm text-gray-500 font-medium">아직 알림이 없어요</p>
                 <p className="text-xs text-gray-400 mt-1">주문하시면 진행 상황을 알려드릴게요</p>
               </div>

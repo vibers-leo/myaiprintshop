@@ -64,7 +64,7 @@ export async function POST(request: NextRequest) {
     createNotification({
       userId: 'ADMIN',
       type: 'system',
-      title: '새 판매자 신청이 들어왔어요 🏪',
+      title: '새 판매자 신청이 들어왔어요',
       message: `${businessName} (${ownerName})님이 입점을 신청했어요 — 어드민에서 확인해주세요`,
       link: '/admin',
     }).catch(() => {});

@@ -61,7 +61,7 @@ export async function POST(request: NextRequest) {
           createNotification({
             userId: qaData.userId,
             type: 'qa',
-            title: '질문에 답변이 달렸어요 💬',
+            title: '질문에 답변이 달렸어요',
             message: `"${qaData.subject}" — 사장님이 직접 답변해주셨어요`,
             link: `/shop/${qaData.productId}`,
           }).catch(() => {});

@@ -191,7 +191,7 @@ export async function POST(request: NextRequest) {
       createNotification({
         userId: updatedOrder.userId,
         type: 'order_status',
-        title: '결제가 완료됐어요 ✨',
+        title: '결제가 완료됐어요',
         message: `${itemCount > 1 ? `${itemName} 외 ${itemCount - 1}건` : itemName} — 제작이 시작되면 다시 알려드릴게요`,
         link: `/mypage/orders/${orderId}`,
       }).catch(() => {});

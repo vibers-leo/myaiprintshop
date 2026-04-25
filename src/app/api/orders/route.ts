@@ -125,7 +125,7 @@ export async function PATCH(request: NextRequest): Promise<NextResponse> {
         createNotification({
           userId: order.userId,
           type: 'review',
-          title: '상품이 도착했어요! 어떠셨나요? 📬',
+          title: '상품이 도착했어요! 어떠셨나요?',
           message: `${itemName} — 솔직한 리뷰를 남겨주시면 최대 1,000P를 드려요`,
           link: `/mypage/orders/${orderId}`,
         }).catch(() => {});
@@ -136,7 +136,7 @@ export async function PATCH(request: NextRequest): Promise<NextResponse> {
         createNotification({
           userId: order.userId,
           type: 'order_status',
-          title: '택배가 출발했어요 🚚',
+          title: '택배가 출발했어요',
           message: order.shippingInfo?.carrier ? `${order.shippingInfo.carrier} ${order.shippingInfo.trackingNumber || ''} — 배송 조회해보세요` : '곧 도착할 거예요 — 주문 상세에서 확인해보세요',
           link: `/mypage/orders/${orderId}`,
         }).catch(() => {});

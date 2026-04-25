@@ -80,7 +80,7 @@ export async function POST(request: NextRequest) {
       createNotification({
         userId: order.userId,
         type: 'order_status',
-        title: cancelAmount ? '부분 환불이 완료됐어요 💸' : '주문이 취소됐어요',
+        title: cancelAmount ? '부분 환불이 완료됐어요' : '주문이 취소됐어요',
         message: `${cancelReason} — ${cancelAmount ? `₩${actualCancelAmount?.toLocaleString()} 환불 예정이에요` : '결제 금액이 환불될 예정이에요'}`,
         link: `/mypage/orders/${orderId}`,
       }).catch(() => {});

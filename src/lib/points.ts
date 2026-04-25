@@ -106,7 +106,7 @@ export async function earnPoints(
     createNotification({
       userId,
       type: 'point',
-      title: `${amount.toLocaleString()}P가 적립됐어요 🎁`,
+      title: `${amount.toLocaleString()}P가 적립됐어요`,
       message: `${reason}으로 받은 포인트예요 — 현재 잔액 ${newBalance.toLocaleString()}P`,
       link: '/mypage/points',
     }).catch(() => {});
